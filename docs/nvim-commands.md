@@ -195,20 +195,12 @@ To navigate around, enter `Normal Mode`.
 |Terminal in new horizontal split:|`<Leader>` `t` `h`|keymaps.lua|
 
 #### Tabs
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-
-
-
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|New tab:|`<Leader>` `n` `t`|keymaps.lua|
+|Quit tab:|`<Leader>` `q` `t`|keymaps.lua|
+|To right tab:|`<Leader>` `t` `r`|keymaps.lua|
+|To left tab:|`<Leader>` `t` `l`|keymaps.lua|
 
 <br>
 
