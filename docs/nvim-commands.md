@@ -93,6 +93,9 @@ To navigate around, enter `Normal Mode`.
 |Scroll one page down:|`ctrl` `p` `d`|keymaps.lua|
 |Enter insert mode at start of line:|`I`|Regular Neovim|
 |Enter insert mode at end of line:|`A`|Regular Neovim|
+|Go to matching brace:|`%`|Regular Neovim|
+|Go to first char of line:|`^`|Regular Neovim|
+|Go to last char of line:|`g_`|Regular Neovim|
 
 <br>
 
