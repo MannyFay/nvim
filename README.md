@@ -37,7 +37,7 @@ Normally, Neovim looks now not how you hope. Press `:` and do:
 ```shell
 PackerUpdate
 ```
-Discard after finishing the popup with `q`, then do:
+Discard after finishing the popup with `q`, then do `:` and:
 ```shell
 PackerSync
 ```
