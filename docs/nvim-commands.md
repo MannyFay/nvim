@@ -10,6 +10,8 @@ the US ANSI layout.
 
 If something doesn't work, check if your caps lock is activated or not :)
 
+<br>
+
 ## Neovim Modes
 Neovim has different modes to get your actions done.  
 The mode where you start is called `Normal Mode`.  
@@ -27,6 +29,8 @@ The mode where you start is called `Normal Mode`.
 
 Entry point for all modes is always `Normal Mode`.
 
+<br>
+
 ## Explanation
 If you see something like `<Leader>`, that's a special key in Neovim. Regularly 
 it is the `\` key. In this configuration it is mapped to the `space` key.
@@ -39,7 +43,7 @@ the key mapping. Feel free to change them if you like.
 
 The most of the commands you can type numbers before, to run the command n times.
 
----
+<br>
 
 ## Commands
 ### Enter Modes
@@ -188,7 +192,6 @@ To navigate around, enter `Normal Mode`.
 |:-----|:-----:|:-------|
 |Scroll preview up|`ctrl` `p` `u`|telescope.lua|
 |Scroll preview down|`ctrl` `p` `d`|telescope.lua|
-
 
 <br>
 
