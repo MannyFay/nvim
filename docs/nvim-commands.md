@@ -52,6 +52,8 @@ The most of the commands you can type numbers before, to run the command n times
 |Enter visual block mode:|`v` `b`|keymaps.lua|
 |Enter command line mode:|`:`|Regular Neovim|
 
+<br>
+
 ### Navigate Around
 To navigate around, enter `Normal Mode`.
 |Action|Command|Location|
@@ -87,6 +89,8 @@ To navigate around, enter `Normal Mode`.
 |Enter insert mode at start of line:|`I`|Regular Neovim|
 |Enter insert mode at end of line:|`A`|Regular Neovim|
 
+<br>
+
 ### Searching
 |Action|Command|Location|
 |:-----|:-----:|:-------|
@@ -98,6 +102,8 @@ To navigate around, enter `Normal Mode`.
 |Find text in files:|`<Leader>` `f` `t`|telescope.lua|
 |Show recent files:|`<Leader>` `r` `f`|telescope.lua|
 |Find word/marked pattern under cursor:|`*`|Regular Neovim|
+
+<br>
 
 ### Editing
 |Action|Command|Location|
