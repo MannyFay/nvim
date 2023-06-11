@@ -37,6 +37,10 @@ default.
 For all other contents of this column, I provide the file where I've defined 
 the key mapping. Feel free to change them if you like.
 
+The most of the commands you can type numbers before, to run the command n times.
+
+---
+
 ## Commands
 ### Enter Modes
 |Action|Command|Location|
@@ -47,6 +51,52 @@ the key mapping. Feel free to change them if you like.
 |Enter visual line mode:|`V`|Regular Neovim|
 |Enter visual block mode:|`v` `b`|keymaps.lua|
 |Enter command line mode:|`:`|Regular Neovim|
+
+### Navigate Around
+To navigate around, enter `Normal Mode`.
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Down:|`j`|Regular Neovim|
+|Up:|`k`|Regular Neovim|
+|Left:|`h`|Regualr Neovim|
+|Right:|`l`|Regular Neovim|
+|Go to character:|`<Leader>` `c`|hop.lua|
+|Go to word:|`<Leader>` `w`|hop.lua|
+|Go to pattern:|`<Leader` `p`|hop.lua|
+|Go to line (visible part of file):|`<Leader>` `l`|hop.lua|
+|Next word:|`w`|Regular Neovim|
+|Previous word:|`b`|Regular Neovim|
+|End of line:|`$`|Regular Neovim|
+|Start of line:|`0`|Regular Neovim|
+|Top of file:|`gg`|Regualar Neovim, telescope.lua|
+|Bottom of file:|`G`|Regular Neovim, telescope.lua|
+|Go to line (whole file):|`:` `<line number>`|Regular Neovim|
+|Go to split below:|`J`|keymaps.lua|
+|Go to split above:|`K`|keymaps.lua|
+|Go to left split:|`H`|keymaps.lua|
+|Go to right split:|`L`|keymaps.lua|
+|Go to project tree (explore tree):|`<Leader>` `e` `t`|nvim-tree.lua|
+|Go to actual file in project tree:|`<Leader>` `s` `f` `t`|nvim-tree.lua|
+|Scroll actual line to top:|`T`|keymaps.lua|
+|Scroll actual line to center:|`C`|keymaps.lua|
+|Scroll actual line to bottom:|`B`|keymaps.lua|
+|Scroll down:|`ctrl` `j`|keymaps.lua, lspsaga.lua, nvim-cmp.lua, telescope.lua|
+|Scroll up:|`ctrl` `k`|keymaps.lua, lspsaga.lua, nvim-cmp.lua, telescope.lua|
+|Scroll one page up:|`ctrl` `p` `u`|keymaps.lua|
+|Scroll one page down:|`ctrl` `p` `d`|keymaps.lua|
+|Enter insert mode at start of line:|`I`|Regular Neovim|
+|Enter insert mode at end of line:|`A`|Regular Neovim|
+
+---
+OLD STUFF
+
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+
 
 
 
