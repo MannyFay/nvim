@@ -28,10 +28,41 @@ Here you can see a possible structure for Post Its with Neovim commands.
 |\<L>sv|=|shrink vert||=|||=||
 |L|=|right||=|||=||
 
+<br>
+
+|j |=  |down         |k |= |up          |
+|:---|---|-----------|-|-|----------|
+|G|=|last line, first char|gg|=|first line, first char|
+|C|=|center line on screen|C|=|center line on screen|
+|B|=|line to botom of screen|T|=|line to top of screen|
+|:\<num>|=|to line|:\<num>|=|to line|
+|ctrl j|=|scroll down|ctrl k|=|scroll up|
+|h|=|left|l|=|right|
+|b|=|prev. word, first char|w|=|next word, first char|
+|0|=|start of line|$|=|end of line|
+|%|=|to matching bracket|%|=|to matching bracket|
+|^|=|first char in line|g_|=|last char of line|
+|\<L>c|=|to char|\<L>w|=|to word|
+|\<L>p|=|to pattern|\<L>l|=|to line|
+
+<br>
 
 
 
-||=|||=|||=||
+
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+||=|||=||
+
+
+
+
 ||=|||=|||=||
 
 
