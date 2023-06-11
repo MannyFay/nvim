@@ -46,4 +46,5 @@ If you open Neovim again, it should look a little better.
 
 ## Further Documentation
 * [Beginners Guide](docs/beginners-guide.md)
-* [Neovim Commands](docs/nvim-commands.md) -> WIP
+* [Neovim Commands](docs/nvim-commands.md)
+* [Neovim Commands as Post Its](docs/post-its.md)
