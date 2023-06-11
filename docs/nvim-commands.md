@@ -183,10 +183,11 @@ To navigate around, enter `Normal Mode`.
 |Next item in completion list:|`tab`|keymaps.lua, nvim-cmp.lua|
 |Previous item in completion list:|`shift` `tab`|keymaps.lua, nvim-cmp.lua|
 
-#### Definition Editing
+#### This to movements?!
 |Action|Command|Location|
 |:-----|:-----:|:-------|
-
+|Scroll preview up|`ctrl` `p` `u`|telescope.lua|
+|Scroll preview down|`ctrl` `p` `d`|telescope.lua|
 
 
 <br>
