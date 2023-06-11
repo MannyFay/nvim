@@ -179,10 +179,10 @@ keymap("n", "<Leader>nt", ":tabnew<CR>", opts)
 keymap("n", "<Leader>qt", ":tabclose<CR>", opts)
 
 -- Go to next tab ( nt):
-keymap("n", "<Leader>rt", ":tabn<CR>", opts)
+keymap("n", "<Leader>tr", ":tabn<CR>", opts)
 
 -- Go to previous tab ( pt):
-keymap("n", "<Leader>lt", ":tabp<CR>", opts)
+keymap("n", "<Leader>tl", ":tabp<CR>", opts)
 
 
 
