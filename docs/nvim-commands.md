@@ -114,6 +114,7 @@ To navigate around, enter `Normal Mode`.
 |Delete marked:|`d`|Regular Neovim|
 |Undo last action:|`u`|Regular Neovim|
 |Redo last action:|`U`|keymaps.lua|
+|Comment out/in:|`<Leader>` `/`|comment.lua|
 |Save file (auto save is active too):|`:` `w`|Regular Neovim|
 |Force save file|`:` `w` `!`|Regular Neovim|
 |Save and close file:|`Z` `Z`|Regular Neovim|
