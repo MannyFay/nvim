@@ -1,4 +1,55 @@
 # Neo-Vim Commands
+Yes, that seems like a lot of commands, but trust me, it's all about muscle 
+memory ;) Use it - and you will learn it.  
+
+For me it was way easier to write the commands on Post-Its and place them on the
+lower side of my screen, so I seen them all the time.
+
+I use one of these configurable split keyboards, but my layout is very near to 
+the US ANSI layout.
+
+If something doesn't work, check if your caps lock is activated or not :)
+
+## Neovim Modes
+Neovim has different modes to get your actions done.  
+The mode where you start is called `Normal Mode`.  
+* Normal Mode
+    * Used to navigate around, copy and paste (yank and put in Neovim language) things, etc.
+* Insert Mode
+    * Used to write like in every other text editor.
+* Visual Mode
+    * Used to mark text. It is divided by three different use cases:
+        * Visual Mode (for marking characters)
+        * Visual Line Mode (for marking whole lines)
+        * Visual Block Mode (for marking blocks of characters)
+* Command Line Mode
+    * Write Neovim and terminal commands
+
+Entry point for all modes is always `Normal Mode`.
+
+## Explanation
+If you see something like `<Leader>`, that's a special key in Neovim. Regularly 
+it is the `\` key. In this configuration it is mapped to the `space` key.
+
+In the column `Location` you will somethimes see `regular Neovim`. This means, 
+I doesn't have created a special key mapping. Neovim provides this function by
+default.  
+For all other contents of this column, I provide the file where I've defined 
+the key mapping. Feel free to change them if you like.
+
+## Commands
+### Enter Modes
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Enter normal mode:|`esc`|Regular Neovim|
+|Enter insert mode:|`i`|Regular Neovim|
+|Enter visual mode:|`v`|Regular Neovim|
+|Enter visual line mode:|`V`|Regular Neovim|
+|Enter visual block mode:|`v` `b`|keymaps.lua|
+|Enter command line mode:|`:`|Regular Neovim|
+
+
+
 These are my keyboard commands for Neo-Vim.
 `<L>` is the abbrevation for `<Leader>`.
 
