@@ -87,9 +87,55 @@ To navigate around, enter `Normal Mode`.
 |Enter insert mode at start of line:|`I`|Regular Neovim|
 |Enter insert mode at end of line:|`A`|Regular Neovim|
 
+### Searching
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Search:|`/` `<search pattern>`|Regular Neovim|
+|Next occurance:|`n`|Regular Neovim|
+|Previous occurance:|`N`|Regular Neovim|
+|Quit highlighting of search:|`<Leader>` `q` `h`|keymaps.lua|
+|Find file:|`<Leader>` `f` `f`|telescope.lua|
+|Find text in files:|`<Leader>` `f` `t`|telescope.lua|
+|Show recent files:|`<Leader>` `r` `f`|telescope.lua|
+|Find word/marked pattern under cursor:|`*`|Regular Neovim|
+
+
 ---
 OLD STUFF
 
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
 |:|`` ``||
 |:|`` ``||
 |:|`` ``||
