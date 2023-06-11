@@ -174,8 +174,19 @@ To navigate around, enter `Normal Mode`.
 |To next sibling:|`J`|nvim-tree.lua|
 
 #### Auto Completion
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Show completion suggestions:|`ctrl` `c`|nvim-cmp.lua|
+|Confirm completion:|`ctrl` `<Leader>`|keymaps.lua, nvim-cmp.lua|
+|Quit completion suggestions:|`ctrl` `q`|keymaps.lua, nvim-cmp.lua|
+|Next item in completion list:|`tab`|keymaps.lua, nvim-cmp.lua|
+|Previous item in completion list:|`shift` `tab`|keymaps.lua, nvim-cmp.lua|
 
 #### Definition Editing
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+
+
 
 <br>
 
@@ -203,8 +214,6 @@ To navigate around, enter `Normal Mode`.
 |To left tab:|`<Leader>` `t` `l`|keymaps.lua|
 
 <br>
-
-### Tab Management
 
 
 
