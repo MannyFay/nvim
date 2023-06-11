@@ -99,28 +99,85 @@ To navigate around, enter `Normal Mode`.
 |Show recent files:|`<Leader>` `r` `f`|telescope.lua|
 |Find word/marked pattern under cursor:|`*`|Regular Neovim|
 
+### Editing
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Delete character:|`x`|Regular Neovim|
+|Delete word:|`d` `i` `w`|Regular Neovim|
+|Delete line:|`d` `d`|Regular Neovim|
+|Delete marked:|`d`|Regular Neovim|
+|Undo last action:|`u`|Regular Neovim|
+|Redo last action:|`U`|keymaps.lua|
+|Save file (auto save is active too):|`:` `w`|Regular Neovim|
+|Force save file|`:` `w` `!`|Regular Neovim|
+|Save and close file:|`Z` `Z`|Regular Neovim|
+|Quit file:|`:` `q`|Regular Neovim|
+|Force quit file:|`:` `q` `!`|Regular Neovim|
+|Open Markdown preview:|`<Leader>` `m` `d` `o`|peek.lua|
+|Quit Markdown preview:|`<Leader>` `m` `d` `q`|peek.lua|
+|Open PlantUML preview:|`<Leader>` `u` `m` `l` `o`|plantuml-previewer.lua|
+|Save PlantUML as .png:|`<Leader>` `u` `m` `l` `s`|plantuml-previewer.lua|
+|Add ; at end of line:|`;` `;`|keymaps.lua|
+|Add , at end of line:|`,` `,`|keymaps.lua|
+|Join next line:|`<Leader>` `j` `l`|keymaps.lua|
+|Join object:|`<Leader>` `j` `o`|splitjoin.lua|
+|Split object:|`<Leader>` `s` `o`|splitjoin.lua|
+|Repeat last command:|`.`|Regular Neovim|
+|Surround with ( ):|`(` `(`|nvim-surround.lua|
+|Surround with { }:|`{` `{`|nvim-surround.lua|
+|Surround with [ ]:|`[` `[`|nvim-surround.lua|
+|Surround with " ":|`"` `"`|nvim-surround.lua|
+|Surround with ' ':|`'` `'`|nvim-surround.lua|
+|Surround with ``:|\` `|nvim-surround.lua|
+|Surround with < >:|`<` `>`|nvim-surround.lua|
+|Surround with HTML tag:|`s` `w` `t`|nvim-surround.lua|
+|Change surrounding HTML tag:|`c` `s` `t`|nvim-surround.lua|
+|Delete surrounding HTML tag:|`d` `s` `t`|nvim-surround.lua|
+|Delete surroundings:|`d` `s` `<closing-sign>`|nvim-surround.lua|
+|Change surroundings:|`c` `s` `<old>` `<new>`|nvim-surround.lua|
+|Yank:|`y`|Regular Neovim|
+|Yank line:|`y` `y`|Regular Neovim|
+|Put:|`p`|Regular Neovim|
+|Insert new line below:|`o`|Regular Neovim|
+|Move (selected) part up:|`shift` `tab`|keymaps.lua|
+|Move (selected) part down:|`tab`|keymaps.lua|
+
+#### Project Tree
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|Close node:|`c` `n`|nvim-tree.lua|
+|Rename:|`r`|nvim-tree.lua|
+|File information:|`i`|nvim-tree.lua|
+|Open:|`enter`|nvim-tree.lua|
+|Open file in vertical split:|`v`|nvim-tree.lua|
+|Open file in horizontal split:|`h`|nvim-tree.lua|
+|Yank name:|`y`|nvim-tree.lua|
+|Yank relative path:|`Y`|nvim-tree.lua|
+|Copy:|`c`|nvim-tree.lua|
+|Cut:|`x`|nvim-tree.lua|
+|Paste:|`p`|nvim-tree.lua|
+|To parent node:|`P`|nvim-tree.lua|
+|New:|`n`|nvim-tree.lua|
+|Delete:|`d`|nvim-tree.lua|
+|Move to bin:|`B`|nvim-tree.lua|
+|Collapse all:|`C`|nvim-tree.lua|
+|Expand all:|`E`|nvim-tree.lua|
+|To top sibling:|`T` `S`|nvim-tree.lua|
+|To bottom sibling:|`T` `B`|nvim-tree.lua|
+|To previous sibling:|`K`|nvim-tree.lua|
+|To next sibling:|`J`|nvim-tree.lua|
+
+
+
+
+
+
+
+
 
 ---
 OLD STUFF
 
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
-|:|`` ``||
 |:|`` ``||
 |:|`` ``||
 |:|`` ``||
