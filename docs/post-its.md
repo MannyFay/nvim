@@ -4,16 +4,16 @@ Here you can see a possible structure for Post Its with Neovim commands.
 
 <br>
 
-|Tree |  |           | | |          | | |      |
-|:---|---|-----------|-|-|----------|-|-|------|
-|\<L>tt|=|toggle tree|h|=|hor. split|d|=|delete|
-|\<L>et|=|explore tree|y|=|yank name|B|=|bin|
-|\<L>sft|=|show file|Y|=|yank path|C|=|collapse|
-|qn|=|close node|c|=|copy|E|=|expand|
-|r|=|rename|x|=|cut|TS|=|top sib.|
-|i|=|info|p|=|paste|BS|=|bot. sib.|
-|enter|=|open|P|=|parent node|
-|v|=|vert. split|n|=|new|
+|Tree   | |            | | |           |  | |         |
+|:------|-|------------|-|-|-----------|--|-|---------|
+|\<L>tt |=|toggle tree |h|=|hor. split |d |=|delete   |
+|\<L>et |=|explore tree|y|=|yank name  |B |=|bin      |
+|\<L>sft|=|show file   |Y|=|yank path  |C |=|collapse |
+|qn     |=|close node  |c|=|copy       |E |=|expand   |
+|r      |=|rename      |x|=|cut        |TS|=|top sib. |
+|i      |=|info        |p|=|paste      |BS|=|bot. sib.|
+|enter  |=|open        |P|=|parent node|
+|v      |=|vert. split |n|=|new|
 
 <br>
 
