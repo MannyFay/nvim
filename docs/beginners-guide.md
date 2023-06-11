@@ -11,4 +11,81 @@ With Neovim this 'hmm.., I would like to do..' thing nearly doesn't exist. You c
 
 This guide starts of the very beginnig to start over with Neovim.
 
+## Configuration
+I'm on [Apple macOS](https://www.apple.com/de/macos), so if you would like to 
+use this configuration on an other OS, feel free to tweak it for your needs.
 
+Let's get our hands dirty 🧱🔨  
+
+Install [Homebrew package manager](https://brew.sh/):
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+Install [Neovim](https://neovim.io/):
+```shell
+brew install neovim
+```
+Create Neovim directory on your machine if it doesn't exist yet:
+```shell
+mkdir -p ~/.config/nvim
+```
+Copy the lua directory and the init.lua file from [here](https://github.com/MannyFay/neovim)
+into the nvim directory.
+
+Install [Graphviz](https://graphviz.org/):
+```shell
+brew install graphviz
+```
+Install [Java](https://en.wikipedia.org/wiki/Java) (do not use [Homebrew](https://brew.sh/)!):
+```shell
+https://www.oracle.com/java/technologies/downloads/#jdk20-mac
+```
+Install [ripgrep](https://github.com/BurntSushi/ripgrep):
+```shel
+brew install ripgrep
+```
+Install Meslo [Nerd Fonts](https://www.nerdfonts.com/):
+```shell
+brew tap homebrew/cask-fonts &&
+brew install --cask font-meslo-nerd-font
+```
+Select the `MesloLGMDZ Nerd Font Propo` as your terminal/Neovim font.
+
+Check out, if you have [Clang](http://clang.org/) installed:
+```shell
+clang --version
+```
+...if not, install it:
+```shell
+xcode-select --install
+```
+Install [Cmake](https://cmake.org/):
+```
+brew install cmake
+```
+Open [Neovim](https://neovim.io/) (at this point, maybe it seems like there will go on lots of weird things - don't worry!):
+```shell
+nvim
+```
+Update [Packer package manager](https://github.com/wbthomason/packer.nvim). Press `:` then run:
+```shell
+PackerUpdate
+```
+Quit the popup with `q`.
+
+Sync [Packer](https://github.com/wbthomason/packer.nvim) packages. Press `:` then run:
+```shell
+PackerSync
+```
+Quit the popup with `q`.
+
+Close Neovim by pressing `ZZ` till you arrive into your terminal.  
+
+Start [Neovim](https://neovim.io/) again:
+```shell
+nvim
+```
+Now it should look a little better. Maybe you see some installation progress in
+the [Neovim](https://neovim.io/) command line. Just let it do it's thing.  
+
+To get arround in your [Neovim](https://neovim.io/), I've written a [documentation about the commands](docs/nvim-commands.md).
