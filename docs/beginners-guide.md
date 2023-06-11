@@ -1,15 +1,23 @@
 # Beginners Guide to my Neovim Configuration
-Neovim can be at the beginnig a bit overwhelming. I hope with this configuration you can dive faster in.  
-Sure, you have to learn commands but I have reduce them to get you fast in.  
+[Neovim](https://neovim.io/) can be at the beginnig a bit overwhelming. I hope 
+with this configuration you can dive in faster.  
+Sure, you have to learn commands but I have reduce them to get you in fast.
 
-Why Neovim? Well, I've tried already [JetBrains IDEs](https://www.jetbrains.com/), [Visual Studio Code](https://code.visualstudio.com/),
-[Visual Studio](https://visualstudio.microsoft.com/), [Code::Blocks](https://www.codeblocks.org/), [Brackets](https://brackets.io/) and [Atom](https://github.com/atom/atom).  
-But none of them are like Neovim. Some of them cost a lot of money, especially for commercial use and for me, all of these have this 'hmm.., I would like to do..' thing.
-All of these take their time to learn too - so why don't thake the time to learn Neovim and build it up for your needs.  
+Why Neovim? Well, I've tried already [JetBrains IDEs](https://www.jetbrains.com/), 
+[Visual Studio Code](https://code.visualstudio.com/), [Visual Studio](https://visualstudio.microsoft.com/), 
+[Code::Blocks](https://www.codeblocks.org/), [Brackets](https://brackets.io/) 
+and [Atom](https://github.com/atom/atom).  
+But none of them are like [Neovim](https://neovim.io/). Some of them cost a lot 
+of money, especially for commercial use and for me, all of these have this 
+'hmm.., I would like to do..' thing.
+All of these take their time to learn too - so why don't thake the time to learn 
+[Neovim](https://neovim.io/) and build it up for your needs.  
 
-With Neovim this 'hmm.., I would like to do..' thing nearly doesn't exist. You can make it your own with an awesome mouseless use for incredibly higher speed on editing.
+With Neovim this 'hmm.., I would like to do..' thing nearly doesn't exist. You 
+can make it your own with an awesome mouseless use for incredibly higher speed 
+on editing.
 
-This guide starts of the very beginnig to start over with Neovim.
+This guide starts of the very beginnig to start over with [Neovim](https://neovim.io/).
 
 ## Configuration
 I'm on [Apple macOS](https://www.apple.com/de/macos), so if you would like to 
