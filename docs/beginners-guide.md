@@ -96,4 +96,4 @@ nvim
 Now it should look a little better. Maybe you see some installation progress in
 the [Neovim](https://neovim.io/) command line. Just let it do it's thing.  
 
-To get arround in your [Neovim](https://neovim.io/), I've written a [documentation about the commands](docs/nvim-commands.md).
+To get arround in your [Neovim](https://neovim.io/), I've written a [documentation about the commands](nvim-commands.md).
