@@ -4,6 +4,7 @@ memory ;) Use it - and you will learn it.
 
 For me it was way easier to write the commands on Post-Its and place them on the
 lower side of my screen, so I seen them all the time.
+If you like to see how I structure them, take a look [here](docs/post-its.md).
 
 I use one of these configurable split keyboards, but my layout is very near to 
 the US ANSI layout.
