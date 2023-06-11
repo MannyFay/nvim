@@ -180,6 +180,35 @@ To navigate around, enter `Normal Mode`.
 <br>
 
 ### Window Management
+#### Splits
+|Action|Command|Location|
+|:-----|:-----:|:-------|
+|New vertical split:|`<Leader>` `v`|keymaps.lua|
+|Grow split vertically:|`<Leader>` `g` `v`|keymaps.lua|
+|Shrink split vertically:|`<Leader>` `s` `v`|keymaps.lua|
+|New horizontal split:|`<Leader>` `h`|keymaps.lua|
+|Grow split horizontally:|`<Leader>` `g` `h`|keymaps.lua|
+|Shrink split horizontally:|`<Leader>` `s` `h`|keymaps.lua|
+|Equalize size of splits:|`<Leader>` `e` `s`|keymaps.lua|
+|Max-/minimize split:|`<Leader>` `m`|windows.lua|
+|Terminal in new vertical split:|`<Leader>` `t` `v`|keymaps.lua|
+|Terminal in new horizontal split:|`<Leader>` `t` `h`|keymaps.lua|
+
+#### Tabs
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+|:|`` ``||
+
+
+
 
 <br>
 
