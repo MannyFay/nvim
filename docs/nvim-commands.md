@@ -173,8 +173,17 @@ To navigate around, enter `Normal Mode`.
 |To previous sibling:|`K`|nvim-tree.lua|
 |To next sibling:|`J`|nvim-tree.lua|
 
+#### Auto Completion
 
+#### Definition Editing
 
+<br>
+
+### Window Management
+
+<br>
+
+### Tab Management
 
 
 
