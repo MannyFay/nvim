@@ -10,7 +10,7 @@ Personally I like a keyboard with US ANSI layout the best.
 
 ## Requirements
 To use this Neovim configuration you have to set up a few things.  
-If you are very new on this topic, pleace read the [beginners-guide](docs/beginners-guide.md).
+If you are very new on this topic, pleace read the [beginners-guide](./docs/beginners-guide.md).
 * Neovim
 * Java
 * Graphviz
@@ -45,6 +45,6 @@ Close the popup again with `q` and close Neovim with pressing `ZZ` till you are 
 If you open Neovim again, it should look a little better.
 
 ## Further Documentation
-* [Beginners Guide](docs/beginners-guide.md)
-* [Neovim Commands](docs/nvim-commands.md)
+* [Beginners Guide](./docs/beginners-guide.md)
+* [Neovim Commands](./docs/nvim-commands.md)
 * [Neovim Commands as Post Its](./docs/post-its.md)

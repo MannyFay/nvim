@@ -4,7 +4,7 @@ memory ;) Use it - and you will learn it.
 
 For me it was way easier to write the commands on Post-Its and place them on the
 lower side of my screen, so I seen them all the time.
-If you like to see how I structure them, take a look [here](docs/post-its.md).
+If you like to see how I structure them, take a look [here](post-its.md).
 
 I use one of these configurable split keyboards, but my layout is very near to 
 the US ANSI layout.
@@ -96,6 +96,7 @@ To navigate around, enter `Normal Mode`.
 |Go to matching brace:|`%`|Regular Neovim|
 |Go to first char of line:|`^`|Regular Neovim|
 |Go to last char of line:|`g_`|Regular Neovim|
+|Go to middle of screen:|`M`|Regular Neovim|
 
 <br>
 
