@@ -520,6 +520,13 @@ use({
 --[[   'beeender/Comrade' ]]
 --[[ }) ]]
 
+-- Command line auto complete style:
+use {
+  'gelguy/wilder.nvim',
+  config = function()
+    require('user.plugin_options.wilder')
+  end,
+}
 
 if packer_bootstrap then
   packer.sync()
