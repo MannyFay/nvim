@@ -538,6 +538,12 @@ use({
 })
 
 
+-- Blade syntax highligting:
+use({
+  'jwalton512/vim-blade'
+})
+
+
 if packer_bootstrap then
   packer.sync()
 end
