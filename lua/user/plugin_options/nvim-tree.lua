@@ -131,7 +131,6 @@ nvim_tree.setup {
   respect_buf_cwd     = true,
   update_focused_file = {
     enable    = true,
-    auto_open = false,
     -- Don't switch automatically the project root:
     update_root = false
   },

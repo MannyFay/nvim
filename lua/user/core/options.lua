@@ -75,7 +75,8 @@ vim.opt.numberwidth = 5
 --[[ vim.opt.completeopt = { 'menu,menuone','noselect' }, ]]
 -- Select first item in auto completion list:
 vim.opt.completeopt = { 'menu,menuone' }
-
+-- Don't insert current comment leader in new line:
+vim.opt.formatoptions:remove({ 'r', 'o', 'n', 'l' })
 
 
 -- complete the longest common match, and allow tabbing the results to fully complete them:
@@ -182,13 +183,6 @@ vim.opt.completeopt = { 'menu,menuone' }
 
 -- Consider - as part of a keyword like in HTML/CSS:
 -- vim.cmd [[set iskeyword+=-]]
-
--- Don't insert current comment leader in new line:
---vim.cmd [[set formatoptions-=r]]
-
-
-
-
 
 
 
