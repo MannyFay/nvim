@@ -53,7 +53,7 @@ comment.setup({
     -- Line-comment:
     line = '<Leader>/',
     -- Block-comment:
-    block = '<Nop>',
+    block = '<Leader>/s',
   },
   -- Extra mappings:
   extra = {
