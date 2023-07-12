@@ -81,9 +81,12 @@ vim.keymap.set('v', 'p', '"_dP')
 -- If delete one char, don't copy it to the clipboard:
 vim.keymap.set('n', 'x', '"_x')
 
--- Insert a ; or , at the end of a line:
+-- Insert a ; at the end of a line:
 vim.keymap.set('n', ';;', '<Esc>A;<Esc>')
+-- Insert a , at the end of a line:
 vim.keymap.set('n', ',,', '<Esc>A,<Esc>')
+-- Insert a : at the end of a line:
+vim.keymap.set('n', '::', '<Esc>A:<Esc>')
 
 -- Open the current file in the default program (on Mac this should just be just `open`)
 --vim.keymap.set('n', '<leader>x', ':!xdg-open %<cr><cr>')
