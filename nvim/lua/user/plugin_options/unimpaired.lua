@@ -1,11 +1,4 @@
--- Add this to your Packer plugin file:
--- Selection of keymappings to jump between buffers and Git conflicts:
--- use({
--- [[   'tummetott/unimpaired.nvim',
---   config = function()
---     require('user.plugin_options.unimpaired')
---   end
--- })
+-- ~/.dotfiles/nvim/lua/user/plugin_options/unimpaired.lua
 
 -- https://github.com/Tummetott/unimpaired.nvim
 

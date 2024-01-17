@@ -16,15 +16,15 @@ end
 harpoon:setup({
   settings = {
     save_on_toggle         = false,          -- Bookmark file if you jump into it.
-    save_on_change         = true,           -- Save bookmarked file if you change it.
+    -- save_on_change         = true,           -- Save bookmarked file if you change it.
     sync_on_ui_close       = false,        -- Sync all bookmarks if UI is closed.
-    enter_on_sendcmd       = false,        -- Enter the terminal when running a command.
-    tmux_autoclose_windows = false,  -- Don't close the tmux window when the pane closes.
-    exclude_filetypes      = { 'harpoon' }, -- Filetypes to exclude when picking files.
-    mark_branch            = true,           -- Set marks specific to each git branch.
-    tabline                = false,         -- Enable tabline integration.
-    tabline_prefix         = " ",
-    tabline_suffix         = " ",
+    -- enter_on_sendcmd       = false,        -- Enter the terminal when running a command.
+    -- tmux_autoclose_windows = false,  -- Don't close the tmux window when the pane closes.
+    -- exclude_filetypes      = { 'harpoon' }, -- Filetypes to exclude when picking files.
+    -- mark_branch            = true,           -- Set marks specific to each git branch.
+    -- tabline                = false,         -- Enable tabline integration.
+    -- tabline_prefix         = " ",
+    -- tabline_suffix         = " ",
     key = function()
         return vim.loop.cwd()
     end,
@@ -53,13 +53,30 @@ local function toggle_telescope(harpoon_files)
   }):find()
 end
 
-vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,  { desc = "Open harpoon window" })
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+  { desc = "Open harpoon window" })
 
 
 
 -------------------------------------------------------------------------------
 -- Key Mappings
 
+-- Original:
+
+-- vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<Leader>eee", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+-- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+-- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+-- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+-- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+
+-- Own:
 -- Jump to a file in the Harpoon list:
 vim.keymap.set("n", "<Leader>hs1", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<Leader>hs2", function() harpoon:list():select(2) end)
@@ -74,15 +91,12 @@ vim.keymap.set("n", "<Leader>hs9", function() harpoon:list():select(9) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end)
-
 -- Mark a file:
 vim.keymap.set("n", "<leader>hm", function() harpoon:list():append() end)
-
--- Show Harpoon marks:
-vim.keymap.set("n", "<Leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
 -- Show Harpoon marks in Telescope interface:
 vim.keymap.set('n', '<Leader>fm', ':Telescope harpoon marks<CR>')
 
--- To delete mark 1 from the list:
--- vim.keymap.set("n", "<leader>d1", function() harpoon:list():remove(1) end)
+
+
+-- https://discord.com/channels/478925420616482816/823558498620276856
+vim.keymap.set("n", "<leader>d1", function() harpoon:list():remove(1) end)

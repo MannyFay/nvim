@@ -1,11 +1,4 @@
--- Add this to your Packer plugin file:
--- -- Provide Unix commands in Neovims command line:
--- use({
---   'chrisgrieser/nvim-genghis',
---   config = function()
---     require('user.plugin_options.nvim-genghis')
---   end
--- })
+-- ~/.dotfiles/nvim/lua/user/plugin_options/nvim-genghis.lua
 
 -- https://github.com/chrisgrieser/nvim-genghis
 

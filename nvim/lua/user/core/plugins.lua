@@ -1,3 +1,7 @@
+-- ~/.dotfiles/nvim/lua/user/core/plugins.lua
+
+
+
 ------------------------------------------------------------------------------
 -- Packer Plugin Manager
 ------------------------------------------------------------------------------
@@ -45,19 +49,21 @@ packer.init {
 
 
 
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- Plugins
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 -- Set up variable for Packers use() function:
 local use = packer.use
 
 
+------------------------------------------------------------
+-- Appearance
 
--------------------------------------------------------------------------------
--- Appearance (let Packer manage itself)
-
+-- Let Packer manage itself:
 use('wbthomason/packer.nvim')
+
+
 
 
 
@@ -102,10 +108,9 @@ use({
 
 use({
   'nvim-treesitter/nvim-treesitter',
-  run = ':TSUpdate',
-  -- run = function()
-  --   require('nvim-treesitter.install').update({ with_sync = true })
-  -- end,
+  run = function()
+    require('nvim-treesitter.install').update({ with_sync = true })
+  end,
   requires = {
     'nvim-treesitter/playground',
     'JoosepAlviste/nvim-ts-context-commentstring',
@@ -116,21 +121,6 @@ use({
     require('user.plugin_options.treesitter')
   end
 })
-
-
-
--------------------------------------------------------------------------------
--- Harpoon Bookmarked files
-
-use "nvim-lua/plenary.nvim"
-use {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    requires = { {"nvim-lua/plenary.nvim"} },
-    config = function()
-      require("user.plugin_options.harpoon")
-    end
-}
 
 
 
@@ -163,12 +153,12 @@ use({
 
 use({
   'kylechui/nvim-surround',
-  -- use * for stability. omit to use `main` branch for the latest features:
+  -- Use * for stability. Omit to use `main` branch for the latest features:
   tag = '*',
   requires = {
-    -- advanced syntax highlighting:
+    -- Advanced syntax highlighting:
     'nvim-treesitter/nvim-treesitter',
-    -- provide more text objects:
+    -- Provide more text objects:
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   config = function()
@@ -217,6 +207,21 @@ use({
 
 
 -------------------------------------------------------------------------------
+-- Harpoon Bookmarked files
+
+use "nvim-lua/plenary.nvim"
+use {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    requires = { {"nvim-lua/plenary.nvim"} },
+    config = function()
+      require("user.plugin_options.harpoon")
+    end
+}
+
+
+
+-------------------------------------------------------------------------------
 -- Lion (code alignment)
 
 use({
@@ -228,15 +233,39 @@ use({
 
 
 
--------------------------------------------------------------------------------
--- Vim Heritage (create directories if file is created in a not existing directory)
+-- -- Provide Unix commands in Neovims command line:
+-- use({
+--   'chrisgrieser/nvim-genghis',
+--   config = function()
+--     require('user.plugin_options.nvim-genghis')
+--   end
+-- })
 
-use('jessarcher/vim-heritage')
+
+-- Selection of keymappings to jump between buffers and Git conflicts:
+-- use({
+-- [[   'tummetott/unimpaired.nvim',
+--   config = function()
+--     require('user.plugin_options.unimpaired')
+--   end
+-- })
 
 
 
--------------------------------------------------------------------------------
--- Vim TextObj XML-Attr (extra text objects for HTML/XML)
+
+-- Create parent directories if file is created in a not existing directory:
+-- use('jessarcher/vim-heritage')
+
+
+-- Mark more than one word and search for it with *:
+-- use('nelstrom/vim-visual-star-search')
+
+
+
+
+
+
+-- Extra text objects for HTML attributes:
 use({
   'whatyouhide/vim-textobj-xmlattr',
   requires = {
@@ -246,27 +275,19 @@ use({
 
 
 
--------------------------------------------------------------------------------
--- Vim Fugitive (Git integration)
-
-use("tpope/vim-fugitive")
 
 
 
--------------------------------------------------------------------------------
--- Undo Tree (visualize undo history)
-
-use({
-  'mbbill/undotree',
-  config = function()
-    require('user.plugin_options.undotree')
-  end
-})
 
 
 
--------------------------------------------------------------------------------
--- Git Signs (Git integration for buffers)
+
+
+
+
+
+
+-- Git integration for buffers:
 use({
   'lewis6991/gitsigns.nvim',
   requires = 'nvim-lua/plenary.nvim',
@@ -290,15 +311,15 @@ use({
 })
 
 
-
--------------------------------------------------------------------------------
--- Nvim LSP Config (Language Server Protocol (LSP))
+--------------------------------------------------------------
+-- Language Server Protocol (LSP):
 
 use({
-  'neovim/nvim-lspconfig',                  -- Language Server Protocol client.
+  'neovim/nvim-lspconfig',                  -- Language Server Protocol client.                                       -- https://github.com/neovim/nvim-lspconfig
   requires = {
-    'williamboman/mason.nvim',               -- Install and manage LSP and DAP servers, linters and formatters.
-    'williamboman/mason-lspconfig.nvim',     -- Bridge between Mason and LSP-Config to use both together.
+    'williamboman/mason.nvim',               -- Install and manage LSP and DAP servers, linters and formatters.       -- https://github.com/williamboman/mason.nvim
+    'williamboman/mason-lspconfig.nvim',     -- Bridge between Mason and LSP-Config to use both together.            -- https://github.com/williamboman/mason-lspconfig.nvim
+    -- 'folke/lsp-colors.nvim',  <-- deprecated
   },
   config = function()
     require('user.plugin_options.lspconfig')
@@ -306,26 +327,26 @@ use({
 })
 
 
-
--------------------------------------------------------------------------------
--- Nvim-Cmp (Completion Management Plugin)
+--------------------------------------------------------------
+-- Autocompletion (Completion Management Plugin)
 
 use({
-  'hrsh7th/nvim-cmp',                       -- Completion Engine
+  'hrsh7th/nvim-cmp',                       -- Completion Engine                                                      -- https://github.com/hrsh7th/nvim-cmp
+  -- Plugins for enhancement:
   requires = {
-    'neovim/nvim-lspconfig',                -- Language Server Protocol client.
-    'hrsh7th/cmp-nvim-lsp',                 -- CMP source for Neovims built-in LSP client.
-    'hrsh7th/cmp-buffer',                   -- Get's words in buffers for completion too.
-    'jessarcher/cmp-path',                  -- Use file system paths for completion too.
-    'hrsh7th/cmp-cmdline',                  -- Completion source for command line.
+    'neovim/nvim-lspconfig',                -- Language Server Protocol client.                                       -- https://github.com/neovim/nvim-lspconfig
+    'hrsh7th/cmp-nvim-lsp',                 -- CMP source for Neovims built-in LSP client.                            -- https://github.com/hrsh7th/cmp-nvim-lsp
+    'hrsh7th/cmp-buffer',                   -- Get's words in buffers for completion too.                             -- https://github.com/hrsh7th/cmp-buffer
+    'jessarcher/cmp-path',                  -- Use file system paths for completion too.                              -- https://github.com/jessarcher/cmp-path
+    'hrsh7th/cmp-cmdline',                  -- Completion source for command line.                                    -- https://github.com/hrsh7th/cmp-cmdline
 
-    'L3MON4D3/LuaSnip',                     -- Snippets engine to use code snippets.
-    'saadparwaiz1/cmp_luasnip',             -- Completion source for LuaSnip.
+    'L3MON4D3/LuaSnip',                     -- Snippets engine to use code snippets.                                  -- https://github.com/L3MON4D3/LuaSnip
+    'saadparwaiz1/cmp_luasnip',             -- Completion source for LuaSnip.                                         -- https://github.com/saadparwaiz1/cmp_luasnip
 
-    'rafamadriz/friendly-snippets',         -- Snippets collection for diverse programming languages.
-    'hrsh7th/cmp-nvim-lsp-signature-help',  -- CMP source to display function signatures with parameter explanation.
-    'hrsh7th/cmp-nvim-lua',                 -- CMP source for Neovim Lua API.
-    'onsails/lspkind-nvim',                 -- Pictograms for LSP completion items.
+    'rafamadriz/friendly-snippets',         -- Snippets collection for diverse programming languages.                 -- https://github.com/rafamadriz/friendly-snippets
+    'hrsh7th/cmp-nvim-lsp-signature-help',  -- CMP source to display function signatures with parameter explanation.  -- https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+    'hrsh7th/cmp-nvim-lua',                 -- CMP source for Neovim Lua API.                                         -- https://github.com/hrsh7th/cmp-nvim-lua
+    'onsails/lspkind-nvim',                 -- Pictograms for LSP completion items.                                   -- https://github.com/onsails/lspkind.nvim
   },
   config = function()
     require('user.plugin_options.nvim-cmp')
@@ -334,36 +355,31 @@ use({
 
 
 
--------------------------------------------------------------------------------
--- DAP (Debug Adapter Protocol)
-
-use({'mfussenegger/nvim-dap'})
 
 
-
--------------------------------------------------------------------------------
--- Mason Nvim DAP (close some gaps between Mason and DAP)
-
-use({
-    "jay-babu/mason-nvim-dap.nvim",
-    requires = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-  },
-})
+-- Look for a plugin called vim-scripts/ReplaceWithRegister
 
 
+--[[]]
+--[[ use({ ]]
+--[[   'jose-elias-alvarez/null-ls.nvim', ]]
+--[[   requires = 'nvim-lua/plenary.nvim', ]]
+--[[   config = function() ]]
+--[[     require('user.plugin_options.null-ls') ]]
+--[[   end, ]]
+--[[ }) ]]
 
--------------------------------------------------------------------------------
--- Vim-Polyglot (boost language packs)
 
+-- Boost up language packs for Neovim:
+--vim.g.polyglot_disabled = { 'markdown.plugin' }
+--vim.g.polyglot_disabled = { 'autoindent' }
 use('sheerun/vim-polyglot')
 
 
-
--------------------------------------------------------------------------------
--- PlantUML (install Java, graphviz, plantuml)
-
+-- PlantUML preview:
+-- Install Java: https://www.oracle.com/java/technologies/downloads/#jdk20-mac
+-- Install Graphviz: brew install graphviz
+-- Install PlantUML: brew install plantuml
 use({
   'weirongxu/plantuml-previewer.vim',
   requires = {
@@ -375,12 +391,11 @@ use({
 })
 
 
-
--------------------------------------------------------------------------------
+--------------------------------------------------------------
 -- Markdown Preview (install Deno first)
 
 use({
-  'toppair/peek.nvim',
+  'toppair/peek.nvim',                     -- Markdown Preview Plugin.                                              -- https://github.com/toppair/peek.nvim
   run = 'deno task --quiet build:fast',
   config = function()
     require('user.plugin_options.peek')
@@ -388,9 +403,18 @@ use({
 })
 
 
+--------------------------------------------------------------
+-- Autosave files by go to normal mode or change buffer
 
--------------------------------------------------------------------------------
--- Nvim-Colorizer (show color highlighting for colors)
+use({
+  'pocco81/auto-save.nvim',                                                   -- https://github.com/Pocco81/auto-save.nvim
+  config = function()
+    require('user.plugin_options.auto-save')
+  end
+})
+
+
+-- Show color highlighting for colors and color variables:
 use({
   'norcalli/nvim-colorizer.lua',
   config = function()
@@ -400,9 +424,8 @@ use({
 
 
 
--------------------------------------------------------------------------------
--- Hop (fast navigation)
 
+-- Fast navigation:
 use({
   'phaazon/hop.nvim',
   config = function()
@@ -412,15 +435,12 @@ use({
 
 
 
--------------------------------------------------------------------------------
--- Autosave files by go to normal mode or change buffer
 
-use({
-  'pocco81/auto-save.nvim',
-  config = function()
-    require('user.plugin_options.auto-save')
-  end
-})
+
+
+
+
+
 
 
 
@@ -428,7 +448,7 @@ use({
 -- Copilot (AI code generation)
 
 use {
-  'zbirenbaum/copilot.lua',
+  'zbirenbaum/copilot.lua',                  -- GitHub Copilot for Neovim.                                            -- https://github.com/zbirenbaum/copilot.lua
   cmd    = 'Copilot',
   event  = 'InsertEnter',
   config = function()
