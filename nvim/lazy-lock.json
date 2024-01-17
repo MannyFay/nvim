@@ -1,0 +1,4 @@
+{
+  "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
+  "mannydark.nvim": { "branch": "main", "commit": "8f8feb68fdbb9a4112a7148b4f6d1b7bfbbf83c4" }
+}

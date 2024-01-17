@@ -1,460 +1,483 @@
-------------------------------------------------------------------------------
--- Packer Plugin Manager
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Lazy Plugin Mangager
+-------------------------------------------------------------------------------
 
--- Automatically install Packer:
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({
-      'git',
-      'clone',
-      '--depth',
-      '1',
-      'https://github.com/wbthomason/packer.nvim',
-      install_path,
-    })
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Set ensure function as variable:
-local packer_bootstrap = ensure_packer()
+require("lazy").setup("user.plugins")
 
--- Import Packer with a protected call:
-local packer_status_ok, packer = pcall(require, 'packer')
-if not packer_status_ok then
-  return
-end
 
--- Reset Packer before customization below:
-packer.reset()
 
--- Have Packer use a popup window:
-packer.init {
-  compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'solid' })
-    end,
-  },
-}
 
 
+-- ------------------------------------------------------------------------------
+-- -- Packer Plugin Manager
+-- ------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------
--- Plugins
--------------------------------------------------------------------------------
+-- -- Automatically install Packer:
+-- local ensure_packer = function()
+--   local fn = vim.fn
+--   local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+--   if fn.empty(fn.glob(install_path)) > 0 then
+--     fn.system({
+--       'git',
+--       'clone',
+--       '--depth',
+--       '1',
+--       'https://github.com/wbthomason/packer.nvim',
+--       install_path,
+--     })
+--     vim.cmd [[packadd packer.nvim]]
+--     return true
+--   end
+--   return false
+-- end
 
--- Set up variable for Packers use() function:
-local use = packer.use
+-- -- Set ensure function as variable:
+-- local packer_bootstrap = ensure_packer()
 
+-- -- Import Packer with a protected call:
+-- local packer_status_ok, packer = pcall(require, 'packer')
+-- if not packer_status_ok then
+--   return
+-- end
 
+-- -- Reset Packer before customization below:
+-- packer.reset()
 
--------------------------------------------------------------------------------
--- Appearance (let Packer manage itself)
+-- -- Have Packer use a popup window:
+-- packer.init {
+--   compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
+--   display = {
+--     open_fn = function()
+--       return require('packer.util').float({ border = 'solid' })
+--     end,
+--   },
+-- }
 
-use('wbthomason/packer.nvim')
 
 
+-- -------------------------------------------------------------------------------
+-- -- Plugins
+-- -------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------
--- Telescope Fuzzy Finder (install ripgrep first)
+-- -- Set up variable for Packers use() function:
+-- local use = packer.use
 
-use({
-  'nvim-telescope/telescope.nvim',
-  requires = {
-    'nvim-lua/plenary.nvim',                                       -- Useful lua functions used by lots of plugins:
-    'kyazdani42/nvim-web-devicons',                                -- Dev-incons set:
-    'nvim-telescope/telescope-live-grep-args.nvim',                -- Passing arguments to the grep command:
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },  -- Increase sorting performance of Telescope:
-    'nvim-telescope/telescope-media-files.nvim',                   -- Telescope image preview:
-  },
-  config = function()
-    require('user.plugin_options.telescope')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Appearance (let Packer manage itself)
 
--------------------------------------------------------------------------------
--- Color Scheme (MannyDark)
+-- use('wbthomason/packer.nvim')
 
-use({
-  'MannyFay/mannydark.nvim',
-  vim.cmd [[
-    try
-      colorscheme mannydark
-    catch /^Vim\%((\a\+)\)\=:E185/
-      colorscheme default
-      set background=dark
-    endtry
-  ]],
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Telescope Fuzzy Finder (install ripgrep first)
 
--------------------------------------------------------------------------------
--- Treesitter Language Parser
+-- use({
+--   'nvim-telescope/telescope.nvim',
+--   requires = {
+--     'nvim-lua/plenary.nvim',                                       -- Useful lua functions used by lots of plugins:
+--     'kyazdani42/nvim-web-devicons',                                -- Dev-incons set:
+--     'nvim-telescope/telescope-live-grep-args.nvim',                -- Passing arguments to the grep command:
+--     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },  -- Increase sorting performance of Telescope:
+--     'nvim-telescope/telescope-media-files.nvim',                   -- Telescope image preview:
+--   },
+--   config = function()
+--     require('user.plugin_options.telescope')
+--   end
+-- })
 
-use({
-  'nvim-treesitter/nvim-treesitter',
-  run = ':TSUpdate',
-  -- run = function()
-  --   require('nvim-treesitter.install').update({ with_sync = true })
-  -- end,
-  requires = {
-    'nvim-treesitter/playground',
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'windwp/nvim-ts-autotag',
-  },
-  config = function()
-    require('user.plugin_options.treesitter')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Color Scheme (MannyDark)
 
--------------------------------------------------------------------------------
--- Harpoon Bookmarked files
+-- use({
+--   'MannyFay/mannydark.nvim',
+--   vim.cmd [[
+--     try
+--       colorscheme mannydark
+--     catch /^Vim\%((\a\+)\)\=:E185/
+--       colorscheme default
+--       set background=dark
+--     endtry
+--   ]],
+-- })
 
-use "nvim-lua/plenary.nvim"
-use {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    requires = { {"nvim-lua/plenary.nvim"} },
-    config = function()
-      require("user.plugin_options.harpoon")
-    end
-}
 
 
+-- -------------------------------------------------------------------------------
+-- -- Treesitter Language Parser
 
--------------------------------------------------------------------------------
--- LastPlace (jump to the last place of editing if you open a file)
+-- use({
+--   'nvim-treesitter/nvim-treesitter',
+--   run = ':TSUpdate',
+--   -- run = function()
+--   --   require('nvim-treesitter.install').update({ with_sync = true })
+--   -- end,
+--   requires = {
+--     'nvim-treesitter/playground',
+--     'JoosepAlviste/nvim-ts-context-commentstring',
+--     'nvim-treesitter/nvim-treesitter-textobjects',
+--     'windwp/nvim-ts-autotag',
+--   },
+--   config = function()
+--     require('user.plugin_options.treesitter')
+--   end
+-- })
 
-use({
-  'ethanholz/nvim-lastplace',
-  config = function()
-    require('user.plugin_options.nvim-lastplace')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Harpoon Bookmarked files
 
--------------------------------------------------------------------------------
--- Comment (easily comment stuff in and out)
+-- use "nvim-lua/plenary.nvim"
+-- use {
+--     "ThePrimeagen/harpoon",
+--     branch = "harpoon2",
+--     requires = { {"nvim-lua/plenary.nvim"} },
+--     config = function()
+--       require("user.plugin_options.harpoon")
+--     end
+-- }
 
-use({
-  'numToStr/Comment.nvim',
-  config = function()
-    require('user.plugin_options.comment')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- LastPlace (jump to the last place of editing if you open a file)
 
--------------------------------------------------------------------------------
--- Surround
+-- use({
+--   'ethanholz/nvim-lastplace',
+--   config = function()
+--     require('user.plugin_options.nvim-lastplace')
+--   end
+-- })
 
-use({
-  'kylechui/nvim-surround',
-  -- use * for stability. omit to use `main` branch for the latest features:
-  tag = '*',
-  requires = {
-    -- advanced syntax highlighting:
-    'nvim-treesitter/nvim-treesitter',
-    -- provide more text objects:
-    'nvim-treesitter/nvim-treesitter-textobjects',
-  },
-  config = function()
-    require('user.plugin_options.nvim-surround')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Comment (easily comment stuff in and out)
 
--------------------------------------------------------------------------------
--- Autopairs
+-- use({
+--   'numToStr/Comment.nvim',
+--   config = function()
+--     require('user.plugin_options.comment')
+--   end
+-- })
 
-use({
-  'windwp/nvim-autopairs',
-  config = function()
-    require('user.plugin_options.autopairs')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Surround
 
--------------------------------------------------------------------------------
--- LuaLine Status Bar
+-- use({
+--   'kylechui/nvim-surround',
+--   -- use * for stability. omit to use `main` branch for the latest features:
+--   tag = '*',
+--   requires = {
+--     -- advanced syntax highlighting:
+--     'nvim-treesitter/nvim-treesitter',
+--     -- provide more text objects:
+--     'nvim-treesitter/nvim-treesitter-textobjects',
+--   },
+--   config = function()
+--     require('user.plugin_options.nvim-surround')
+--   end
+-- })
 
-use({
-  'nvim-lualine/lualine.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('user.plugin_options.lualine')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Autopairs
 
--------------------------------------------------------------------------------
--- NvimTree
+-- use({
+--   'windwp/nvim-autopairs',
+--   config = function()
+--     require('user.plugin_options.autopairs')
+--   end
+-- })
 
-use({
-    'nvim-tree/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('user.plugin_options.nvim-tree')
-    end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- LuaLine Status Bar
 
--------------------------------------------------------------------------------
--- Lion (code alignment)
+-- use({
+--   'nvim-lualine/lualine.nvim',
+--   requires = 'kyazdani42/nvim-web-devicons',
+--   config = function()
+--     require('user.plugin_options.lualine')
+--   end
+-- })
 
-use({
-  'tommcdo/vim-lion',
-  config = function()
-    require('user.plugin_options.lion')
-  end,
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- NvimTree
 
--------------------------------------------------------------------------------
--- Vim Heritage (create directories if file is created in a not existing directory)
+-- use({
+--     'nvim-tree/nvim-tree.lua',
+--     requires = 'kyazdani42/nvim-web-devicons',
+--     config = function()
+--       require('user.plugin_options.nvim-tree')
+--     end
+-- })
 
-use('jessarcher/vim-heritage')
 
 
+-- -------------------------------------------------------------------------------
+-- -- Lion (code alignment)
 
--------------------------------------------------------------------------------
--- Vim TextObj XML-Attr (extra text objects for HTML/XML)
-use({
-  'whatyouhide/vim-textobj-xmlattr',
-  requires = {
-    'kana/vim-textobj-user'
-  },
-})
+-- use({
+--   'tommcdo/vim-lion',
+--   config = function()
+--     require('user.plugin_options.lion')
+--   end,
+-- })
 
 
 
--------------------------------------------------------------------------------
--- Vim Fugitive (Git integration)
+-- -------------------------------------------------------------------------------
+-- -- Vim Heritage (create directories if file is created in a not existing directory)
 
-use("tpope/vim-fugitive")
+-- use('jessarcher/vim-heritage')
 
 
 
--------------------------------------------------------------------------------
--- Undo Tree (visualize undo history)
+-- -------------------------------------------------------------------------------
+-- -- Vim TextObj XML-Attr (extra text objects for HTML/XML)
+-- use({
+--   'whatyouhide/vim-textobj-xmlattr',
+--   requires = {
+--     'kana/vim-textobj-user'
+--   },
+-- })
 
-use({
-  'mbbill/undotree',
-  config = function()
-    require('user.plugin_options.undotree')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Vim Fugitive (Git integration)
 
--------------------------------------------------------------------------------
--- Git Signs (Git integration for buffers)
-use({
-  'lewis6991/gitsigns.nvim',
-  requires = 'nvim-lua/plenary.nvim',
-  config = function()
-    require('user.plugin_options.gitsigns')
-  end
-})
+-- use("tpope/vim-fugitive")
 
 
-use({
-  'nvimdev/lspsaga.nvim',
-  after = 'nvim-lspconfig',
-  config = function()
-    require('user.plugin_options.lspsaga')
-  end,
-  requires = {
-    {'nvim-tree/nvim-web-devicons'},
-    --Please make sure you install markdown and markdown_inline parser
-    {'nvim-treesitter/nvim-treesitter'}
-  }
-})
 
+-- -------------------------------------------------------------------------------
+-- -- Undo Tree (visualize undo history)
 
+-- use({
+--   'mbbill/undotree',
+--   config = function()
+--     require('user.plugin_options.undotree')
+--   end
+-- })
 
--------------------------------------------------------------------------------
--- Nvim LSP Config (Language Server Protocol (LSP))
 
-use({
-  'neovim/nvim-lspconfig',                  -- Language Server Protocol client.
-  requires = {
-    'williamboman/mason.nvim',               -- Install and manage LSP and DAP servers, linters and formatters.
-    'williamboman/mason-lspconfig.nvim',     -- Bridge between Mason and LSP-Config to use both together.
-  },
-  config = function()
-    require('user.plugin_options.lspconfig')
-  end
-})
 
+-- -------------------------------------------------------------------------------
+-- -- Git Signs (Git integration for buffers)
+-- use({
+--   'lewis6991/gitsigns.nvim',
+--   requires = 'nvim-lua/plenary.nvim',
+--   config = function()
+--     require('user.plugin_options.gitsigns')
+--   end
+-- })
 
 
--------------------------------------------------------------------------------
--- Nvim-Cmp (Completion Management Plugin)
+-- use({
+--   'nvimdev/lspsaga.nvim',
+--   after = 'nvim-lspconfig',
+--   config = function()
+--     require('user.plugin_options.lspsaga')
+--   end,
+--   requires = {
+--     {'nvim-tree/nvim-web-devicons'},
+--     --Please make sure you install markdown and markdown_inline parser
+--     {'nvim-treesitter/nvim-treesitter'}
+--   }
+-- })
 
-use({
-  'hrsh7th/nvim-cmp',                       -- Completion Engine
-  requires = {
-    'neovim/nvim-lspconfig',                -- Language Server Protocol client.
-    'hrsh7th/cmp-nvim-lsp',                 -- CMP source for Neovims built-in LSP client.
-    'hrsh7th/cmp-buffer',                   -- Get's words in buffers for completion too.
-    'jessarcher/cmp-path',                  -- Use file system paths for completion too.
-    'hrsh7th/cmp-cmdline',                  -- Completion source for command line.
 
-    'L3MON4D3/LuaSnip',                     -- Snippets engine to use code snippets.
-    'saadparwaiz1/cmp_luasnip',             -- Completion source for LuaSnip.
 
-    'rafamadriz/friendly-snippets',         -- Snippets collection for diverse programming languages.
-    'hrsh7th/cmp-nvim-lsp-signature-help',  -- CMP source to display function signatures with parameter explanation.
-    'hrsh7th/cmp-nvim-lua',                 -- CMP source for Neovim Lua API.
-    'onsails/lspkind-nvim',                 -- Pictograms for LSP completion items.
-  },
-  config = function()
-    require('user.plugin_options.nvim-cmp')
-  end,
-})
+-- -------------------------------------------------------------------------------
+-- -- Nvim LSP Config (Language Server Protocol (LSP))
 
+-- use({
+--   'neovim/nvim-lspconfig',                  -- Language Server Protocol client.
+--   requires = {
+--     'williamboman/mason.nvim',               -- Install and manage LSP and DAP servers, linters and formatters.
+--     'williamboman/mason-lspconfig.nvim',     -- Bridge between Mason and LSP-Config to use both together.
+--   },
+--   config = function()
+--     require('user.plugin_options.lspconfig')
+--   end
+-- })
 
 
--------------------------------------------------------------------------------
--- DAP (Debug Adapter Protocol)
 
-use({'mfussenegger/nvim-dap'})
+-- -------------------------------------------------------------------------------
+-- -- Nvim-Cmp (Completion Management Plugin)
 
+-- use({
+--   'hrsh7th/nvim-cmp',                       -- Completion Engine
+--   requires = {
+--     'neovim/nvim-lspconfig',                -- Language Server Protocol client.
+--     'hrsh7th/cmp-nvim-lsp',                 -- CMP source for Neovims built-in LSP client.
+--     'hrsh7th/cmp-buffer',                   -- Get's words in buffers for completion too.
+--     'jessarcher/cmp-path',                  -- Use file system paths for completion too.
+--     'hrsh7th/cmp-cmdline',                  -- Completion source for command line.
 
+--     'L3MON4D3/LuaSnip',                     -- Snippets engine to use code snippets.
+--     'saadparwaiz1/cmp_luasnip',             -- Completion source for LuaSnip.
 
--------------------------------------------------------------------------------
--- Mason Nvim DAP (close some gaps between Mason and DAP)
+--     'rafamadriz/friendly-snippets',         -- Snippets collection for diverse programming languages.
+--     'hrsh7th/cmp-nvim-lsp-signature-help',  -- CMP source to display function signatures with parameter explanation.
+--     'hrsh7th/cmp-nvim-lua',                 -- CMP source for Neovim Lua API.
+--     'onsails/lspkind-nvim',                 -- Pictograms for LSP completion items.
+--   },
+--   config = function()
+--     require('user.plugin_options.nvim-cmp')
+--   end,
+-- })
 
-use({
-    "jay-babu/mason-nvim-dap.nvim",
-    requires = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-  },
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- DAP (Debug Adapter Protocol)
 
--------------------------------------------------------------------------------
--- Vim-Polyglot (boost language packs)
+-- use({'mfussenegger/nvim-dap'})
 
-use('sheerun/vim-polyglot')
 
 
+-- -------------------------------------------------------------------------------
+-- -- Mason Nvim DAP (close some gaps between Mason and DAP)
 
--------------------------------------------------------------------------------
--- PlantUML (install Java, graphviz, plantuml)
+-- use({
+--     "jay-babu/mason-nvim-dap.nvim",
+--     requires = {
+--       "williamboman/mason.nvim",
+--       "mfussenegger/nvim-dap",
+--   },
+-- })
 
-use({
-  'weirongxu/plantuml-previewer.vim',
-  requires = {
-    'tyru/open-browser.vim',
-  },
-  config = function()
-    require('user.plugin_options.plantuml-previewer')
-  end,
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Vim-Polyglot (boost language packs)
 
--------------------------------------------------------------------------------
--- Markdown Preview (install Deno first)
+-- use('sheerun/vim-polyglot')
 
-use({
-  'toppair/peek.nvim',
-  run = 'deno task --quiet build:fast',
-  config = function()
-    require('user.plugin_options.peek')
-  end,
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- PlantUML (install Java, graphviz, plantuml)
 
--------------------------------------------------------------------------------
--- Nvim-Colorizer (show color highlighting for colors)
-use({
-  'norcalli/nvim-colorizer.lua',
-  config = function()
-    require('user.plugin_options.nvim-colorizer')
-  end
-})
+-- use({
+--   'weirongxu/plantuml-previewer.vim',
+--   requires = {
+--     'tyru/open-browser.vim',
+--   },
+--   config = function()
+--     require('user.plugin_options.plantuml-previewer')
+--   end,
+-- })
 
 
 
--------------------------------------------------------------------------------
--- Hop (fast navigation)
+-- -------------------------------------------------------------------------------
+-- -- Markdown Preview (install Deno first)
 
-use({
-  'phaazon/hop.nvim',
-  config = function()
-    require('user.plugin_options.hop')
-  end,
-})
+-- use({
+--   'toppair/peek.nvim',
+--   run = 'deno task --quiet build:fast',
+--   config = function()
+--     require('user.plugin_options.peek')
+--   end,
+-- })
 
 
 
--------------------------------------------------------------------------------
--- Autosave files by go to normal mode or change buffer
+-- -------------------------------------------------------------------------------
+-- -- Nvim-Colorizer (show color highlighting for colors)
+-- use({
+--   'norcalli/nvim-colorizer.lua',
+--   config = function()
+--     require('user.plugin_options.nvim-colorizer')
+--   end
+-- })
 
-use({
-  'pocco81/auto-save.nvim',
-  config = function()
-    require('user.plugin_options.auto-save')
-  end
-})
 
 
+-- -------------------------------------------------------------------------------
+-- -- Hop (fast navigation)
 
--------------------------------------------------------------------------------
--- Copilot (AI code generation)
+-- use({
+--   'phaazon/hop.nvim',
+--   config = function()
+--     require('user.plugin_options.hop')
+--   end,
+-- })
 
-use {
-  'zbirenbaum/copilot.lua',
-  cmd    = 'Copilot',
-  event  = 'InsertEnter',
-  config = function()
-    require('user.plugin_options.copilot')
-  end,
-}
 
 
+-- -------------------------------------------------------------------------------
+-- -- Autosave files by go to normal mode or change buffer
 
+-- use({
+--   'pocco81/auto-save.nvim',
+--   config = function()
+--     require('user.plugin_options.auto-save')
+--   end
+-- })
 
 
 
-if packer_bootstrap then
-  packer.sync()
-end
+-- -------------------------------------------------------------------------------
+-- -- Copilot (AI code generation)
 
+-- use {
+--   'zbirenbaum/copilot.lua',
+--   cmd    = 'Copilot',
+--   event  = 'InsertEnter',
+--   config = function()
+--     require('user.plugin_options.copilot')
+--   end,
+-- }
 
 
-------------------------------------------------------------------------------
--- Auto Commands
-------------------------------------------------------------------------------
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file:
--- vim.cmd([[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]])
+
+
+
+-- if packer_bootstrap then
+--   packer.sync()
+-- end
+
+
+
+-- ------------------------------------------------------------------------------
+-- -- Auto Commands
+-- ------------------------------------------------------------------------------
+
+-- -- Autocommand that reloads neovim whenever you save the plugins.lua file:
+-- -- vim.cmd([[
+-- --   augroup packer_user_config
+-- --     autocmd!
+-- --     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+-- --   augroup end
+-- -- ]])
