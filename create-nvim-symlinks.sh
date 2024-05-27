@@ -18,7 +18,7 @@ rm -rf $HOME/.config/nvim
 
 # Create symlink to ~/.config/dotfiles/nvim/lua/:
 #ln -s $DOTFILES/nvim/lua $HOME/.config/nvim/
-ln -s ~/.config/dotfiles/nvim $HOME/.config/nvim
+ln -s $HOME/personal/github/nvim $HOME/.config/nvim
 
 # Create symlink to ~/.config/dotfiles/nvim/init.lua:
 #ln -s $DOTFILES/nvim/init.lua $HOME/.config/nvim/init.lua
