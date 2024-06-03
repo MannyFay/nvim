@@ -71,6 +71,28 @@ vim.keymap.set('n', '<Leader>jl', 'J', opts)                            -- Join 
 -- nnoremap <leader>x :!chmod +x %<CR>
 
 
+-- Toggle inlay hints ( tih):
+-- if vim.lsp.inlay_hint then
+--   vim.keymap.set(
+--     'n',
+--     '<Leader>tih',
+--     function() vim.lsp.inlay_hint(0, nil) end,
+--     { desc = "Toggle inlay hints." }
+--   )
+-- end
+
+-- if vim.lsp.inlay_hint then
+--     vim.keymap.set('n', '<Leader>tih', function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0)) end, { desc = "toggle inlay [h]ints" })
+-- end
+
+-- vim.keymap.set('n', '<Leader>tih', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
+
+
+
+-- Maybe here works something:
+-- vim.keymap.set('n', '<Leader>tih', function() lsp.inlay_hint.enable(0, not lsp.inlay_hint.is_enabled()) end)
+
+
 -- Start tmux sessionizer
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/dotfiles/tmux/tmux-sessionizer.sh<CR>')
 
