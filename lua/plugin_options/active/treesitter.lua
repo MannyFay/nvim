@@ -9,9 +9,17 @@ if not status_ok then
   return "Error: */lua/user/plugin_options/treesitter.lua -> Treesitter plugin could not be loaded. Sure you have installed it in your plugins file?"
 end
 
+-- Import Treesitter Auto Tag with a protected call:
+-- https://github.com/windwp/nvim-ts-autotag
+local ts_auto_tag_status_ok, ts_auto_tag = pcall(require, 'nvim-ts-autotag')
+if not ts_auto_tag_status_ok then
+  return "Error: */lua/plugin_options/active/treesitter.lua -> Treesitter Auto Tag plugin could not be loaded. Sure you have installed it in your plugins file?"
+end
 
-------------------------------------------------------------
--- Appearance
+
+
+-------------------------------------------------------------------------------
+-- TreeSitter Appearance
 
 configs.setup {
   modules          = { },
@@ -26,7 +34,7 @@ configs.setup {
     -- Enable syntax highlighting:
     enable = false,
     -- Languages where color highlighting is disabled:
-    disable = { '' },
+    disable = { 'all' },
     -- If true, it slows down Neovim and doubles syntax highlighting:
     additional_vim_regex_highlighting = false,
   },
@@ -72,16 +80,33 @@ configs.setup {
       show_help                 = '<Nop>',
     },
   },
-  -- Autotag extension for auto close and auto rename tags:
-  autotag = {
-    enable                = true,
-    enable_rename         = true,
-    enable_close          = true,
-    enable_close_on_slash = true,
-    filetypes             = { "html" , "xml", "php", "blade" },
-  },
 }
 
-require('ts_context_commentstring').setup {}
 
+
+-------------------------------------------------------------------------------
+-- TreeSitter Context CommentString Appearance
+
+require('ts_context_commentstring').setup {}
 vim.g.skip_ts_context_commentstring_module = true
+
+
+
+-------------------------------------------------------------------------------
+-- TreeSitter Auto Tag Appearance
+
+ts_auto_tag.setup({
+  opts = {
+    enable_close          = true,  -- Auto close tags
+    enable_rename         = true,  -- Auto rename pairs of tags
+    enable_close_on_slash = false  -- Auto close on trailing </
+  },
+  -- Also override individual filetype configs, these take priority.
+  -- Empty by default, useful if one of the "opts" global settings
+  -- doesn't work well in a specific filetype
+  -- per_filetype = {
+  --   ["html"] = {
+  --     enable_close = false
+  --   }
+  -- }
+})
