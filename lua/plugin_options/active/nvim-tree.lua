@@ -7,7 +7,7 @@
 --     'nvim-tree/nvim-tree.lua',
 --     requires = 'kyazdani42/nvim-web-devicons',
 --     config = function()
---       require('user.plugin_options.nvim-tree')
+--       require('plugin_options.active.nvim-tree')
 --     end
 -- })
 
@@ -23,7 +23,7 @@
 -- Import Nvim-Tree plugin with a protected call:
 local nvim_tree_status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not nvim_tree_status_ok then
-  return "Error: */lua/user/plugin_options/nvim-tree.lua -> NvimTree plugin could not be loaded. Sure you have installed it in your plugins file?"
+  return "Error: */lua/plugin_options/active/nvim-tree.lua -> NvimTree plugin could not be loaded. Sure you have installed it in your plugins file?"
 end
 
 -- Open Nvim-Tree by default if Nvim starts (leave it at this place!):
@@ -32,7 +32,7 @@ local function open_nvim_tree()
 end
 
 -- Recommended settings of Nvim-Tree documentation:
-vim.g.loaded_netrw = 1
+vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
 
@@ -111,7 +111,7 @@ end
 --------------------------------------------------------------
 -- Settings
 
-nvim_tree.setup {
+nvim_tree.setup{
   on_attach                          = on_attach,  -- Call function above to set key mappings.
   hijack_cursor                      = false,      -- true: keeps cursor on first char of item in tree.
   auto_reload_on_write               = true,       -- Reload tree if a file was written.
@@ -166,7 +166,7 @@ nvim_tree.setup {
     add_trailing           = false,          -- true: Append trailing slash to directory names.
     group_empty            = false,          -- true: Compact directories that contain only a single folder into one node.
     full_name              = false,          -- true: Display names that are longer than the width in floating window.
-    root_folder_label      = true,           -- true: Display the root directory.
+    root_folder_label = ":~:s?$?/..?",       -- true: Display the root directory.
     indent_width           = 2,              -- Indentation spaces of nesting (minimum = 1).
     special_files          = {},             -- Filenames that get highlighted by 'NvimTreeSpecialFile'.
     symlink_destination    = true,           -- true: Display destination of symlink.
