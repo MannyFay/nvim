@@ -74,7 +74,7 @@ use({
     'nvim-telescope/telescope-media-files.nvim',                   -- Telescope image preview:
   },
   config = function()
-    require('user.plugin_options.telescope')
+    require('plugin_options.active.telescope')
   end
 })
 
@@ -113,7 +113,7 @@ use({
     'windwp/nvim-ts-autotag',
   },
   config = function()
-    require('user.plugin_options.treesitter')
+    require('plugin_options.active.treesitter')
   end
 })
 
@@ -128,7 +128,7 @@ use {
     branch = "harpoon2",
     requires = { {"nvim-lua/plenary.nvim"} },
     config = function()
-      require("user.plugin_options.harpoon")
+      require("plugin_options.active.harpoon")
     end
 }
 
@@ -140,7 +140,7 @@ use {
 use({
   'ethanholz/nvim-lastplace',
   config = function()
-    require('user.plugin_options.nvim-lastplace')
+    require('plugin_options.active.nvim-lastplace')
   end
 })
 
@@ -152,7 +152,7 @@ use({
 use({
   'numToStr/Comment.nvim',
   config = function()
-    require('user.plugin_options.comment')
+    require('plugin_options.active.comment')
   end
 })
 
@@ -172,7 +172,7 @@ use({
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   config = function()
-    require('user.plugin_options.nvim-surround')
+    require('plugin_options.active.nvim-surround')
   end
 })
 
@@ -184,7 +184,7 @@ use({
 use({
   'windwp/nvim-autopairs',
   config = function()
-    require('user.plugin_options.autopairs')
+    require('plugin_options.active.autopairs')
   end
 })
 
@@ -197,7 +197,7 @@ use({
   'nvim-lualine/lualine.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
-    require('user.plugin_options.lualine')
+    require('plugin_options.active.lualine')
   end
 })
 
@@ -210,7 +210,7 @@ use({
     'nvim-tree/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('user.plugin_options.nvim-tree')
+      require('plugin_options.active.nvim-tree')
     end
 })
 
@@ -222,7 +222,7 @@ use({
 use({
   'tommcdo/vim-lion',
   config = function()
-    require('user.plugin_options.lion')
+    require('plugin_options.active.lion')
   end,
 })
 
@@ -259,7 +259,7 @@ use("tpope/vim-fugitive")
 use({
   'mbbill/undotree',
   config = function()
-    require('user.plugin_options.undotree')
+    require('plugin_options.active.undotree')
   end
 })
 
@@ -271,7 +271,7 @@ use({
   'lewis6991/gitsigns.nvim',
   requires = 'nvim-lua/plenary.nvim',
   config = function()
-    require('user.plugin_options.gitsigns')
+    require('plugin_options.active.gitsigns')
   end
 })
 
@@ -280,7 +280,7 @@ use({
   'nvimdev/lspsaga.nvim',
   after = 'nvim-lspconfig',
   config = function()
-    require('user.plugin_options.lspsaga')
+    require('plugin_options.active.lspsaga')
   end,
   requires = {
     {'nvim-tree/nvim-web-devicons'},
@@ -303,7 +303,7 @@ use({
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    require('user.plugin_options.lsp.mason')
+    require('plugin_options.active.lsp.mason')
   end,
 })
 
@@ -324,7 +324,7 @@ use({
     "folke/neodev.nvim",
   },
   config = function()
-    require('user.plugin_options.lsp.lspconfig')
+    require('plugin_options.active.lsp.lspconfig')
   end
 })
 
@@ -351,7 +351,7 @@ use({
     'onsails/lspkind-nvim',                 -- Pictograms for LSP completion items.
   },
   config = function()
-    require('user.plugin_options.nvim-cmp')
+    require('plugin_options.active.nvim-cmp')
   end,
 })
 
@@ -393,7 +393,7 @@ use({
     'tyru/open-browser.vim',
   },
   config = function()
-    require('user.plugin_options.plantuml-previewer')
+    require('plugin_options.active.plantuml-previewer')
   end,
 })
 
@@ -406,7 +406,7 @@ use({
   'toppair/peek.nvim',
   run = 'deno task --quiet build:fast',
   config = function()
-    require('user.plugin_options.peek')
+    require('plugin_options.active.peek')
   end,
 })
 
@@ -417,7 +417,7 @@ use({
 use({
   'norcalli/nvim-colorizer.lua',
   config = function()
-    require('user.plugin_options.nvim-colorizer')
+    require('plugin_options.active.nvim-colorizer')
   end
 })
 
@@ -429,7 +429,7 @@ use({
 use({
   'pocco81/auto-save.nvim',
   config = function()
-    require('user.plugin_options.auto-save')
+    require('plugin_options.active.auto-save')
   end
 })
 
@@ -443,7 +443,7 @@ use {
   cmd    = 'Copilot',
   event  = 'InsertEnter',
   config = function()
-    require('user.plugin_options.copilot')
+    require('plugin_options.active.copilot')
   end,
 }
 
@@ -451,7 +451,7 @@ use {
 use({
   'lukas-reineke/indent-blankline.nvim',
   config = function()
-    require('user.plugin_options.indent-blankline')
+    require('plugin_options.active.indent-blankline')
   end,
 })
 
@@ -468,7 +468,7 @@ use {
     'nvim-lua/plenary.nvim',
   },
   config = function()
-    require('user.plugin_options.copilot-chat')
+    require('plugin_options.active.copilot-chat')
   end,
 }
 
@@ -490,7 +490,7 @@ use({
     'mfussenegger/nvim-dap',
   },
   config = function()
-    require('user.plugin_options.rust-tools')
+    require('plugin_options.active.rust-tools')
   end,
 })
 
@@ -508,7 +508,7 @@ use({
     'nvimtools/none-ls.nvim',
   },
   config = function()
-    require('user.plugin_options.laravel')
+    require('plugin_options.active.laravel')
   end,
 })
 
@@ -524,7 +524,7 @@ use({
     'nvim-lua/plenary.nvim',
   },
   config = function()
-    require('user.plugin_options.obsidian')
+    require('plugin_options.active.obsidian')
   end,
 })
 
@@ -536,7 +536,7 @@ use({
 use({
   'folke/which-key.nvim',
   config = function()
-    require('user.plugin_options.whichkey')
+    require('plugin_options.active.whichkey')
   end,
 })
 
