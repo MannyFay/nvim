@@ -6,7 +6,7 @@
 -- use({
 --   'folke/which-key.nvim',
 --   config = function()
---     require('user.plugin_options.which-key')
+--     require('plugin_options.active.which-key')
 --   end,
 -- })
 
