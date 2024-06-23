@@ -1,3 +1,3 @@
-require('core.plugins')
-require('core.options')
-require('core.keymaps')
+require("core.options")  -- Must be first entry.
+require("core.keymaps")
+require("core.lazy")

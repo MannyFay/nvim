@@ -67,6 +67,8 @@ vim.keymap.set('n', 'vb', '<C-v>', opts)                                -- Enter
 
 vim.keymap.set('n', '<Leader>jl', 'J', opts)                            -- Join line below with white space:
 
+--vim.keymap.set('n', '<Leader>/', 'gcc')
+
 -- to run a script directly from vim:
 -- nnoremap <leader>x :!chmod +x %<CR>
 
