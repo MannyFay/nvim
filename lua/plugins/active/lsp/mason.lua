@@ -33,8 +33,6 @@ return {
         "html",
         "intelephense",
         "lua_ls",
-        "pint",
-        "phpstan",
         "prismals",
         "psalm",
         "pyright",
@@ -53,6 +51,8 @@ return {
         "black", -- python formatter
         "pylint",
         "eslint_d",
+        "pint",
+        "phpstan",
       },
     })
   end,
