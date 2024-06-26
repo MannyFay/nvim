@@ -64,11 +64,6 @@ return {
         -- Don't ignore change of white spaces for blame:
         ignore_whitespace = false,
       },
-      -- Formatting of blame information:
-      current_line_blame_formatter_opts = {
-        -- Display time stamps as absolute time (not '2 days ago'):
-        relative_time = false,
-      },
       -- Priority of Gitsigns against other signs:
       sign_priority = 6,
       -- Refresh interval of Gitsigns in milliseconds:
@@ -86,9 +81,9 @@ return {
         col      = 1,
       },
       -- Disable integration with YADM (Yet Another Dotfiles Manager):
-      yadm = {
-        enable = false,
-      },
+      -- yadm = {
+      --   enable = false,
+      -- },
     })
     vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})  -- Preview hunk (the part before the change).
     vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})  -- Show blame information.
