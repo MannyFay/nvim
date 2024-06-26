@@ -26,6 +26,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { import = "plugins.active" },
+    { import = "plugins.active.git" },
+    { import = "plugins.active.laravel "},
     { import = "plugins.active.lsp" },
   }, {
   change_detection = {
