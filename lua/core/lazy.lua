@@ -30,6 +30,7 @@ require("lazy").setup({
     { import = "plugins.active.git" },
     { import = "plugins.active.laravel"},
     { import = "plugins.active.lsp" },
+    { import = "plugins.active.telescope" },
   }, {
   change_detection = {
     notify = false, -- Don't notify in command line about changed plugin files.
