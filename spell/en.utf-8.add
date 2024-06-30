@@ -804,3 +804,6 @@ dl
 lineinfile
 include
 RelWithDebInfo
+makepkg
+sri
+chmod
