@@ -803,3 +803,4 @@ archlinux
 dl
 lineinfile
 include
+RelWithDebInfo
