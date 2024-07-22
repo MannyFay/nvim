@@ -62,12 +62,12 @@ vim.keymap.set('n', '<Leader>fm', ':Telescope harpoon marks<CR>')
       settings = {
         save_on_toggle         = false,          -- Bookmark file if you jump into it.
         save_on_change         = true,           -- Save bookmarked file if you change it.
-        sync_on_ui_close       = false,        -- Sync all bookmarks if UI is closed.
-        enter_on_sendcmd       = false,        -- Enter the terminal when running a command.
-        tmux_autoclose_windows = false,  -- Don't close the tmux window when the pane closes.
-        exclude_filetypes      = { 'harpoon' }, -- Filetypes to exclude when picking files.
+        sync_on_ui_close       = false,          -- Sync all bookmarks if UI is closed.
+        enter_on_sendcmd       = false,          -- Enter the terminal when running a command.
+        tmux_autoclose_windows = false,          -- Don't close the tmux window when the pane closes.
+        exclude_filetypes      = { 'harpoon' },  -- Filetypes to exclude when picking files.
         mark_branch            = true,           -- Set marks specific to each git branch.
-        tabline                = false,         -- Enable tabline integration.
+        tabline                = false,          -- Enable tabline integration.
         tabline_prefix         = " ",
         tabline_suffix         = " ",
         key = function()

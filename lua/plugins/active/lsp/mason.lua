@@ -89,7 +89,7 @@ return {
       ensure_installed = {
         "actionlint",  -- GitHub Actions linter.
         "ansible-lint",  -- Ansible linter.
-        "bacon",  -- Rust linter.
+        --"bacon",  -- Rust linter.
         "blade-formatter",  -- Laravel Blade formatter.
         "checkstyle",  -- Java linter.
         "cmakelint",  -- CMake linter.
