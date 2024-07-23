@@ -807,3 +807,17 @@ RelWithDebInfo
 makepkg
 sri
 chmod
+jsx
+a11y
+parserOptions
+ecmaVersion
+sourceType
+ecmaFeatures
+es6
+classnames
+mssql
+openai
+turndown
+autoprefixer
+#
+Schadenverhütung
