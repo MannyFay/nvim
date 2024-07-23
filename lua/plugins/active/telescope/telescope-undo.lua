@@ -17,13 +17,13 @@ return {
     -- don't use `defaults = { }` here, do this in the main telescope spec
     extensions = {
       undo = {
-        use_delta = true,
+        use_delta          = true,
         use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-        side_by_side = false,
-        diff_context_lines = vim.o.scrolloff,
-        entry_format = "$ID - $TIME - Changed: $STAT ",
-        time_format = "",
-        saved_only = false,
+        side_by_side       = false,
+        vim_diff_opts      = { ctxlen = 3 },
+        entry_format       = "$ID - $TIME - Changed: $STAT ",
+        time_format        = "",
+        saved_only         = false,
       },
       -- no other extensions here, they can have their own spec too
     },
