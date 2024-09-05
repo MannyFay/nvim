@@ -73,7 +73,7 @@ return {
         'tailwindcss',                     -- Tailwind CSS language server.
         'taplo',                           -- TOML language server.
         'terraformls',                     -- Terraform language server.
-        'tsserver',                        -- JavaScript/TypeScript language server.
+        'ts_ls',                           -- JavaScript/TypeScript language server.
         'volar',                           -- Vue language server.
         'yamlls',                          -- YAML language server.
         --'editorconfig-checker',            -- EditorConfig checker.
