@@ -46,3 +46,4 @@ vim.loader.enable()                                          -- Improve Neovim s
 vim.opt.mouse = 'a'                                          -- Enable mouse support.
 vim.o.undofile = true
 -- nvim_list_uis()[0]
+vim.opt.swapfile = false                                     -- Don't create swap files.
