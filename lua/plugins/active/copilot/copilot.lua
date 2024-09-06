@@ -1,9 +1,18 @@
+-------------------------------------------------------------------------------
+-- Copilot Plugin
+-- https://github.com/zbirenbaum/copilot.lua
+-------------------------------------------------------------------------------
+
 return {
   "zbirenbaum/copilot.lua",
   cmd    = 'Copilot',
-  event = { "InsertEnter" },
+  event  = { "InsertEnter" },
   config = function()
     local copilot = require("copilot")
+
+
+    ---------------------------------------------------------------------------
+    ----- Settings
 
     copilot.setup({
       panel = {
