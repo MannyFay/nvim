@@ -115,8 +115,8 @@ vim.keymap.set('n', '<C-d>',   '<C-d>zz', opts)  -- Scroll half page down and ce
 --------------------------------------------------------------
 -- Splitting
 
-keymap('n', '<Leader>\\|', ':vsplit<CR>', opts)  -- Split buffer vertically (y-axis) ( y).
-keymap('n', '<Leader>-',   ':split<CR>',  opts)  -- Split buffer horizontally (x-axis) ( x).
+keymap('n', '<Leader>\\|', ':vsplit<CR>', opts)  -- Split buffer vertically (y-axis).
+keymap('n', '<Leader>-',   ':split<CR>',  opts)  -- Split buffer horizontally (x-axis).
 
 
 --------------------------------------------------------------

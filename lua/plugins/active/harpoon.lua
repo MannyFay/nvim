@@ -42,15 +42,15 @@ return {
     vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,  { desc = "Open harpoon window" })
 
     -- Jump to a file in the Harpoon list:
-    vim.keymap.set("n", "<Leader>hs1", function() harpoon:list():select(1) end)
-    vim.keymap.set("n", "<Leader>hs2", function() harpoon:list():select(2) end)
-    vim.keymap.set("n", "<Leader>hs3", function() harpoon:list():select(3) end)
-    vim.keymap.set("n", "<Leader>hs4", function() harpoon:list():select(4) end)
-    vim.keymap.set("n", "<Leader>hs5", function() harpoon:list():select(5) end)
-    vim.keymap.set("n", "<Leader>hs6", function() harpoon:list():select(6) end)
-    vim.keymap.set("n", "<Leader>hs7", function() harpoon:list():select(7) end)
-    vim.keymap.set("n", "<Leader>hs8", function() harpoon:list():select(8) end)
-    vim.keymap.set("n", "<Leader>hs9", function() harpoon:list():select(9) end)
+    vim.keymap.set("n", "<Leader>h1", function() harpoon:list():select(1) end)
+    vim.keymap.set("n", "<Leader>h2", function() harpoon:list():select(2) end)
+    vim.keymap.set("n", "<Leader>h3", function() harpoon:list():select(3) end)
+    vim.keymap.set("n", "<Leader>h4", function() harpoon:list():select(4) end)
+    vim.keymap.set("n", "<Leader>h5", function() harpoon:list():select(5) end)
+    vim.keymap.set("n", "<Leader>h6", function() harpoon:list():select(6) end)
+    vim.keymap.set("n", "<Leader>h7", function() harpoon:list():select(7) end)
+    vim.keymap.set("n", "<Leader>h8", function() harpoon:list():select(8) end)
+    vim.keymap.set("n", "<Leader>h9", function() harpoon:list():select(9) end)
 
     -- Toggle previous & next buffers stored within Harpoon list:
     vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)
