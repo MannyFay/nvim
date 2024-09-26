@@ -1,6 +1,7 @@
 if vim.g.vscode then
   -- VSCode Neovim
   -- https://github.com/vscode-neovim
+  require("vs-code.options")
   require("vs-code.keymaps")
 else
   -- Ordinary Neovim

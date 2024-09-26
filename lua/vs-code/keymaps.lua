@@ -9,7 +9,6 @@ local keymap = vim.keymap.set
 local opts   = { noremap = true, silent = true }
 
 
-
 -------------------------------------------------------------------------------
 -- Key Mappings
 
@@ -17,18 +16,6 @@ local opts   = { noremap = true, silent = true }
 keymap("n", "<Space>", "", opts)
 vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
-
--- yank to system clipboard
--- keymap({"n", "v"}, "<leader>y", '"+y', opts)
-keymap({"n", "v"}, "y", '"+y', opts)
-
--- paste from system clipboard
--- keymap({"n", "v"}, "<leader>p", '"+p', opts)
-keymap({"n", "v"}, "p", '"+p', opts)
-
-
-
-
 
 
 
@@ -58,9 +45,6 @@ keymap({'n', 'v'}, '<leader>-', "<cmd>lua require('vscode').action('workbench.ac
 
 
 
-
-
-
 -------------------------------------------------------------------------------
 -- Comments
 
@@ -87,6 +71,17 @@ keymap('n',        'q:',         ':q<CR>',       opts)  -- Disable typical comma
 keymap({'n', 'v'}, '<Leader>jl', 'J',            opts)  -- Join line below with white space.
 keymap('v',        '<<',         '<gv',          opts)  -- Stay in visual mode after indent width <<.
 keymap('v',        '>>',         '>gv',          opts)  -- Stay in visual mode after indent width >>.
+keymap('n', 'Y',  '+y$',    opts)        -- Yank to end of line.
+
+keymap({"n", "v"}, "y", '"+y',   opts)  -- Yank line to system clipboard.
+keymap({"n", "v"}, "yy", '"+yy', opts)  -- Yank to system clipboard.
+
+keymap({"n", "v"}, "D", '"+D', opts)  -- Delete to end of line and copy to system clipboard.
+
+
+-- paste from system clipboard
+-- keymap({"n", "v"}, "<leader>p", '"+p', opts)
+keymap({"n", "v"}, "p", '"+p', opts)
 
 
 -------------------------------------------------------------------------------
@@ -99,7 +94,6 @@ keymap('v', 'Y',  'myY`y', opts)        -- Maintain the cursor position when yan
 keymap('v', '<<', '<gv',   opts)        -- Stay in visual mode after indent width <<.
 keymap('v', '>>', '>gv',   opts)        -- Stay in visual mode after indent width >>.
 keymap('v', 'p',  '"_dP',  opts)        -- Paste preserves primal yanked piece.
-keymap('n', 'Y',  'y$',    opts)        -- Yank to end of line.
 
 
 -------------------------------------------------------------------------------
