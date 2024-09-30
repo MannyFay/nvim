@@ -1,0 +1,162 @@
+#------------------------------------------------------------------------------
+#-- Default and fall back config
+#-- https://editorconfig.org/
+
+root = true
+
+[*]
+charset              = utf-8
+end_of_line          = lf
+indent_size          = 4
+indent_style         = space
+insert_final_newline = true
+max_line_length      = 120
+tab_width            = 4
+trim_trailing_whitespace = true
+
+
+
+#------------------------------------------------------------------------------
+#-- CSS
+#-- https://google.github.io/styleguide/htmlcssguide.html
+
+[*.css]
+charset      = utf-8
+indent_size  = 2
+indent_style = space
+tab_width    = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- HTML
+#-- https://google.github.io/styleguide/htmlcssguide.html
+
+[*.{html, blade.php, twig}]
+charset      = utf-8
+indent_size  = 2
+indent_style = space
+tab_width    = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- JSON
+#-- https://google.github.io/styleguide/jsoncstyleguide.xml
+
+[*.{json, JSON}]
+charset      = utf-8
+indent_size  = 2
+indent_style = space
+tab_width    = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- JavaScript
+#-- https://standardjs.com/rules.html
+
+[*.js]
+indent_size     = 2
+indent_style    = space
+max_line_length = 80
+tab_width       = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- Lua
+#-- http://lua-users.org/wiki/LuaStyleGuide
+
+[*.lua]
+indent_size     = 2
+indent_style    = space
+max_line_length = 120
+tab_width       = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- Markdown
+#-- https://google.github.io/styleguide/docguide/style.html
+
+[*.{md, markdown}]
+charset         = utf-8
+indent_size     = 4
+indent_style    = space
+max_line_length = 150
+
+
+
+#------------------------------------------------------------------------------
+#-- PHP
+#-- https://www.php-fig.org/psr/psr-12/
+
+[*.php]
+end_of_line              = lf
+indent_size              = 4
+indent_style             = space
+insert_final_newline     = false
+max_line_length          = 120
+trim_trailing_whitespace = true
+
+
+
+#------------------------------------------------------------------------------
+#-- Prisma
+#-- https://www.prisma.io/docs/about/style-guide/spelling-punctuation-formatting
+
+[*.prisma]
+charset      = utf-8
+indent_size  = 2
+indent_style = space
+
+
+
+#------------------------------------------------------------------------------
+#-- Shell Script
+#-- https://google.github.io/styleguide/shellguide.html
+
+[*.{sh, bash}]
+charset                  = utf-8
+indent_size              = 2
+indent_style             = space
+max_line_length          = 80
+trim_trailing_whitespace = true
+
+
+
+#------------------------------------------------------------------------------
+#-- TypeScript
+#-- https://google.github.io/styleguide/tsguide.html
+
+[*.{ts, tsx}]
+charset      = utf-8
+indent_size  = 2
+indent_style = space
+
+
+
+#------------------------------------------------------------------------------
+#-- XML
+#-- https://google.github.io/styleguide/xmlstyle.html
+
+[*.{xml}]
+charset         = utf-8
+indent_size     = 2
+indent_style    = space
+max_line_length = 400
+tab_width       = 2
+
+
+
+#------------------------------------------------------------------------------
+#-- YAML
+#-- https://developers.home-assistant.io/docs/documenting/yaml-style-guide/
+
+[*.{yml, yaml}]
+indent_size     = 2
+indent_style    = space
+max_line_length = 150
+tab_width       = 2
+

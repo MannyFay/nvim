@@ -118,14 +118,18 @@ keymap('n', '<C-d>',   '<C-d>zz', opts)  -- Scroll half page down and center.
 keymap({'n', 'v'}, '<leader>tt', "<cmd>lua require('vscode').action('workbench.action.toggleSidebarVisibility')<CR>")         -- Toggle tree.
 keymap({'n', 'v'}, '<leader>et', "<cmd>lua require('vscode').action('workbench.view.explorer')<CR>")                          -- Explore tree.
 keymap({'n', 'v'}, '<leader>et', "<cmd>lua require('vscode').action('workbench.files.action.showActiveFileInExplorer')<CR>")  -- Show actual file in tree.
-keymap('n',        'r',          "<cmd>lua require('vscode').action('renameFile')<CR>")                                       -- Rename.
+-- keymap('n',        'r',          "<cmd>lua require('vscode').action('renameFile')<CR>")                                       -- Rename.
 -- copy path
 -- copy relative path
 keymap('n',        '<leader>x',          "<cmd>lua require('vscode').action('explorer.openToSide')<CR>")                              -- Open file in vertical split.
-keymap('n',        'c',          "<cmd>lua require('vscode').action('filesExplorer.copy')<CR>")                               -- Copy.
+-- keymap('n',        'c',          "<cmd>lua require('vscode').action('filesExplorer.copy')<CR>")                               -- Copy.
 --keymap('n',        'x',          "<cmd>lua require('vscode').action('filesExplorer.cut')<CR>")                                -- Cut.
 --keymap('n',        'p',          "<cmd>lua require('vscode').action('filesExplorer.paste')<CR>")                              -- Paste.
-keymap('n',        'ni',         "<cmd>lua require('vscode').action('explorer.newFile')<CR>")                                 -- Create new file. (maybe directory too?)
+
+-- This does only work in the editor, not in the explorer:
+-- keymap('n',        'ni',         "<cmd>lua require('vscode').action('explorer.newFile')<CR>")                                 -- Create new file. (maybe directory too?)
+
+
 --keymap('n',        'd',          "<cmd>lua require('vscode').action('deleteFile')<CR>")                                       -- Delete file. (maybe directory too?)
 
 
