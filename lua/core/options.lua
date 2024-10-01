@@ -47,3 +47,4 @@ vim.opt.mouse = 'a'                                          -- Enable mouse sup
 vim.o.undofile = true
 -- nvim_list_uis()[0]
 vim.opt.swapfile = false                                     -- Don't create swap files.
+vim.g.editorconfig = true                                    -- Enable Neovims editorconfig functionality.

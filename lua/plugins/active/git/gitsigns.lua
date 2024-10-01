@@ -1,91 +1,76 @@
+-------------------------------------------------------------------------------
+-- Git-Signs Plugin
+-- https://github.com/lewis6991/gitsigns.nvim
+-- Git integration for buffers.
+-------------------------------------------------------------------------------
+
 return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local gitsigns = require("gitsigns")
 
+
+    ---------------------------------------------------------------------------
+    --- Settings
+
     gitsigns.setup({
       signs = {
-        add = {
-          -- hl     = 'GitSignsAdd',
-          text   = '▎',
-          -- numhl  = 'GitSignsAddNr',
-          -- linehl = 'GitSignsAddLn',
-        },
-        change = {
-          -- hl     = 'GitSignsChange',
-          text   = '▎',
-          -- numhl  = 'GitSignsChangeNr',
-          -- linehl = 'GitSignsChangeLn',
-        },
-        delete = {
-          -- hl     = 'GitSignsDelete',
-          text   = ' ',
-          -- numhl  = 'GitSignsDeleteNr',
-          -- linehl = 'GitSignsDeleteLn',
-        },
-        topdelete = {
-          -- hl     = 'GitSignsDelete',
-          text   = ' ',
-          -- numhl  = 'GitSignsDeleteNr',
-          -- linehl = 'GitSignsDeleteLn',
-        },
-        changedelete = {
-          -- hl     = 'GitSignsChange',
-          text   = '▎',
-          -- numhl  = 'GitSignsChangeNr',
-          -- linehl = 'GitSignsChangeLn',
-        },
+        add          = { text = '▎',  },
+        change       = { text = '▎',  },
+        delete       = { text = ' ', },
+        topdelete    = { text = ' ', },
+        changedelete = { text = '▎',  },
+        untracked    = { text = '┆'   },
       },
-      -- Create Gitsigns column before line numbers:
-      signcolumn = true,
-      -- Disable highlighting of line numbers affected by Gitsigns:
-      numhl = false,
-      -- Disable highlighting of current line if it contains Gitsigns:
-      linehl = false,
-      -- Disable highlighting of word level changes:
-      word_diff = false,
-      -- Watch the Git directory for changes:
-      watch_gitdir = {
-        interval = 1000,
+      signs_staged = {
+        add          = { text = '▎',  },
+        change       = { text = '▎',  },
+        delete       = { text = ' ', },
+        topdelete    = { text = ' ', },
+        changedelete = { text = '▎',  },
+        untracked    = { text = '┆'   },
+      },
+      signs_staged_enabled = true,                                              -- Enable Gitsigns for staged changes.
+      signcolumn           = true,                                              -- Create Gitsigns column before line numbers.
+      numhl                = false,                                             -- Disable highlighting of line numbers affected by Gitsigns.
+      linehl               = false,                                             -- Disable highlighting of current line if it contains Gitsigns.
+      word_diff            = false,                                             -- Disable highlighting of word level changes.
+      watch_gitdir         = {                                                  -- Watch the Git directory for changes.
+        interval     = 1000,
         follow_files = true,
       },
-      -- Enable Gitsigns for untracked files too:
-      attach_to_untracked = true,
-      -- Disable Git-Blame information for current line:
-      current_line_blame = false,
-      current_line_blame_opts = {
-        -- Enable displaying virtual text for blame information:
-        virt_text = true,
-        -- Position of blame information (possible: eol, overlay, right_align):
-        virt_text_pos = 'eol',
-        -- Milliseconds before displaying blame information:
-        delay = 500,
-        -- Don't ignore change of white spaces for blame:
-        ignore_whitespace = false,
+      auto_attach             = true,                                           -- Enable Gitsigns for all buffers.
+      attach_to_untracked     = true,                                           -- Enable Gitsigns for untracked files too.
+      current_line_blame      = true,                                           -- Blame information for current line.
+      current_line_blame_opts = {                                               -- Git-Blame options for current line.
+        virt_text         = true,                                               -- Enable displaying virtual text for blame information.
+        virt_text_pos     = 'eol',                                              -- Position of blame information (possible: eol, overlay, right_align).
+        delay             = 10,                                                 -- Milliseconds before displaying blame information.
+        ignore_whitespace = false,                                              -- Don't ignore change of white spaces for blame.
+        use_focus         = true,                                               -- Use focus mode for blame information.
       },
-      -- Priority of Gitsigns against other signs:
-      sign_priority = 6,
-      -- Refresh interval of Gitsigns in milliseconds:
-      update_debounce = 100,
-      -- Use the default built-in status formatter:
-      status_formatter = nil,
-      -- Maximum file size where Gitsigns will be displayed in bytes:
-      max_file_length = 40000,
-      -- Appearance of the preview window (options passed to nvim_open_win:
-      preview_config = {
+      current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',  -- Format of the blame information.
+      sign_priority    = 6,                                                     -- Priority of Gitsigns against other signs.
+      update_debounce  = 100,                                                   -- Refresh interval of Gitsigns in milliseconds.
+      status_formatter = nil,                                                   -- Use the default built-in status formatter.
+      max_file_length  = 40000,                                                 -- Maximum file size where Gitsigns will be displayed in lines.
+      preview_config   = {                                                      -- Appearance of the preview window (options passed to nvim_open_win).
         border   = 'single',
         style    = 'minimal',
         relative = 'cursor',
         row      = 0,
         col      = 1,
       },
-      -- Disable integration with YADM (Yet Another Dotfiles Manager):
-      -- yadm = {
-      --   enable = false,
-      -- },
     })
-    vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})  -- Preview hunk (the part before the change).
-    vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})  -- Show blame information.
-    end,
+
+
+    ---------------------------------------------------------------------------
+    --- Key Mappings
+
+    vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", {})                -- Preview hunk (the part before the change).
+    vim.keymap.set("n", "<leader>glb", ":Gitsigns toggle_current_line_blame<CR>", {})  -- Show blame information.
+
+  end,
 }
+
