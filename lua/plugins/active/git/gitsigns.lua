@@ -31,7 +31,7 @@ return {
         changedelete = { text = '▎',  },
         untracked    = { text = '┆'   },
       },
-      signs_staged_enabled = true,                                              -- Enable Gitsigns for staged changes.
+      -- signs_staged_enabled = true,                                              -- Enable Gitsigns for staged changes.
       signcolumn           = true,                                              -- Create Gitsigns column before line numbers.
       numhl                = false,                                             -- Disable highlighting of line numbers affected by Gitsigns.
       linehl               = false,                                             -- Disable highlighting of current line if it contains Gitsigns.
