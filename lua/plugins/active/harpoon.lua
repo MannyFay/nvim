@@ -1,12 +1,16 @@
 -------------------------------------------------------------------------------
 -- Harpoon Plugin
 -- https://github.com/ThePrimeagen/harpoon
+-- Mark files and jump to them quickly.
 -------------------------------------------------------------------------------
 
 return {
   "ThePrimeagen/harpoon",
   branch       = "harpoon2",
-  dependencies = { "nvim-lua/plenary.nvim" },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
   config       = function()
     local harpoon = require("harpoon")
 
@@ -35,38 +39,24 @@ return {
 
 
 
-
     ---------------------------------------------------------------------------
     ----- Key Mappings
 
-    vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,  { desc = "Open harpoon window" })
+    vim.keymap.set("n", "<leader>fm", function() toggle_telescope(harpoon:list()) end,  { desc = "Open harpoon window" })  -- Open Harpoon marks in Telescope.
+    vim.keymap.set("n", "<leader>hm", function() harpoon:list():add() end)                                                 -- Mark a file and add it to the Harpoon list.
+    vim.keymap.set("n", "<Leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)                         -- Show Harpoon marks in floating window.
+    vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)                                                -- Jump to previous mark. (not a good map by now)
+    vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end)                                                -- Jump to next mark.   (not a good map by now)
+    vim.keymap.set("n", "<Leader>h1", function() harpoon:list():select(1) end)                                             -- Jump to mark 1.
+    vim.keymap.set("n", "<Leader>h2", function() harpoon:list():select(2) end)                                             -- Jump to mark 2.
+    vim.keymap.set("n", "<Leader>h3", function() harpoon:list():select(3) end)                                             -- Jump to mark 3.
+    vim.keymap.set("n", "<Leader>h4", function() harpoon:list():select(4) end)                                             -- Jump to mark 4.
+    vim.keymap.set("n", "<Leader>h5", function() harpoon:list():select(5) end)                                             -- Jump to mark 5.
+    vim.keymap.set("n", "<Leader>h6", function() harpoon:list():select(6) end)                                             -- Jump to mark 6.
+    vim.keymap.set("n", "<Leader>h7", function() harpoon:list():select(7) end)                                             -- Jump to mark 7.
+    vim.keymap.set("n", "<Leader>h8", function() harpoon:list():select(8) end)                                             -- Jump to mark 8.
+    vim.keymap.set("n", "<Leader>h9", function() harpoon:list():select(9) end)                                             -- Jump to mark 9.
 
-    -- Jump to a file in the Harpoon list:
-    vim.keymap.set("n", "<Leader>h1", function() harpoon:list():select(1) end)
-    vim.keymap.set("n", "<Leader>h2", function() harpoon:list():select(2) end)
-    vim.keymap.set("n", "<Leader>h3", function() harpoon:list():select(3) end)
-    vim.keymap.set("n", "<Leader>h4", function() harpoon:list():select(4) end)
-    vim.keymap.set("n", "<Leader>h5", function() harpoon:list():select(5) end)
-    vim.keymap.set("n", "<Leader>h6", function() harpoon:list():select(6) end)
-    vim.keymap.set("n", "<Leader>h7", function() harpoon:list():select(7) end)
-    vim.keymap.set("n", "<Leader>h8", function() harpoon:list():select(8) end)
-    vim.keymap.set("n", "<Leader>h9", function() harpoon:list():select(9) end)
-
-    -- Toggle previous & next buffers stored within Harpoon list:
-    vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end)
-
-    -- Mark a file:
-    vim.keymap.set("n", "<leader>hm", function() harpoon:list():append() end)
-
-    -- Show Harpoon marks:
-    vim.keymap.set("n", "<Leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-    -- Show Harpoon marks in Telescope interface:
-    vim.keymap.set('n', '<Leader>fm', ':Telescope harpoon marks<CR>')
-
-    -- To delete mark 1 from the list:
-    -- vim.keymap.set("n", "<leader>d1", function() harpoon:list():remove(1) end)
 
 
     ---------------------------------------------------------------------------
@@ -79,18 +69,27 @@ return {
         sync_on_ui_close       = false,          -- Sync all bookmarks if UI is closed.
         enter_on_sendcmd       = false,          -- Enter the terminal when running a command.
         tmux_autoclose_windows = false,          -- Don't close the tmux window when the pane closes.
-        exclude_filetypes      = { 'harpoon' },  -- Filetypes to exclude when picking files.
+        exclude_filetypes      = { 'harpoon' },  -- File types to exclude when picking files.
         mark_branch            = true,           -- Set marks specific to each git branch.
-        tabline                = false,          -- Enable tabline integration.
+        tabline                = false,          -- Enable tab line integration.
         tabline_prefix         = " ",
         tabline_suffix         = " ",
         key = function()
-            return vim.loop.cwd()
+          local cwd = vim.loop.cwd()
+
+          return cwd or ""
         end,
       },
     })
+
+    harpoon:extend({
+      UI_CREATE = function(cx)
+        vim.keymap.set("n", "<|>", function() harpoon.ui:select_menu_item({ vsplit  = true }) end, { buffer = cx.bufnr })  -- Open marked file in vertical split. (Not working by now)
+        -- vim.keymap.set("n", "<C-x>", function() harpoon.ui:select_menu_item({ split   = true }) end, { buffer = cx.bufnr })
+        -- vim.keymap.set("n", "<C-t>", function() harpoon.ui:select_menu_item({ tabedit = true }) end, { buffer = cx.bufnr })
+      end,
+    })
+
   end,
-
-
-
 }
+

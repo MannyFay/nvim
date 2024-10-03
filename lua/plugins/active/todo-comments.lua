@@ -22,7 +22,7 @@ return {
       -- TODO = { icon = " ", color = "info" },
       TODO = { icon = " ", color = "error" },
       -- HACK = { icon = " ", color = "warning" },
-      HACK = { icon = "󰿗 ", color = "warning" },
+      HACK = { icon = "󰿗 ", color = "warning", alt = { "WORKAROUND"} },
       WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
       PERF = { icon = " ", color = "warning", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
       -- NOTE = { icon = " ", color = "hint", alt = { "INFO" } },

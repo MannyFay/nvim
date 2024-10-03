@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 -- Copilot Plugin
 -- https://github.com/zbirenbaum/copilot.lua
+-- Code completion and suggestion engine
 -------------------------------------------------------------------------------
 
 return {
@@ -33,14 +34,14 @@ return {
       suggestion = {
         enabled      = true,
         auto_trigger = true,
-        debounce     = 75,             -- (milliseconds)
-        keymap = {
+        debounce     = 75,             -- (Milliseconds) Delay before suggestions are shown.
+        keymap = {                     -- Key mappings in insert mode (be careful which keys you choose - insert mode ;) ).
           accept      = '<right>',     -- Right arrow key to accept suggestion.
-          accept_word = false,
-          accept_line = false,
-          next        = '<M-]>',
-          prev        = '<M-[>',
-          dismiss     = '<C-]>',
+          -- accept_word = '<leader>cw',  -- Leader + cw to accept word.
+          -- accept_line = '<leader>cl',  -- Leader + cl to accept line.
+          next        = '<down>',      -- Down arrow key to show next suggestion.
+          prev        = '<up>',        -- Up arrow key to show previous suggestion.
+          dismiss     = '<left>',      -- Left arrow key to dismiss suggestion.
         },
       },
       filetypes = {
@@ -61,9 +62,8 @@ return {
       },
       copilot_node_command  = 'node',  -- Node.js version must be higher than 16.x.
       server_opts_overrides = {},
-
-
     })
 
   end,
 }
+

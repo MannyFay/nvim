@@ -6,12 +6,16 @@
 
 return {
   "Pocco81/auto-save.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event  = { "BufReadPre", "BufNewFile" },
   config = function()
     local auto_save = require("auto-save")
 
+
+    ---------------------------------------------------------------------------
+    ----- Settings
+
     auto_save.setup({
-      enabled = true, -- Enable plugin.
+      enabled           = true, -- Enable plugin.
       execution_message = {
         message = function()
           return ("Saved at " .. vim.fn.strftime("%H:%M:%S")) -- Message to print on save.
@@ -26,10 +30,13 @@ return {
 
       -- Function that determines whether to save the current buffer or not (true: if buffer is ok to be saved. false: if it's not ok to be saved.
       condition = function(buf)
-        local fn = vim.fn
-        local utils = require("auto-save.utils.data")
+        if vim.bo[buf].filetype == "harpoon" then  -- Don't save Harpoon buffers (leaves Harpoon window open).
+          return false
+        end
 
-        if fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {}) then
+        local as_utils = require("auto-save.utils.data")
+
+        if vim.fn.getbufvar(buf, "&modifiable") == 1 and as_utils.not_in(vim.fn.getbufvar(buf, "&filetype"), {}) then
           return true
         end
       return false

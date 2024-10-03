@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
---- Peek Markdown Preview Plugin
+--- Peek Plugin
 --- https://github.com/toppair/peek.nvim
+--- Advanced markdown previewer
 -------------------------------------------------------------------------------
 
 return {
@@ -20,7 +21,7 @@ return {
         syntax           = true,       -- Enable syntax highlighting (affects performance).
         theme            = 'dark',     -- Set theme of the preview (light, dark).
         update_on_change = true,       -- Update preview on text change.
-        app              = 'browser',  -- Place to open preview (webview, browser)
+        app              = 'browser',  -- Place to open preview (web-view, browser)
 
         -- File types to recognize as markdown:
         filetype = {
@@ -46,8 +47,9 @@ return {
       -------------------------------------------------------------------------
       ----- Key Mappings
 
-      vim.keymap.set('n', '<Leader>mdo', ':PeekOpen<CR>')
-      vim.keymap.set('n', '<Leader>mdq', ':PeekClose<CR>')
+      -- TODO: Find new key mappings this because m is min/max buffer.
+      -- vim.keymap.set('n', '<Leader>mdo', ':PeekOpen<CR>')
+      -- vim.keymap.set('n', '<Leader>mdq', ':PeekClose<CR>')
 
       -- Preview window commands (has to be focused):
       -- k = scroll up

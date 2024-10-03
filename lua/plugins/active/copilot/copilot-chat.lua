@@ -1,12 +1,13 @@
 -------------------------------------------------------------------------------
 -- Copilot Chat Plugin
 -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
+-- Copilot chat buffer.
 -------------------------------------------------------------------------------
 
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch       = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim"  },  -- For curl, log wrapper.

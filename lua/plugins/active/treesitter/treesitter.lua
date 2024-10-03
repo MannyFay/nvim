@@ -1,36 +1,30 @@
+-------------------------------------------------------------------------------
+-- Treesitter Plugin
+--
+--
+-------------------------------------------------------------------------------
+
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
-  build = ":TSUpdate",
+  event        = { "BufReadPre", "BufNewFile" },
+  build        = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
     "JoosepAlviste/nvim-ts-context-commentstring",
-      opts = {
-        custom_calculation = function(_, language_tree)
-          if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
-            return "{{-- %s --}}"
-          end
-        end,
-      },
+    opts = {
+      custom_calculation = function(_, language_tree)
+        if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
+          return "{{-- %s --}}"
+        end
+      end,
+    },
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
+    local treesitter = require("nvim-treesitter.configs")  -- Import nvim-treesitter plugin.
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      sync_install = false,
-      auto_install = true,
-      ignore_install = {},
-      modules = {},
-      -- ensure these language parsers are installed
-      ensure_installed = {
+    treesitter.setup({
+      ensure_installed = {  -- Ensure these language parsers are installed.
         "json",
         "javascript",
         "typescript",
@@ -52,6 +46,16 @@ return {
         "vimdoc",
         "c",
       },
+      sync_install = false,
+      auto_install = true,
+      highlight = {
+        enable = true,   -- Enable syntax highlighting.
+      },
+      -- enable indentation
+      indent = { enable = true },
+      ignore_install = {},
+      modules = {},
+
       incremental_selection = {
         enable = true,
         keymaps = {
