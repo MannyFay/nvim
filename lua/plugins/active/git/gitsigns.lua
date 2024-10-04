@@ -69,6 +69,7 @@ return {
     --- Key Mappings
 
     vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", {})                -- Preview hunk (the part before the change).
+    vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", {})                       -- Preview file blame in buffer.
     vim.keymap.set("n", "<leader>glb", ":Gitsigns toggle_current_line_blame<CR>", {})  -- Show blame information.
 
   end,

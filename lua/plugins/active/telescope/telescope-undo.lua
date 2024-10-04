@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------
+-- Telescope-Undo Plugin
+-- https://github.com/debugloop/telescope-undo.nvim
+-- Visualize your undo tree and fuzzy-search changes in it.
+-------------------------------------------------------------------------------
+
 return {
   "debugloop/telescope-undo.nvim",
   dependencies = {

@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Treesitter-Text-Objects Plugin
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
---
+-- Syntax aware text-objects, select, move, swap, and peek support.
 -------------------------------------------------------------------------------
 
 return {
@@ -10,6 +10,7 @@ return {
   after        = "nvim-treesitter",
   lazy         = true,
 }
+
 
 -- For further configuration of these plugin, use the file:
 -- /lua/plugins/active/treesitter/treesitter.lua

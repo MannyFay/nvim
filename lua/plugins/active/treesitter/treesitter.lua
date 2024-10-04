@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Treesitter Plugin
 -- https://github.com/nvim-treesitter/nvim-treesitter
---
+-- Syntax parsing, highlighting and file-tree generation.
 -------------------------------------------------------------------------------
 
 return {
