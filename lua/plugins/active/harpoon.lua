@@ -45,8 +45,8 @@ return {
     vim.keymap.set("n", "<leader>fm", function() toggle_telescope(harpoon:list()) end,  { desc = "Open harpoon window" })  -- Open Harpoon marks in Telescope.
     vim.keymap.set("n", "<leader>hm", function() harpoon:list():add() end)                                                 -- Mark a file and add it to the Harpoon list.
     vim.keymap.set("n", "<Leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)                         -- Show Harpoon marks in floating window.
-    vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)                                                -- Jump to previous mark. (not a good map by now)
-    vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end)                                                -- Jump to next mark.   (not a good map by now)
+    vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end)                                                -- Jump to previous mark. TODO: Not a good map by now. Create a better one.
+    vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end)                                                -- Jump to next mark.   TODO: Not a good map by now. Create a better one.
     vim.keymap.set("n", "<Leader>h1", function() harpoon:list():select(1) end)                                             -- Jump to mark 1.
     vim.keymap.set("n", "<Leader>h2", function() harpoon:list():select(2) end)                                             -- Jump to mark 2.
     vim.keymap.set("n", "<Leader>h3", function() harpoon:list():select(3) end)                                             -- Jump to mark 3.
@@ -84,7 +84,7 @@ return {
 
     harpoon:extend({
       UI_CREATE = function(cx)
-        vim.keymap.set("n", "<|>", function() harpoon.ui:select_menu_item({ vsplit  = true }) end, { buffer = cx.bufnr })  -- Open marked file in vertical split. (Not working by now)
+        vim.keymap.set("n", "<\\|>", function() harpoon.ui:select_menu_item({ vsplit  = true }) end, { buffer = cx.bufnr })  -- Open marked file in vertical split. TODO: Not working by now, fix it. Try <\\|> <-- Not working too.
         -- vim.keymap.set("n", "<C-x>", function() harpoon.ui:select_menu_item({ split   = true }) end, { buffer = cx.bufnr })
         -- vim.keymap.set("n", "<C-t>", function() harpoon.ui:select_menu_item({ tabedit = true }) end, { buffer = cx.bufnr })
       end,

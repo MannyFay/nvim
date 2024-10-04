@@ -11,6 +11,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/neodev.nvim", opts = {} },
+    "artemave/workspace-diagnostics.nvim",
   },
   config = function()
     local lspconfig       = require("lspconfig")        -- Import LSP Config plugin.
@@ -127,6 +128,9 @@ return {
       function(server_name)
         lspconfig[server_name].setup({
           capabilities = capabilities,
+          on_attach = function(client, bufnr)                                               -- Attach the following to every buffer.
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)  -- Populate Workspace-Diagnostics plugin information.
+          end,
         })
       end,
 

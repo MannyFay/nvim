@@ -40,8 +40,8 @@ vim.keymap.set('n', 'U', '<C-r>', opts)                                 -- Redo 
 
 vim.keymap.set('n', 'q:', ':q<CR>')                                     -- Disable typical command line typo.
 
-vim.keymap.set('v', '<<', '<gv', opts)                                   -- Stay in visual mode after indent width <<.
-vim.keymap.set('v', '>>', '>gv', opts)                                   -- Stay in visual mode after indent width >>.
+vim.keymap.set('x', '<<', '<gv', opts)                                   -- Stay in visual mode after indent width <<.
+vim.keymap.set('x', '>>', '>gv', opts)                                   -- Stay in visual mode after indent width >>.
 vim.keymap.set('n', '<Leader><Leader>==', 'ggvvG=', opts)                -- Auto indent the whole file.
 
 vim.keymap.set('v', 'y', 'myy`y')                                       -- Maintain the cursor position when yanking a visual selection.
