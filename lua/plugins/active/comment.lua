@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------
+-- Comment Plugin
+-- https://github.com/numToStr/Comment.nvim
+-- Smart and powerful commenting plugin.
+-------------------------------------------------------------------------------
+
 return {
   "numToStr/Comment.nvim",
   event = { "BufReadPre", "BufNewFile" },

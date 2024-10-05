@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
---- Peek Plugin
---- https://github.com/toppair/peek.nvim
---- Advanced markdown previewer
+-- Peek Plugin
+-- https://github.com/toppair/peek.nvim
+-- Advanced markdown previewer.
 -------------------------------------------------------------------------------
 
 return {

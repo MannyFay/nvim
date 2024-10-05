@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 -- Harpoon Plugin
--- https://github.com/ThePrimeagen/harpoon
+-- https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 -- Mark files and jump to them quickly.
 -------------------------------------------------------------------------------
 

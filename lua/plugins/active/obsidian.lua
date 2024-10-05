@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------
+-- Obsidian Plugin
+-- https://github.com/epwalsh/obsidian.nvim
+-- Plugin for writing and navigating Obsidian vaults.
+-------------------------------------------------------------------------------
+
 return {
   "epwalsh/obsidian.nvim",
   version = "*",  -- recommended, use latest release instead of latest commit

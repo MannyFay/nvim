@@ -7,103 +7,81 @@
 return {
   "NeogitOrg/neogit",
   dependencies = {
-    "nvim-lua/plenary.nvim",         -- required
-    "sindrets/diffview.nvim",        -- optional - Diff integration
+    "nvim-lua/plenary.nvim",
+    "sindrets/diffview.nvim",
     "nvim-tree/nvim-web-devicons",
-    -- Only one of these is needed.
-    "nvim-telescope/telescope.nvim", -- optional
-    -- "ibhagwan/fzf-lua",              -- optional
-    -- "echasnovski/mini.pick",         -- optional
+    "nvim-telescope/telescope.nvim",
   },
   config = function()
     local neogit = require("neogit")
 
     neogit.setup {
-      disable_hint = false,     -- Hides the hints at the top of the status buffer
-      disable_context_highlighting = false,     -- Disables changing the buffer highlights based on where the cursor is.
-      disable_signs = false, -- Disables signs for sections/items/hunks
-      -- Changes what mode the Commit Editor starts in. `true` will leave nvim in normal mode, `false` will change nvim to
-      -- insert mode, and `"auto"` will change nvim to insert mode IF the commit message is empty, otherwise leaving it in
-      -- normal mode.
-      disable_insert_on_commit = "auto",
-      -- When enabled, will watch the `.git/` directory for changes and refresh the status buffer in response to filesystem
-      -- events.
-      filewatcher = {
-        interval = 1000,
-        enabled = true,
+      disable_hint                 = false,   -- Show hints at the top of the status buffer.
+      disable_context_highlighting = false,   -- Disables changing the buffer highlights based on where the cursor is.
+      disable_signs                = false,   -- Disables signs for sections/items/hunks
+      disable_insert_on_commit     = "auto",  -- Mode, where commit UI starts in. "true" = "n", "false" = "i", "auto" = "n" if empty.
+      filewatcher = {                         -- Options for watching the `.git/` directory for changes.
+        interval = 1000,                      -- Time in milliseconds to check for changes.
+        enabled  = true,                      -- Enable the file-watcher.
       },
-      -- "ascii"   is the graph the git CLI generates
-      -- "unicode" is the graph like https://github.com/rbong/vim-flog
-      graph_style = "ascii",
-      git_services = {  -- Used to generate URL's for branch popup action "pull request".
+      graph_style  = "unicode",               -- Possible: "ascii" (regular CLI), "unicode (https://github.com/rbong/vim-flog)" .
+      git_services = {                        -- To generate URL's for branch popup action "pull request".
         ["azure.com"]     = "https://dev.azure.com/${owner}/_git/${repository}/pullrequestcreate?sourceRef=${branch_name}&targetRef=${target}",
         ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
         ["github.com"]    = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
         ["gitlab.com"]    = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
       },
-      -- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
-      -- sorter instead. By default, this function returns `nil`.
-      telescope_sorter = function()
-        return require("telescope").extensions.fzf.native_fzf_sorter()
+      telescope_sorter = function()                                     -- Telescope sorter.
+        return require("telescope").extensions.fzf.native_fzf_sorter()  -- FZF as sorter.
       end,
-      remember_settings = true,  -- Persist the values of switches/options within and across sessions
+      remember_settings        = true,  -- Persist the values of switches/options within and across sessions
       use_per_project_settings = true,  -- Scope persisted settings on a per-project basis
-      ignored_settings = {   -- Table of settings to never persist. Uses format "Filetype--cli-value"
+      ignored_settings = {              -- Settings to never persist (format: "Filetype--cli-value").
         "NeogitPushPopup--force-with-lease",
         "NeogitPushPopup--force",
         "NeogitPullPopup--rebase",
         "NeogitCommitPopup--allow-empty",
         "NeogitRevertPopup--no-edit",
       },
-      highlight = {  -- Configure highlight group features
-        italic = true,
-        bold = true,
+      highlight = {                      -- Highlight group features.
+        italic    = true,
+        bold      = true,
         underline = true
       },
-      use_default_keymaps = true,  -- Set to false if you want to be responsible for creating _ALL_ keymappings
-      -- Neogit refreshes its internal state after specific events, which can be expensive depending on the repository size.
-      -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
-      auto_refresh = true,
-      -- Value used for `--sort` option for `git branch` command
-      -- By default, branches will be sorted by commit date descending
-      -- Flag description: https://git-scm.com/docs/git-branch#Documentation/git-branch.txt---sortltkeygt
-      -- Sorting keys: https://git-scm.com/docs/git-for-each-ref#_options
-      sort_branches = "-committerdate",
-      kind = "split", --kind = "tab",  -- Change the default way of opening neogit
-      -- Disable line numbers and relative line numbers
-      disable_line_numbers = true,
-      -- The time after which an output console is shown for slow running commands
-      console_timeout = 2000,
-      -- Automatically show console if a command takes more than console_timeout milliseconds
-      auto_show_console = true,
-      -- Automatically close the console if the process exits with a 0 (success) status
-      auto_close_console = true,
+      use_default_keymaps  = true,              -- false: Create own _ALL_ key-mappings.
+      auto_refresh         = true,              -- Refreshes Neogit state (can be slow in big repos).
+      sort_branches        = "-committerdate",  -- Sorting of branches (descending).
+      kind                 = "floating",        -- How to open status ("tab", "split", "vsplit", "floating").
+      disable_line_numbers = false,             -- Enable line numbers and relative line numbers.
+      console_timeout      = 2000,              -- Time (milliseconds) when output console is shown for slow running commands.
+      auto_show_console    = true,              -- Show console if commands takes more than console_timeout.
+      auto_close_console   = true,              -- Close the console if the process exits with a 0 (success) status.
       status = {
         show_head_commit_hash = true,
-        recent_commit_count = 10,
-        HEAD_padding = 10,
-        HEAD_folded = false,
-        mode_padding = 3,
-        mode_text = {
-          M = "   Modified:",
-          N = " 󰵺  New file:",
-          A = " 󰾛  Staged:",
-          D = "   Deleted:",
-          C = "Copied:",
-          U = "Updated:",
-          R = "   Renamed:",
-          DD = "   Unmerged:",
-          AU = "   Unmerged:",
-          UD = "   Unmerged:",
-          UA = "   Unmerged:",
-          DU = "   Unmerged:",
-          AA = "   Unmerged:",
-          UU = "   Unmerged:",
+        recent_commit_count   = 10,
+        HEAD_padding          = 10,
+        HEAD_folded           = false,
+        mode_padding          = 3,
+        mode_text             = {
+          M     = "   Modified:",
+          N     = " 󰵺  New file:",
+          A     = " 󰾛  Staged:",
+          D     = "   Deleted:",
+          C     = "Copied:",
+          U     = "Updated:",
+          R     = "   Renamed:",
+          DD    = "   Unmerged:",
+          AU    = "   Unmerged:",
+          UD    = "   Unmerged:",
+          UA    = "   Unmerged:",
+          DU    = "   Unmerged:",
+          AA    = "   Unmerged:",
+          UU    = "   Unmerged:",
           ["?"] = "",
         },
       },
       commit_editor = {
-        kind = "tab",
+        kind = "floating",  -- Possible: "tab", "split", "vsplit", "floating".
         show_staged_diff = true,
         -- Accepted values:
         -- "split" to show the staged diff below the commit editor
@@ -115,20 +93,21 @@ return {
         spell_check = true,
       },
       commit_select_view = {
-        kind = "tab",
+        kind = "split",  -- "tab" works too.
       },
       commit_view = {
+        -- kind = "split",  -- "tab" works too.
         kind = "vsplit",
         verify_commit = vim.fn.executable("gpg") == 1, -- Can be set to true or false, otherwise we try to find the binary
       },
       log_view = {
-        kind = "tab",
+        kind = "split",  -- "tab" works too.
       },
       rebase_editor = {
         kind = "auto",
       },
       reflog_view = {
-        kind = "tab",
+        kind = "split",  -- "tab" works too.
       },
       merge_editor = {
         kind = "auto",
@@ -142,11 +121,10 @@ return {
       popup = {
         kind = "split",
       },
-      signs = {
-        -- { CLOSED, OPENED }
-        hunk = { "", "" },
-        item = { ">", "v" },
-        section = { ">", "v" },
+      signs = {  -- { CLOSED, OPENED }
+        hunk    = { "",  ""  },
+        item    = { "", "" },
+        section = { "", "" },
       },
       -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
       integrations = {
@@ -320,7 +298,11 @@ return {
     ---------------------------------------------------------------------------
     --- Key Mappings
 
-    vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { noremap = true, silent = true, nowait = true })  -- Open Git status buffer.
+    vim.keymap.set("n", "<leader>gs", ":Neogit<CR>",                 { noremap = true, silent = true, nowait = true })  -- Open Git status buffer.
+    vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>",          { noremap = true, silent = true, nowait = true })  -- Open Git commit buffer.
+    vim.keymap.set("n", "<leader>gP", ":Neogit pull<CR>",            { noremap = true, silent = true, nowait = true })  -- Open Git pull buffer.
+    vim.keymap.set("n", "<leader>gp", ":Neogit push<CR>",            { noremap = true, silent = true, nowait = true })  -- Open Git push buffer.
+    vim.keymap.set("n", "<leader>gB", ":Telescope git_branches<CR>", { noremap = true, silent = true, nowait = true })  -- Open branches view in Telescope.
 
   end,
 }

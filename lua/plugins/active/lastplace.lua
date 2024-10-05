@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------
+-- Last Place Plugin
+-- https://github.com/ethanholz/nvim-lastplace
+-- Set cursor on the place where the file was leaved.
+-------------------------------------------------------------------------------
+
 return {
   "ethanholz/nvim-lastplace",
   config = function()
