@@ -1,7 +1,17 @@
 TODO:
 
-* if pressing ~ stay after changing on the same cursor position
 * Found out how to open file in new vsplit but stay in tree.
-* why it goes always on more step to the right?
-# avoid comment characters in new line
-# Why : feels slow?
+* Stay in Telescope and work in preview split
+
+
+
+
+BUG:
+* avoid comment characters in new line (in options.lua) - not working flawlessly
+
+
+
+
+
+
+leader gx opens root of project in finder window

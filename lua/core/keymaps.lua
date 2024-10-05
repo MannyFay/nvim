@@ -2,7 +2,8 @@
 -- Key Mappings
 -------------------------------------------------------------------------------
 
-------------------------------------------------------------
+
+-------------------------------------------------------------------------------
 -- Modes
 
 --   normal_mode       = 'n'
@@ -13,7 +14,7 @@
 --   command_mode      = 'c',
 
 
-------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- Variables
 
 local opts   = { noremap = true, silent = true }  -- Don't show command message in command line.
@@ -25,24 +26,40 @@ local keymap = vim.api.nvim_set_keymap
 -- Default Key Mappings
 -------------------------------------------------------------------------------
 
+
+-------------------------------------------------------------------------------
+-- Leader
+
 vim.g.mapleader      = ' '                                              -- Set <Leader> to space globally (standard is \).
 vim.g.maplocalleader = ' '                                              -- Set <Leader> to space per buffer (standard is \).
 
---vim.keymap.set('n', '<leader>qh', ':nohlsearch<CR>', opts)              -- Quit highlighting of search.
+
+-------------------------------------------------------------------------------
+-- Searching
+
+vim.keymap.set('n', '<leader>qh', ':nohlsearch<CR>', opts)              -- Quit highlighting of search.
 vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', opts)                   -- Quit highlighting of search.
 vim.keymap.set('n', 'n',          'nzzzv',           opts)              -- Center the screen after jumping to the next match.
 vim.keymap.set('n', 'N',          'Nzzzv',           opts)              -- Center the screen after jumping to the previous match.
+
+
+-------------------------------------------------------------------------------
+-- Editing
 
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })  -- When text is wrapped, move by terminal rows, not lines up, unless a count is provided.
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })  -- When text is wrapped, move by terminal rows, not lines down, unless a count is provided.
 
 vim.keymap.set('n', 'U', '<C-r>', opts)                                 -- Redo last action.
 
-vim.keymap.set('n', 'q:', ':q<CR>')                                     -- Disable typical command line typo.
-
-vim.keymap.set('x', '<<', '<gv', opts)                                   -- Stay in visual mode after indent width <<.
+vim.keymap.set({'v', 'x'}, '<<', '<gv', opts)                                   -- Stay in visual mode after indent width <<.
 vim.keymap.set('x', '>>', '>gv', opts)                                   -- Stay in visual mode after indent width >>.
 vim.keymap.set('n', '<Leader><Leader>==', 'ggvvG=', opts)                -- Auto indent the whole file.
+
+vim.keymap.set('n', '~', 'g~l', opts)  -- Don't change the cursor position after case change.
+
+
+vim.keymap.set('n', 'q:', ':q<CR>')                                     -- Disable typical command line typo.
+
 
 vim.keymap.set('v', 'y', 'myy`y')                                       -- Maintain the cursor position when yanking a visual selection.
 vim.keymap.set('v', 'Y', 'myY`y')                                       -- Maintain the cursor position when yanking a visual line selection.
@@ -55,7 +72,7 @@ vim.keymap.set('n', 'x', '"_x')                                         -- If de
 -- Commented out because ; is used for repeat command:
 -- vim.keymap.set('n', ';;', '<Esc>A;<Esc>')                               -- Insert a ; at the end of a line.
 vim.keymap.set('n', ',,', '<Esc>A,<Esc>')                               -- Insert a , at the end of a line.
-vim.keymap.set('n', '::', '<Esc>A:<Esc>')                               -- Insert a : at the end of a line.
+-- vim.keymap.set('n', '::', '<Esc>A:<Esc>')                               -- Insert a : at the end of a line.  -- This slows down the regular : command.
 
 vim.keymap.set('x', '<Tab>',   ":move '>+1<CR>gv-gv")                   -- Move text down in visual block mode.
 vim.keymap.set('x', '<S-Tab>', ":move '<-2<CR>gv-gv")                   -- Move text up in visual block mode.
@@ -104,6 +121,7 @@ vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/personal/github/dotfiles/
 -- vim.keymap.set('n', 'T',       'zt',    opts)  -- Scroll actual line to top.
 -- vim.keymap.set('n', 'B',       'zb',      opts)  -- Scroll actual line to bottom.
 -- vim.keymap.set('n', 'C',       'zz',      opts)  -- Scroll actual line to center.
+
 vim.keymap.set('n', '<C-k>',   '<C-u>',   opts)  -- Scroll up.
 vim.keymap.set('n', '<C-j>',   '<C-e>',   opts)  -- Scroll down.
 vim.keymap.set('n', '<C-p-u>', '<C-b>',   opts)  -- Scroll page up.

@@ -15,10 +15,11 @@ return {
     ---------------------------------------------------------------------------
     --- Key Mappings
 
-    vim.keymap.set( 'x', 'aoc',  function() require'align'.align_to_char({ length = 1, }) end, NS)                                                -- Align to 1 character.
-    vim.keymap.set( 'x', 'aocc', function() require'align'.align_to_char({ length = 2, }) end, NS)                                               -- Align to 2 characters.
-    vim.keymap.set( 'x', 'aos',  function() require'align'.align_to_string({ regex = false, }) end, NS)                                           -- Align to a string.
-    vim.keymap.set( 'x', 'aop',  function() require'align'.align_to_string({ regex = true, }) end, NS)                                            -- Align to a regex.
+-- INFO: This is not the problem of extra right cursor move:
+    -- vim.keymap.set( 'x', 'aoc',  function() require'align'.align_to_char({ length = 1, }) end, NS)                                                -- Align to 1 character.
+    -- vim.keymap.set( 'x', 'aocc', function() require'align'.align_to_char({ length = 2, }) end, NS)                                               -- Align to 2 characters.
+    -- vim.keymap.set( 'x', 'aos',  function() require'align'.align_to_string({ regex = false, }) end, NS)                                           -- Align to a string.
+    -- vim.keymap.set( 'x', 'aop',  function() require'align'.align_to_string({ regex = true, }) end, NS)                                            -- Align to a regex.
 
 
     -- Original plugin key mappings:

@@ -11,6 +11,7 @@ return {
   dependencies = {
     "windwp/nvim-ts-autotag",
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     opts = {
       custom_calculation = function(_, language_tree)
         if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
@@ -18,7 +19,6 @@ return {
         end
       end,
     },
-    "nvim-treesitter/nvim-treesitter-textobjects",
   },
   config = function()
     local treesitter = require("nvim-treesitter.configs")  -- Import nvim-treesitter plugin.
@@ -83,7 +83,7 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
             ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
-            ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+            -- ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },  -- BUG: This drives the 'cursor-one-step-further-to-the-right' problem in visual mode.
             ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
 
             -- works for javascript/typescript files (custom capture I created in after/queries/ecma/textobjects.scm)

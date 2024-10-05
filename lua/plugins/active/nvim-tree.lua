@@ -34,9 +34,17 @@ return {
       vim.keymap.set('n', 'i', api.node.show_info_popup, opts('Info'))                    -- Show file information.
       vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))                       -- Open file in actual buffer.
       vim.keymap.set('n', '|', api.node.open.vertical, opts('Open: Vertical Split'))      -- Open file in vertical split.
+      vim.keymap.set('n', 'o', function()                                                 -- Open file in vertical split, stay in tree.
+        local node = api.tree.get_node_under_cursor()
+        if node then
+          api.node.open.vertical()
+          vim.cmd('NvimTreeFocus')
+        end
+      end, opts('Open: Vertical Split'))
       vim.keymap.set('n', '-', api.node.open.horizontal, opts('Open: Horizontal Split'))  -- Open file in horizontal split.
       vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Name'))                   -- Yank name of file.
       vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))     -- Yank relative path of file.
+      vim.keymap.set('n', 'a', api.fs.copy.absolute_path, opts('Copy Absolute Path'))     -- Yank absolute path of file.
       vim.keymap.set('n', 'c', api.fs.copy.node, opts('Copy'))                            -- Copy.
       vim.keymap.set('n', 'x', api.fs.cut, opts('Cut'))                                   -- Cut.
       vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))                               -- Paste.
@@ -68,7 +76,6 @@ return {
       vim.keymap.set('n', '<Nop>', api.live_filter.clear, opts('Clean Filter'))
       vim.keymap.set('n', '<Nop>', api.live_filter.start, opts('Filter'))
       vim.keymap.set('n', '<Nop>', api.tree.toggle_help, opts('Help'))
-      vim.keymap.set('n', '<Nop>', api.fs.copy.absolute_path, opts('Copy Absolute Path'))
       vim.keymap.set('n', '<Nop>', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
       vim.keymap.set('n', '<Nop>', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignore'))
       vim.keymap.set('n', '<Nop>', api.marks.toggle, opts('Toggle Bookmark'))
@@ -99,16 +106,12 @@ return {
       reload_on_bufenter                 = true,       -- true: reload NvimTree when entering its buffer.
       respect_buf_cwd                    = false,      -- true: Don't change tree root directory to current work directory of file buffer (used by Project plugin too).
       select_prompts                     = false,      -- true: Use UI prompt decorator (like from dressing.nvim or teescompe-ui-select.nvim).
-
-      -- File and directory sorting options:
-      sort = {
+      sort = {                   -- File and directory sorting options.
         sorter        = 'name',  -- Sorts by alphabetical order.
         folders_first = true,    -- true: List directories before files.
         files_first   = false,   -- true: List files before directories.
       },
-
-      -- Look of NvimTree:
-      view = {
+      view = {                                   -- Look of NvimTree.
         centralize_selection        = false,     -- true: Center the selected item in tree.
         cursorline                  = true,      -- true: Highlight the current line in tree.
         debounce_delay              = 15,        -- (default) Idle milliseconds for refreshing (increase there are graphics issues).
@@ -122,12 +125,10 @@ return {
           max     = -1,                          -- Maximum width of NvimTree (-1 means no limit. Set to same as min to be static).
           padding = 1,                           -- Padding of NvimTree on the right.
         },
-        -- For using NvimTree as a floating window:
-        float = {
+        float = {                   -- For using NvimTree as a floating window.
         enable             = false,            -- true: Enable floating window.
         quit_on_focus_loss = true,             -- true: Close floating window when focus is lost.
-        -- Floating window options (specified in options.lua in nvim_open_win() function):
-        open_win_config = {
+        open_win_config = {  -- Floating window options (specified in options.lua in nvim_open_win() function).
           relative = 'editor',
           border   = 'rounded',
           width    = 100,
@@ -214,28 +215,20 @@ return {
         },
       },
     },
-
-    -- Directory management:
-    hijack_directories = {
+    hijack_directories = {  -- Directory management:
       enable    = true,  -- true: Manage directory navigation by NvimTree.
       auto_open = true,  -- true: Open tree automatically.
     },
-
-    -- Update focused file and un-collapse directories till file:
-    update_focused_file = {
+    update_focused_file = {  -- Update focused file and un-collapse directories till file:
       enable      = true,   -- true: Feature is enabled.
       update_root = false,  -- true: Update the root directory if the file is not under current root directory.
       ignore_list = {},     -- List of buffer names / filetypes that will not update the tree.
     },
-
-    -- Open a file or directory in your preferred application:
-    system_open = {
+    system_open = { -- Open a file or directory in your preferred application.
       cmd  = '',  -- Empty string for OS default application.
       args = {},  -- List of arguments to pass to the command. Empty list for OS default application.
     },
-
-    -- Git integration:
-    git = {
+    git = {                       -- Git integration.
       enable            = true,   -- true: Enable Git integration.
       show_on_dirs      = true,   -- true: Show status icon when directory has no status icon.
       show_on_open_dirs = true,   -- true: Show status icon of children on open directories.
@@ -243,9 +236,7 @@ return {
       timeout           = 500,    -- (milliseconds) Timeout for Git status update if it takes longer than this.
       cygwin_support    = false,  -- true: Enable Cygwin support.
     },
-
-    -- LSP and COC diagnostics integration:
-    diagnostics = {
+    diagnostics = {                           -- LSP and COC diagnostics integration.
       enable            = true,               -- true: Enable diagnostics integration.
       debounce_delay    = 50,                 -- (milliseconds) Debounce time for diagnostics highlight update.
       show_on_dirs      = true,               -- true: Show diagnostic icons on parent directories.
@@ -261,16 +252,12 @@ return {
         info     = '',
       },
     },
-
-    -- Indication which file have unsaved modifications:
-    modified ={
+    modified ={                  -- Indication which file have unsaved modifications.
       enable            = true,  -- true: Enable modified indicator.
       show_on_dirs      = true,  -- true: Show modified indicator on parent directories.
       show_on_open_dirs = true,  -- true: Show modified indicator of children on open directories.
     },
-
-    -- Filters what to display in NvimTree:
-    filters = {
+    filters = {             -- Filters what to display in NvimTree.
       git_ignored = false,  -- true: Hide files that are ignored by Git.
       dotfiles    = false,  -- true: Hide dotfiles.
       git_clean   = false,  -- true: Hide files with no Git status.
@@ -280,22 +267,16 @@ return {
       },     -- List of Vim regex patterns to hide files/directories.
       exclude     = {},     -- List of files/directories to exclude from filtering.
     },
-
-    -- Live filtering in tree:
-    live_filter = {
+    live_filter = {                        -- Live filtering in tree.
       prefix              = '[FILTER]: ',  -- Prefix for live filtering.
       always_show_folders = true,          -- true: Run filter on directories too.
     },
-
-    -- File system watcher to watch for changes:
-    filesystem_watchers = {
+    filesystem_watchers = {   -- File system watcher to watch for changes.
       enable         = true,  -- true: Enable file system watcher.
       debounce_delay = 50,    -- (milliseconds) Debounce time for file system watcher.
       ignore_dirs    = {},    -- List of Vim regex for absolute directory paths to ignore.
     },
-
-    -- Actions behavior:
-    actions = {
+    actions = {                                             -- Actions behavior.
       use_system_clipboard = true,                          -- true: Use system clipboard for copy and paste.
       change_dir = {
         enable             = false,                         -- true: Change working directory when changing directories in tree.
@@ -344,34 +325,24 @@ return {
         close_window = true,                                -- true: Close any window displaying a file when removing it from the tree.
       },
     },
-
-    -- Commands for using the 'put to trash' functionality (must be installed on OS):
-    trash = {
+    trash = {           -- Commands for using the 'put to trash' functionality (must be installed on OS):
       cmd = 'trash',
     },
-
-    -- Tree behavior for working with tabs:
-    tab = {
+    tab = {             -- Tree behavior for working with tabs:
       sync = {
         open = false,   -- true: Open tree automatically if switching a tabpage or open new.
         close = false,  -- true: Close the tree across all tabpages if it is closed in one of them.
         ignore = {},    -- List of buffers/files on new tab that prevent the above two settings.
       },
     },
-
-    -- Notification settings:
-    notify = {
+    notify = {              -- Notification settings.
       threshold     = vim.log.levels.INFO,  -- Minimum notification level.
       absolute_path = true,                 -- true: Use absolute path for item names in notifications.
     },
-
-    -- Settings how the help is sorted:
-    help = {
+    help = {            -- Settings how the help is sorted.
       sort_by = 'key',  -- Sort mappings in help window alphabetically by their key. 'desc': sort alphabetically by description.
     },
-
-    -- Confirmation settings:
-    ui = {
+    ui = {                   -- Confirmation settings.
       confirm = {
         remove      = true,   -- true: Prompt before removing.
         trash       = true,   -- true: Prompt before trashing.
@@ -382,7 +353,8 @@ return {
 
 
     ---------------------------------------------------------------------------
-    -- Open Nvim-Tree on Nvim start:
+    -- Open Nvim-Tree if Neovim is started
+
     local function open_nvim_tree()
       require("nvim-tree.api").tree.open()
     end
