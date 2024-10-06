@@ -52,7 +52,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })  -- When 
 vim.keymap.set('n', 'U', '<C-r>', opts)                                 -- Redo last action.
 
 vim.keymap.set({'v', 'x'}, '<<', '<gv', opts)                                   -- Stay in visual mode after indent width <<.
-vim.keymap.set('x', '>>', '>gv', opts)                                   -- Stay in visual mode after indent width >>.
+vim.keymap.set('v', '>>', '>gv', opts)                                   -- Stay in visual mode after indent width >>.
+vim.keymap.set({'v', 'x'}, '<<', '<gV', opts)                                   -- Stay in visual mode after indent width <<.
+vim.keymap.set('v', '>>', '>gV', opts)                                   -- Stay in visual mode after indent width >>.
 vim.keymap.set('n', '<Leader><Leader>==', 'ggvvG=', opts)                -- Auto indent the whole file.
 
 vim.keymap.set('n', '~', 'g~l', opts)  -- Don't change the cursor position after case change.

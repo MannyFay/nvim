@@ -13,7 +13,7 @@ return {
   },
   opts = {
     use_diagnostic_signs = true,
-    focus = true,
+    focus                = true,
   }, -- for default options, refer to the configuration section for custom setup.
   cmd = "Trouble",
 
@@ -23,7 +23,7 @@ return {
 
   keys = {
     {
-      "<leader>xx", function()
+      "<leader>xx", function() -- Run workspace diagnostics, then toggle trouble.
         for _, client in ipairs(vim.lsp.get_clients()) do
           require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
         end

@@ -9,14 +9,17 @@ return {
   event        = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    { "mason.nvim", config = true },  -- Ensure mason is loaded first
+    { "williamboman/mason-lspconfig.nvim", config = true },  -- then mason-lspconfig
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/neodev.nvim", opts = {} },
     "artemave/workspace-diagnostics.nvim",
   },
   config = function()
-    local lspconfig       = require("lspconfig")        -- Import LSP Config plugin.
-    local mason_lspconfig = require("mason-lspconfig")  -- Import Mason LSP Config plugin.
-    local cmp_nvim_lsp    = require("cmp_nvim_lsp")     -- Import CMP NVIM LSP plugin.
+    local lspconfig       = require("lspconfig")                 -- Import LSP Config plugin.
+    local mason_lspconfig = require("mason-lspconfig")           -- Import Mason LSP Config plugin.
+    local cmp_nvim_lsp    = require("cmp_nvim_lsp")              -- Import CMP NVIM LSP plugin.
+    local capabilities    = cmp_nvim_lsp.default_capabilities()  -- Enable autocompletion (assign to every LSP server config).
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group    = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -24,13 +27,12 @@ return {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
 
-        local opts = { buffer = ev.buf, silent = true }
-
 
         -----------------------------------------------------------------------
         --- Key Mappings
 
         local keymap = vim.keymap
+        local opts   = { buffer = ev.buf, silent = true }
 
         opts.desc = "Show LSP references"
         keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)   -- show definition, references
@@ -73,39 +75,7 @@ return {
       end,
     })
 
-    require'lspconfig'.ts_ls.setup{
-        diagnosicMode = "workspace",
-      on_attach = function(client, bufnr)
-        require'nvim-lsp-ts-utils'.setup_client(client)
-        -- do
-        --   local ts_utils = require("nvim-lsp-ts-utils")
 
-        --   ts_utils.setup {
-        --     debug = false,
-        --     disable_commands = false,
-        --     enable_import_on_completion = true,
-        --     import_all_timeout = 5000, -- ms
-
-        --     -- eslint
-        --     eslint_enable_code_actions = false,
-        --     eslint_enable_disable_comments = true,
-        --     eslint_bin = "eslint_d",
-        --     eslint_enable_diagnostics = true,
-
-        --     -- formatting
-        --     enable_formatting = false,
-        --     formatter = "prettier",
-        --     formatter_config_file = ".prettierrc",
-        --     format_on_save = false,
-        --   }
-
-        --   -- required to fix code action ranges
-        --   ts_utils.setup_client(client)
-        -- end
-      end,
-    }
-
-    local capabilities    = cmp_nvim_lsp.default_capabilities()  -- Enable autocompletion (assign to every LSP server config).
     local diagnosticIcons = {                                    -- Diagnostic symbols in the gutter column.
       Error = ' ',
       Warn  = ' ',
@@ -133,6 +103,17 @@ return {
           end,
         })
       end,
+
+      ----- TypeScript:  INFO: This is removed because of the typescript-tool plugin.
+      -- ["ts_ls"] = function()
+      --   lspconfig["ts_ls"].setup({
+      --     capabilities = capabilities,
+      --     on_attach = function(client, bufnr)
+      --       -- require('nvim-lsp-ts-utils').setup_client(client)
+      --     end,
+      --     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+      --   })
+      -- end,
 
       ----- Svelte:
       ["svelte"] = function()
@@ -205,5 +186,10 @@ return {
         })
       end,
     })
+
+
+--     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end )
+-- vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end )
+-- vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end )
   end,
 }

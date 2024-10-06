@@ -10,6 +10,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
+  cmd = "Mason",
   config = function()
     local mason                = require("mason")                 -- Import plugin.
     local mason_lspconfig      = require("mason-lspconfig")       -- Import mason-lspconfig.

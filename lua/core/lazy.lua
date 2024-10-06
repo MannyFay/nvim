@@ -38,6 +38,11 @@ require("lazy").setup({
 
 
     ---------------------------------------------------------------------------
+    -- js-env
+    { import = "plugins.active.js-env.typescript-tools" },
+
+
+    ---------------------------------------------------------------------------
     -- Git
     { import = "plugins.active.git.fugitive" },
     { import = "plugins.active.git.gitsigns" },
@@ -56,6 +61,7 @@ require("lazy").setup({
     { import = "plugins.active.lsp.mason" },
     { import = "plugins.active.lsp.trouble" },
     { import = "plugins.active.lsp.workspace-diagnostics" },
+    { import = "plugins.active.lsp.none-ls" },
 
 
     ---------------------------------------------------------------------------
