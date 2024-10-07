@@ -84,6 +84,7 @@ require("lazy").setup({
     { import = "plugins.active.colorizer" },
     { import = "plugins.active.colorscheme" },
     { import = "plugins.active.comment" },
+    { import = "plugins.active.conform" },
     { import = "plugins.active.harpoon" },
     { import = "plugins.active.indent-blankline" },
     { import = "plugins.active.lastplace" },

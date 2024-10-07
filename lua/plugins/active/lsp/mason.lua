@@ -115,12 +115,15 @@ return {
         ----- Formatters:
         "black",            -- Python formatter.
         "blade-formatter",  -- Laravel Blade formatter.
-        --"prettierd",        -- Prettier formatter.
+        "prettierd",        -- Prettier formatter.
         --"stylua",           -- Lua formatter.
         "isort",            -- Python formatter.
         "pint",             -- PHP formatter.
       },
     })
+
+
+
   end,
 }
 
