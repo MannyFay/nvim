@@ -16,47 +16,47 @@ return {
     local neogit = require("neogit")
 
     neogit.setup {
-      disable_hint                 = false,   -- Show hints at the top of the status buffer.
-      disable_context_highlighting = false,   -- Disables changing the buffer highlights based on where the cursor is.
-      disable_signs                = false,   -- Disables signs for sections/items/hunks
-      disable_insert_on_commit     = "auto",  -- Mode, where commit UI starts in. "true" = "n", "false" = "i", "auto" = "n" if empty.
-      filewatcher = {                         -- Options for watching the `.git/` directory for changes.
-        interval = 1000,                      -- Time in milliseconds to check for changes.
-        enabled  = true,                      -- Enable the file-watcher.
+      disable_hint                 = false,     -- Show hints at the top of the status buffer.
+      disable_context_highlighting = false,     -- Disables changing the buffer highlights based on where the cursor is.
+      disable_signs                = false,     -- Disables signs for sections/items/hunks
+      disable_insert_on_commit     = "auto",    -- Mode, where commit UI starts in. "true" = "n", "false" = "i", "auto" = "n" if empty.
+      filewatcher                  = {          -- Options for watching the `.git/` directory for changes.
+        interval = 1000,                        -- Time in milliseconds to check for changes.
+        enabled  = true,                        -- Enable the file-watcher.
       },
-      graph_style  = "unicode",               -- Possible: "ascii" (regular CLI), "unicode (https://github.com/rbong/vim-flog)" .
-      git_services = {                        -- To generate URL's for branch popup action "pull request".
+      graph_style                  = "unicode", -- Possible: "ascii" (regular CLI), "unicode (https://github.com/rbong/vim-flog)" .
+      git_services                 = {          -- To generate URL's for branch popup action "pull request".
         ["azure.com"]     = "https://dev.azure.com/${owner}/_git/${repository}/pullrequestcreate?sourceRef=${branch_name}&targetRef=${target}",
         ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
         ["github.com"]    = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
         ["gitlab.com"]    = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
       },
-      telescope_sorter = function()                                     -- Telescope sorter.
-        return require("telescope").extensions.fzf.native_fzf_sorter()  -- FZF as sorter.
+      telescope_sorter             = function()                        -- Telescope sorter.
+        return require("telescope").extensions.fzf.native_fzf_sorter() -- FZF as sorter.
       end,
-      remember_settings        = true,  -- Persist the values of switches/options within and across sessions
-      use_per_project_settings = true,  -- Scope persisted settings on a per-project basis
-      ignored_settings = {              -- Settings to never persist (format: "Filetype--cli-value").
+      remember_settings            = true,                             -- Persist the values of switches/options within and across sessions
+      use_per_project_settings     = true,                             -- Scope persisted settings on a per-project basis
+      ignored_settings             = {                                 -- Settings to never persist (format: "Filetype--cli-value").
         "NeogitPushPopup--force-with-lease",
         "NeogitPushPopup--force",
         "NeogitPullPopup--rebase",
         "NeogitCommitPopup--allow-empty",
         "NeogitRevertPopup--no-edit",
       },
-      highlight = {                      -- Highlight group features.
+      highlight                    = { -- Highlight group features.
         italic    = true,
         bold      = true,
         underline = true
       },
-      use_default_keymaps  = true,              -- false: Create own _ALL_ key-mappings.
-      auto_refresh         = true,              -- Refreshes Neogit state (can be slow in big repos).
-      sort_branches        = "-committerdate",  -- Sorting of branches (descending).
-      kind                 = "floating",        -- How to open status ("tab", "split", "vsplit", "floating").
-      disable_line_numbers = false,             -- Enable line numbers and relative line numbers.
-      console_timeout      = 2000,              -- Time (milliseconds) when output console is shown for slow running commands.
-      auto_show_console    = true,              -- Show console if commands takes more than console_timeout.
-      auto_close_console   = true,              -- Close the console if the process exits with a 0 (success) status.
-      status = {
+      use_default_keymaps          = true,             -- false: Create own _ALL_ key-mappings.
+      auto_refresh                 = true,             -- Refreshes Neogit state (can be slow in big repos).
+      sort_branches                = "-committerdate", -- Sorting of branches (descending).
+      kind                         = "floating",       -- How to open status ("tab", "split", "vsplit", "floating").
+      disable_line_numbers         = false,            -- Enable line numbers and relative line numbers.
+      console_timeout              = 2000,             -- Time (milliseconds) when output console is shown for slow running commands.
+      auto_show_console            = true,             -- Show console if commands takes more than console_timeout.
+      auto_close_console           = true,             -- Close the console if the process exits with a 0 (success) status.
+      status                       = {
         show_head_commit_hash = true,
         recent_commit_count   = 10,
         HEAD_padding          = 10,
@@ -80,8 +80,8 @@ return {
           ["?"] = "",
         },
       },
-      commit_editor = {
-        kind = "floating",  -- Possible: "tab", "split", "vsplit", "floating".
+      commit_editor                = {
+        kind = "vsplit", -- Possible: "tab", "split", "vsplit", "floating".
         show_staged_diff = true,
         -- Accepted values:
         -- "split" to show the staged diff below the commit editor
@@ -92,42 +92,42 @@ return {
         staged_diff_split_kind = "split",
         spell_check = true,
       },
-      commit_select_view = {
-        kind = "split",  -- "tab" works too.
+      commit_select_view           = {
+        kind = "split", -- "tab" works too.
       },
-      commit_view = {
+      commit_view                  = {
         -- kind = "split",  -- "tab" works too.
         kind = "vsplit",
         verify_commit = vim.fn.executable("gpg") == 1, -- Can be set to true or false, otherwise we try to find the binary
       },
-      log_view = {
-        kind = "split",  -- "tab" works too.
+      log_view                     = {
+        kind = "split", -- "tab" works too.
       },
-      rebase_editor = {
+      rebase_editor                = {
         kind = "auto",
       },
-      reflog_view = {
-        kind = "split",  -- "tab" works too.
+      reflog_view                  = {
+        kind = "split", -- "tab" works too.
       },
-      merge_editor = {
+      merge_editor                 = {
         kind = "auto",
       },
-      tag_editor = {
+      tag_editor                   = {
         kind = "auto",
       },
-      preview_buffer = {
+      preview_buffer               = {
         kind = "floating",
       },
-      popup = {
+      popup                        = {
         kind = "split",
       },
-      signs = {  -- { CLOSED, OPENED }
-        hunk    = { "",  ""  },
+      signs                        = { -- { CLOSED, OPENED }
+        hunk    = { "", "" },
         item    = { "", "" },
         section = { "", "" },
       },
       -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
-      integrations = {
+      integrations                 = {
         -- If enabled, use telescope for menu selection rather than vim.ui.select.
         -- Allows multi-select and some things that vim.ui.select doesn't.
         telescope = nil,
@@ -147,7 +147,7 @@ return {
         -- Requires you to have `echasnovski/mini.pick` installed.
         mini_pick = nil,
       },
-      sections = {
+      sections                     = {
         -- Reverting/Cherry Picking
         sequencer = {
           folded = false,
@@ -194,7 +194,7 @@ return {
           hidden = false,
         },
       },
-      mappings = {
+      mappings                     = {
         commit_editor = {
           ["q"] = "Close",
           ["<c-c><c-c>"] = "Submit",
@@ -298,11 +298,10 @@ return {
     ---------------------------------------------------------------------------
     --- Key Mappings
 
-    vim.keymap.set("n", "<leader>gs", ":Neogit<CR>",                 { noremap = true, silent = true, nowait = true })  -- Open Git status buffer.
-    vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>",          { noremap = true, silent = true, nowait = true })  -- Open Git commit buffer.
-    vim.keymap.set("n", "<leader>gP", ":Neogit pull<CR>",            { noremap = true, silent = true, nowait = true })  -- Open Git pull buffer.
-    vim.keymap.set("n", "<leader>gp", ":Neogit push<CR>",            { noremap = true, silent = true, nowait = true })  -- Open Git push buffer.
-    vim.keymap.set("n", "<leader>gB", ":Telescope git_branches<CR>", { noremap = true, silent = true, nowait = true })  -- Open branches view in Telescope.
-
+    vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { noremap = true, silent = true, nowait = true })                 -- Open Git status buffer.
+    vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", { noremap = true, silent = true, nowait = true })          -- Open Git commit buffer.
+    vim.keymap.set("n", "<leader>gP", ":Neogit pull<CR>", { noremap = true, silent = true, nowait = true })            -- Open Git pull buffer.
+    vim.keymap.set("n", "<leader>gp", ":Neogit push<CR>", { noremap = true, silent = true, nowait = true })            -- Open Git push buffer.
+    vim.keymap.set("n", "<leader>gB", ":Telescope git_branches<CR>", { noremap = true, silent = true, nowait = true }) -- Open branches view in Telescope.
   end,
 }

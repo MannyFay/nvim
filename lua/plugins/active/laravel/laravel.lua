@@ -7,10 +7,10 @@
 return {
   "adalessa/laravel.nvim",
   dependencies = {
-    "nvim-telescope/telescope.nvim",
     "tpope/vim-dotenv",
+    "nvim-telescope/telescope.nvim",
     "MunifTanjim/nui.nvim",
-    "nvimtools/none-ls.nvim",
+    "kevinhwang91/promise-async",
   },
   cmd = {
     "Sail",
@@ -26,5 +26,6 @@ return {
     { "<leader>lm", ":Laravel related<cr>" },
   },
   event = { "VeryLazy" },
+  opts = {},
   config = true,
 }

@@ -9,17 +9,17 @@ return {
   event        = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    { "mason.nvim", config = true },  -- Ensure mason is loaded first
-    { "williamboman/mason-lspconfig.nvim", config = true },  -- then mason-lspconfig
+    { "mason.nvim",                          config = true }, -- Ensure mason is loaded first
+    { "williamboman/mason-lspconfig.nvim",   config = true }, -- then mason-lspconfig
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/neodev.nvim",                   opts = {} },
     "artemave/workspace-diagnostics.nvim",
   },
-  config = function()
-    local lspconfig       = require("lspconfig")                 -- Import LSP Config plugin.
-    local mason_lspconfig = require("mason-lspconfig")           -- Import Mason LSP Config plugin.
-    local cmp_nvim_lsp    = require("cmp_nvim_lsp")              -- Import CMP NVIM LSP plugin.
-    local capabilities    = cmp_nvim_lsp.default_capabilities()  -- Enable autocompletion (assign to every LSP server config).
+  config       = function()
+    local lspconfig       = require("lspconfig")                -- Import LSP Config plugin.
+    local mason_lspconfig = require("mason-lspconfig")          -- Import Mason LSP Config plugin.
+    local cmp_nvim_lsp    = require("cmp_nvim_lsp")             -- Import CMP NVIM LSP plugin.
+    local capabilities    = cmp_nvim_lsp.default_capabilities() -- Enable autocompletion (assign to every LSP server config).
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group    = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -34,8 +34,8 @@ return {
         local keymap = vim.keymap
         local opts   = { buffer = ev.buf, silent = true }
 
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)   -- show definition, references
+        opts.desc    = "Show LSP references"
+        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
         opts.desc = "Go to declaration"
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -76,7 +76,7 @@ return {
     })
 
 
-    local diagnosticIcons = {                                    -- Diagnostic symbols in the gutter column.
+    local diagnosticIcons = { -- Diagnostic symbols in the gutter column.
       Error = ' ',
       Warn  = ' ',
       Hint  = ' ',
@@ -98,22 +98,22 @@ return {
       function(server_name)
         lspconfig[server_name].setup({
           capabilities = capabilities,
-          on_attach = function(client, bufnr)                                               -- Attach the following to every buffer.
-            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)  -- Populate Workspace-Diagnostics plugin information.
+          on_attach = function(client, bufnr)                                              -- Attach the following to every buffer.
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) -- Populate Workspace-Diagnostics plugin information.
           end,
         })
       end,
 
-      ----- TypeScript:  INFO: This is removed because of the typescript-tool plugin.
-      -- ["ts_ls"] = function()
-      --   lspconfig["ts_ls"].setup({
-      --     capabilities = capabilities,
-      --     on_attach = function(client, bufnr)
-      --       -- require('nvim-lsp-ts-utils').setup_client(client)
-      --     end,
-      --     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-      --   })
-      -- end,
+      --- TypeScript:  INFO: This is removed because of the typescript-tool plugin.
+      ["ts_ls"] = function()
+        lspconfig["ts_ls"].setup({
+          capabilities = capabilities,
+          on_attach = function(client, bufnr)
+            -- require('nvim-lsp-ts-utils').setup_client(client)
+          end,
+          filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        })
+      end,
 
       ----- Svelte:
       ["svelte"] = function()
@@ -151,7 +151,7 @@ return {
           settings     = {
             Lua = {
               diagnostics = {
-                globals = { "vim" },  -- Recognize "vim" global.
+                globals = { "vim" }, -- Recognize "vim" global.
               },
               completion = {
                 callSnippet = "Replace",
@@ -188,8 +188,8 @@ return {
     })
 
 
---     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end )
--- vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end )
--- vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end )
+    --     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end )
+    -- vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end )
+    -- vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end )
   end,
 }

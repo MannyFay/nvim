@@ -20,11 +20,11 @@ return {
       end,
     },
   },
-  config = function()
-    local treesitter = require("nvim-treesitter.configs")  -- Import nvim-treesitter plugin.
+  config       = function()
+    local treesitter = require("nvim-treesitter.configs") -- Import nvim-treesitter plugin.
 
     treesitter.setup({
-      ensure_installed = {  -- Ensure these language parsers are installed.
+      ensure_installed = { -- Ensure these language parsers are installed.
         "json",
         "javascript",
         "typescript",
@@ -41,6 +41,7 @@ return {
         "lua",
         "vim",
         "dockerfile",
+        "php",
         "gitignore",
         "query",
         "vimdoc",
@@ -49,7 +50,7 @@ return {
       sync_install = false,
       auto_install = true,
       highlight = {
-        enable = true,   -- Enable syntax highlighting.
+        enable = true, -- Enable syntax highlighting.
       },
       -- enable indentation
       indent = { enable = true },
@@ -72,8 +73,8 @@ return {
 
       textobjects = {
         select = {
-          enable    = true,  -- Automatically enable the textobjects.
-          lookahead = true,  -- Automatically jump forward to textobj, similar to targets.vim.
+          enable    = true, -- Automatically enable the textobjects.
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim.
 
 
           ---------------------------------------------------------------------
@@ -115,13 +116,13 @@ return {
           enable = true,
           swap_next = {
             ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-            ["<leader>n:"] = "@property.outer", -- swap object property with next
-            ["<leader>nm"] = "@function.outer", -- swap function with next
+            ["<leader>n:"] = "@property.outer",  -- swap object property with next
+            ["<leader>nm"] = "@function.outer",  -- swap function with next
           },
           swap_previous = {
             ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-            ["<leader>p:"] = "@property.outer", -- swap object property with prev
-            ["<leader>pm"] = "@function.outer", -- swap function with previous
+            ["<leader>p:"] = "@property.outer",  -- swap object property with prev
+            ["<leader>pm"] = "@function.outer",  -- swap function with previous
           },
         },
         move = {
@@ -210,12 +211,5 @@ return {
     -- }
 
     -- require("nvim-treesitter.configs").setup(opts)
-
-
-
-
-
-
-
   end,
 }
