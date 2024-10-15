@@ -185,6 +185,27 @@ return {
           filetypes    = { "css", "scss", "less", "sass" },
         })
       end,
+      ----- Ansible:
+      ["ansiblels"] = function()
+        lspconfig["ansiblels"].setup({
+          capabilities = capabilities,
+          filetypes    = { "yaml", "yml", "ansible" },
+        })
+      end,
+      ----- YAML:
+      ["yamlls"] = function()
+        lspconfig["yamlls"].setup({
+          capabilities = capabilities,
+          filetypes    = { "yaml", "yml" },
+        })
+      end,
+      ----- Shell Scripts:
+      ["bashls"] = function()
+        lspconfig["bashls"].setup({
+          capabilities = capabilities,
+          filetypes    = { "sh", "bash", "zsh", "fish", "dash", "ksh" },
+        })
+      end,
     })
 
 

@@ -103,7 +103,7 @@ return {
         ----- Linters:
         "actionlint",   -- GitHub Actions linter.
         "ansible-lint", -- Ansible linter.
-        --"bacon",            -- Rust linter.
+        --"bacon",      -- Rust linter.
         "checkstyle",   -- Java linter.
         "cmakelint",    -- CMake linter.
         "codespell",    -- Check code for common misspellings.
@@ -111,6 +111,7 @@ return {
         "eslint-lsp",   -- JavaScript, TypeScript linter.
         "phpstan",      -- PHP linter.
         "pylint",       -- Python linter.
+        "yamllint",     -- YAML linter.
 
         ----- Formatters:
         "black",           -- Python formatter.
@@ -119,6 +120,8 @@ return {
         --"stylua",           -- Lua formatter.
         "isort",           -- Python formatter.
         "pint",            -- PHP formatter.
+        "shfmt",           -- Shell script formatter.
+        "yamlfix",         -- YAML formatter.
       },
     })
   end,
