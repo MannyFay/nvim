@@ -13,28 +13,31 @@ return {
 
     conform.setup({
       formatters_by_ft     = {
-        javascript      = { "prettierd" },
-        typescript      = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        typescriptreact = { "prettierd" },
-        svelte          = { "prettierd" },
+        blade           = { "blade-formatter" },
         css             = { "prettierd" },
+        graphql         = { "prettierd" },
         html            = { "prettierd" },
         json            = { "prettierd" },
-        yaml            = { "prettierd" },
-        markdown        = { "prettierd" },
-        graphql         = { "prettierd" },
+        javascript      = { "prettierd" },
+        javascriptreact = { "prettierd" },
         liquid          = { "prettierd" },
         lua             = { "stylua" },
         python          = { "isort", "black" },
+        shell           = { "shfmt" },
+        svelte          = { "prettierd" },
+        markdown        = { "prettierd" },
+        typescript      = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        yaml            = { "prettierd" },
       },
       format_on_save       = {
         lsp_fallback = true,
         async        = false,
-        timeout_ms   = 1000,
+        timeout_ms   = 500,
       },
-      notify_on_error      = true, -- Conform will notify you when a formatter errors.
-      notify_no_formatters = true, -- Conform will notify you when no formatters are available for the buffer.
+      notify_on_error      = false, -- Conform will notify you when a formatter errors.
+      quiet                = true,  -- Conform will suppress all output if quiet is true.
+      notify_no_formatters = true,  -- Conform will notify you when no formatters are available for the buffer.
     })
 
 
