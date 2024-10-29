@@ -2,6 +2,8 @@
 ----- Default Neovim Settings
 -------------------------------------------------------------------------------
 
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
 vim.opt.number         = true -- Show line numbers.
 vim.opt.relativenumber = true -- Show relative line numbers.
 vim.opt.tabstop        = 4 -- Spaces for indentation.
@@ -15,8 +17,7 @@ vim.opt.smartcase      = true -- Is mixed case included in search, assume case-s
 vim.opt.cursorline     = true -- Highlight the current line.
 vim.opt.termguicolors  = true -- Expand the number of usable colors.
 vim.opt.background     = 'dark' -- Apply the color set to dark screens.
-vim.opt.signcolumn     =
-'yes' -- Always show the sign column, otherwise it would shift the text each time.
+vim.opt.signcolumn     = 'yes' -- Always show the sign column, otherwise it would shift the text each time.
 vim.opt.backspace      = 'indent,eol,start' -- Allow backspace on indent, end of line or insert mode start position.
 vim.opt.clipboard      = 'unnamedplus' -- Use clipboard of OS.
 vim.opt.splitbelow     = true -- Open new horizontal split always below the current.
@@ -42,7 +43,7 @@ vim.opt.completeopt  = { 'menu,menuone' } -- Select first item in auto completio
 -- vim.opt.formatoptions:remove('r')
 vim.cmd('autocmd BufEnter * set formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
-
+vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.spell       = true -- Enable spell checking.
 vim.opt.equalalways = true -- Enable/Disable automatic resizing of panes (does not work).
 vim.cmd('set pumblend=0') -- Transparency of floating windows.
@@ -52,3 +53,4 @@ vim.o.undofile = true
 -- nvim_list_uis()[0]
 vim.opt.swapfile = false  -- Don't create swap files.
 vim.g.editorconfig = true -- Enable Neovims editorconfig functionality.
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders

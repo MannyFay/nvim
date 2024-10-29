@@ -39,7 +39,7 @@ require("lazy").setup({
 
   ---------------------------------------------------------------------------
   -- js-env
-  -- { import = "plugins.active.js-env.typescript-tools" },
+  { import = "plugins.active.js-env.typescript-tools" },
 
 
   ---------------------------------------------------------------------------
@@ -59,9 +59,11 @@ require("lazy").setup({
   -- LSP
   { import = "plugins.active.lsp.lspconfig" },
   { import = "plugins.active.lsp.mason" },
+  { import = "plugins.active.lsp.otter" },
+  -- { import = "plugins.active.lsp.lspsaga" },
   { import = "plugins.active.lsp.trouble" },
   { import = "plugins.active.lsp.workspace-diagnostics" },
-  { import = "plugins.active.lsp.none-ls" },
+  -- { import = "plugins.active.lsp.none-ls" },
 
 
   ---------------------------------------------------------------------------
@@ -89,6 +91,7 @@ require("lazy").setup({
   { import = "plugins.active.indent-blankline" },
   { import = "plugins.active.lastplace" },
   { import = "plugins.active.live-share" },
+  -- { import = "plugins.active.local-highlight" },
   { import = "plugins.active.lualine" },
   { import = "plugins.active.maximizer" },
   { import = "plugins.active.nvim-cmp" },

@@ -64,7 +64,7 @@ return {
         help       = false,
         hgcommit   = false,
         svn        = false,
-        ['*']      = false,
+        -- ['*']      = false,
       },
       copilot_node_command  = 'node', -- Node.js version must be higher than 16.x.
       server_opts_overrides = {},

@@ -9,6 +9,7 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "neovim/nvim-lspconfig",
   },
   cmd = "Mason",
   config = function()
@@ -35,7 +36,7 @@ return {
     --- Mason LSP Config Settings
 
     mason_lspconfig.setup({
-      ensure_installed = {                 -- List of servers for mason to install.
+      ensure_installed = {                 -- List of LSP servers for mason to install.
         'angularls',                       -- Angular language server.
         'ansiblels',                       -- Ansible language server.
         'arduino_language_server',         -- Arduino language server.
@@ -81,13 +82,12 @@ return {
         'tailwindcss',   -- Tailwind CSS language server.
         'taplo',         -- TOML language server.
         'terraformls',   -- Terraform language server.
-        'ts_ls',         -- JavaScript/TypeScript language server.
-        --'tsserver',                           -- JavaScript/TypeScript language server.
-        'volar',         -- Vue language server.
-        'yamlls',        -- YAML language server.
-        --'editorconfig-checker',             -- EditorConfig checker.
+        -- 'ts_ls',         -- JavaScript/TypeScript language server.
+        -- 'tsserver',                           -- JavaScript/TypeScript language server.
+        'volar',  -- Vue language server.
+        'yamlls', -- YAML language server.
         --'nginx_language_server',            -- NGINX language server.
-        'vimls', -- Vim language server.
+        'vimls',  -- Vim language server.
         -- 'twigcs',                           -- Twig language server.
         -- 'php-debug-adapter',              -- PHP Debug Adapter.
       },
@@ -101,17 +101,18 @@ return {
       ensure_installed = {
 
         ----- Linters:
-        "actionlint",   -- GitHub Actions linter.
-        "ansible-lint", -- Ansible linter.
+        "actionlint",           -- GitHub Actions linter.
+        "ansible-lint",         -- Ansible linter.
         --"bacon",      -- Rust linter.
-        "checkstyle",   -- Java linter.
-        "cmakelint",    -- CMake linter.
-        "codespell",    -- Check code for common misspellings.
-        "commitlint",   -- Checks commit messages format.
-        "eslint-lsp",   -- JavaScript, TypeScript linter.
-        "phpstan",      -- PHP linter.
-        "pylint",       -- Python linter.
-        "yamllint",     -- YAML linter.
+        "checkstyle",           -- Java linter.
+        "cmakelint",            -- CMake linter.
+        "codespell",            -- Check code for common misspellings.
+        "commitlint",           -- Checks commit messages format.
+        'editorconfig-checker', -- EditorConfig checker.
+        -- "eslint-lsp",           -- JavaScript, TypeScript linter.
+        "phpstan",              -- PHP linter.
+        "pylint",               -- Python linter.
+        "yamllint",             -- YAML linter.
 
         ----- Formatters:
         "black",           -- Python formatter.
@@ -121,6 +122,7 @@ return {
         "isort",           -- Python formatter.
         "pint",            -- PHP formatter.
         "shfmt",           -- Shell script formatter.
+        "vacuum",          -- OpenAPI formatter.
         "yamlfix",         -- YAML formatter.
       },
     })

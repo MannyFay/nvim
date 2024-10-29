@@ -14,12 +14,31 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/neodev.nvim",                   opts = {} },
     "artemave/workspace-diagnostics.nvim",
+    -- 'jose-elias-alvarez/nvim-lsp-ts-utils',
+  },
+  opts         = {
+    event = "BufReadPre",
+    -- servers = {
+    --   "angularls",
+    --   "ansiblels",
+    --   "bashls",
+    --   "cssls",
+    --   "emmet_ls",
+    --   "graphql",
+    --   "intelephense",
+    --   "lua_ls",
+    --   "svelte",
+    --   -- tailwindcss = {},
+    --   "ts_ls",
+    --   "yamlls",
+    -- },
   },
   config       = function()
     local lspconfig       = require("lspconfig")                -- Import LSP Config plugin.
     local mason_lspconfig = require("mason-lspconfig")          -- Import Mason LSP Config plugin.
     local cmp_nvim_lsp    = require("cmp_nvim_lsp")             -- Import CMP NVIM LSP plugin.
     local capabilities    = cmp_nvim_lsp.default_capabilities() -- Enable autocompletion (assign to every LSP server config).
+    -- local eslint          = require("lspconfig.eslint")         -- Import ESLint LSP plugin.
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group    = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -100,18 +119,29 @@ return {
           capabilities = capabilities,
           on_attach = function(client, bufnr)                                              -- Attach the following to every buffer.
             require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) -- Populate Workspace-Diagnostics plugin information.
+            -- require("workspace-diagnostics").populate_workspace_diagnostics(client, 0) -- Populate Workspace-Diagnostics plugin information.
           end,
         })
       end,
 
-      --- TypeScript:  INFO: This is removed because of the typescript-tool plugin.
-      ["ts_ls"] = function()
-        lspconfig["ts_ls"].setup({
+      -- -- TypeScript:  INFO: This is removed because of the typescript-tool plugin.
+      -- ["ts_ls"] = function()
+      --   lspconfig["ts_ls"].setup({
+      --     capabilities = capabilities,
+      --     on_attach = function(client, bufnr)
+      --       require('nvim-lsp-ts-utils').setup_client(client)
+      --     end,
+      --     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+      --   })
+      -- end,
+
+      ----- Tailwind CSS:
+      ["tailwindcss"] = function()
+        lspconfig["tailwindcss"].setup({
           capabilities = capabilities,
-          on_attach = function(client, bufnr)
-            -- require('nvim-lsp-ts-utils').setup_client(client)
+          on_attach    = function(client, bufnr)
           end,
-          filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+          filetypes    = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" },
         })
       end,
 
@@ -204,6 +234,19 @@ return {
         lspconfig["bashls"].setup({
           capabilities = capabilities,
           filetypes    = { "sh", "bash", "zsh", "fish", "dash", "ksh" },
+        })
+      end,
+    })
+    -- INFO: In addition for typescript-tools, the following is added:
+    require 'lspconfig'.eslint.setup({
+      settings  = {
+        packageManager = "yarn",
+      },
+      ---@diagnostic disable-next-line: unused-local
+      on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
         })
       end,
     })

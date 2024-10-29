@@ -47,18 +47,30 @@ vim.keymap.set('n', 'N', 'Nzzzv', opts)                    -- Center the screen 
 -------------------------------------------------------------------------------
 -- Editing
 
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true }) -- When text is wrapped, move by terminal rows, not lines up, unless a count is provided.
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true }) -- When text is wrapped, move by terminal rows, not lines down, unless a count is provided.
+local map = vim.keymap.set
 
-vim.keymap.set('n', 'U', '<C-r>', opts)                                -- Redo last action.
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true }) -- When text is wrapped, move by terminal rows, not lines up, unless a count is provided.
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true }) -- When text is wrapped, move by terminal rows, not lines down, unless a count is provided.
 
-vim.keymap.set({ 'v', 'x' }, '<<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
-vim.keymap.set({ 'v', 'x' }, '>>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
-vim.keymap.set({ 'v', 'x' }, '<<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
-vim.keymap.set({ 'v', 'x' }, '>>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
-vim.keymap.set('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
+map('n', 'U', '<C-r>', opts)                                -- Redo last action.
 
-vim.keymap.set('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
+map({ 'n', }, '<', '<<', opts)                        -- Stay in visual mode after indent width <<.
+map({ 'n', }, '>', '>>', opts)                        -- Stay in visual mode after indent width <<.
+map({ 'v', 'x' }, '<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
+map({ 'v', 'x' }, '>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
+map({ 'v', 'x' }, '<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
+map({ 'v', 'x' }, '>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
+map('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
+
+map('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
+
+
+
+map('n', '+', '<C-a>', opts)                                          -- Increment number under cursor.
+map('n', '-', '<C-x>', opts)                                          -- Decrement number under cursor.
+map('n', 'dw', 'vb"_d', opts)                                         -- Delete word backwards it.
+map('n', '<C-a>', 'gg<S-v>G', opts)                                   -- Select all text.
+
 
 
 vim.keymap.set('n', 'q:', ':q<CR>') -- Disable typical command line typo.

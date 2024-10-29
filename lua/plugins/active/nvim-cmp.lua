@@ -11,6 +11,7 @@ return {
     "hrsh7th/cmp-buffer",   -- Completion source for text in buffer.
     "hrsh7th/cmp-path",     -- Completion source for file system paths.
     "hrsh7th/cmp-cmdline",  -- Completion source for text in command line.
+    "hrsh7th/cmp-nvim-lsp", -- Completion source for built-in LSP.
     "hrsh7th/cmp-nvim-lsp-signature-help",  -- CMP source to display function signatures with parameter explanation.
     "hrsh7th/cmp-nvim-lua",                 -- CMP source for Neovim Lua API.
     {

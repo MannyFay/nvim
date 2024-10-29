@@ -22,22 +22,30 @@ return {
         javascriptreact = { "prettierd" },
         liquid          = { "prettierd" },
         lua             = { "stylua" },
+        markdown        = { "prettierd" },
         python          = { "isort", "black" },
         shell           = { "shfmt" },
         svelte          = { "prettierd" },
-        markdown        = { "prettierd" },
         typescript      = { "prettierd" },
         typescriptreact = { "prettierd" },
         yaml            = { "prettierd" },
+        ["*"]           = { "trim_whitespace" },
       },
       format_on_save       = {
         lsp_fallback = true,
         async        = false,
-        timeout_ms   = 500,
+        timeout_ms   = 10000,
       },
       notify_on_error      = false, -- Conform will notify you when a formatter errors.
       quiet                = true,  -- Conform will suppress all output if quiet is true.
       notify_no_formatters = true,  -- Conform will notify you when no formatters are available for the buffer.
+      formatters           = {
+        prettierd = {
+          condition = function()
+            return vim.loop.fs_realpath(".prettierrc.js") ~= nil or vim.loop.fs_realpath(".prettierrc.mjs") ~= nil
+          end,
+        },
+      },
     })
 
 
@@ -48,7 +56,7 @@ return {
       conform.format({
         lsp_fallback = true,
         async = false,
-        timeout_ms = 1000,
+        timeout_ms = 10000,
       })
     end, { desc = "Format file or range (in visual mode)" })
   end,

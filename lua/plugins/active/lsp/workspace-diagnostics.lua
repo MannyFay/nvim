@@ -1,9 +1,3 @@
--------------------------------------------------------------------------------
--- Workspace Diagnostics Plugin
--- https://github.com/artemave/workspace-diagnostics.nvim
--- Populates project-wide lsp diagnostics, regardless of what files are opened.
--------------------------------------------------------------------------------
-
 return {
   "artemave/workspace-diagnostics.nvim",
   event        = { "BufReadPre", "BufNewFile" },
@@ -52,4 +46,3 @@ return {
     })
   end,
 }
-

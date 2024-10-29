@@ -14,6 +14,7 @@ return {
     ----- Settings
 
     colorizer.setup({
+      "*"; -- Highlight all files, but customize some others.
       "!md",        -- Ignore highlighting in markdown files.
       "!markdown",  -- Ignore highlighting in markdown files.
       "!Lazy",      -- Ignore highlighting in lazy loaded buffers.
