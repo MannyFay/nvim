@@ -43,6 +43,7 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-Tab>"] = cmp.mapping.confirm({ select = true }),
+        -- ["<Leader>es"] = cmp.mapping.confirm({ select = true }),
         ["<S-Tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<Tab>"]   = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-q>"] = cmp.mapping.abort(), -- close completion window

@@ -40,6 +40,7 @@ require("lazy").setup({
   ---------------------------------------------------------------------------
   -- js-env
   { import = "plugins.active.js-env.typescript-tools" },
+  { import = "plugins.active.js-env.type-checker" },
 
 
   ---------------------------------------------------------------------------
@@ -64,6 +65,11 @@ require("lazy").setup({
   { import = "plugins.active.lsp.trouble" },
   { import = "plugins.active.lsp.workspace-diagnostics" },
   -- { import = "plugins.active.lsp.none-ls" },
+
+
+  ---------------------------------------------------------------------------
+  -- Snippets
+  { import = "plugins.active.snippets.luasnip" },
 
 
   ---------------------------------------------------------------------------

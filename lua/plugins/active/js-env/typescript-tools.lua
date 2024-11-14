@@ -3,6 +3,7 @@
 -- https://github.com/pmizio/typescript-tools.nvim
 -- TypeScript integration NeoVim deserves.
 -------------------------------------------------------------------------------
+
 return {
   "pmizio/typescript-tools.nvim",
   dependencies = {
@@ -19,10 +20,10 @@ return {
           function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
-        for _, client in ipairs(vim.lsp.get_clients()) do
+        -- for _, client in ipairs(vim.lsp.get_clients()) do
         --   require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
         --     require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) -- Populate Workspace-Diagnostics plugin information.
-        end
+        -- end
           end,
       handlers = {},
       settings = {
