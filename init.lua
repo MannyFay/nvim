@@ -27,3 +27,6 @@ end
 if is_win then
   vim.opt.clipboard = { "unnamed", "unnamedplus" }
 end
+
+vim.opt.runtimepath:append("~/.config/nvim/lua/plugins")
+

@@ -142,6 +142,15 @@ return {
           on_attach    = function(client, bufnr)
           end,
           filetypes    = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" },
+          settings     = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]" }
+                },
+              },
+            },
+          },
         })
       end,
 
@@ -213,6 +222,20 @@ return {
         lspconfig["cssls"].setup({
           capabilities = capabilities,
           filetypes    = { "css", "scss", "less", "sass" },
+          settings = {
+            css = {
+              validate = true,
+              lint = { unknownAtRules = "ignore" }
+            },
+            scss = {
+              validate = true,
+              lint = { unknownAtRules = "ignore" }
+            },
+            less = {
+              validate = true,
+              lint = { unknownAtRules = "ignore" }
+            },
+          },
         })
       end,
       ----- Ansible:

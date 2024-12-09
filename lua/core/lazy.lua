@@ -107,6 +107,7 @@ require("lazy").setup({
   { import = "plugins.active.surround" },
   { import = "plugins.active.todo-comments" },
   { import = "plugins.active.vim-illuminate" },
+  { import = "plugins.active.plantuml_preview" },
 }, {
   change_detection = {
     notify = false, -- Don't notify in command line about changed plugin files.

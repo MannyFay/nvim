@@ -12,7 +12,22 @@ return {
       workspace_files = function()                -- Customize this function to return project files.
         return vim.fn.systemlist("git ls-files")  -- Example to get files from Git.
       end,
-      -- Add any other configuration options as needed.
+      clients = {
+        copilot = {
+          filetypes = {
+            "javascript",
+            "typescript",
+            "html",
+            "css",
+            "markdown",
+            "yaml",
+            "sh",
+            "bash",
+            "php",
+            "lua",
+          },
+        },
+      },
     })
 
     -- Automatically populate diagnostics when the LSP client attaches:
@@ -25,9 +40,17 @@ return {
       group = vim.api.nvim_create_augroup("WorkspaceDiagnosticsGroup", {}),
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        -- Attach diagnostics for all LSP clients:
         if client then
-          on_attach(client, ev.buf)
+          on_attach(client, ev.buf) --  <-- This is the original code.
+          -- workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
+          -- Special handling for Copilot:
+          -- if client.name == "copilot" then
+          --   workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
+          -- end
         end
+
       end,
     })
 
