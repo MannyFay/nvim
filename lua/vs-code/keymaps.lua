@@ -56,21 +56,33 @@ keymap({'n', 'v'}, '<leader>bc', "<cmd>lua require('vscode').action('editor.acti
 -- Searching
 
 keymap({'n', 'v'}, '<leader>ff',  "<cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>")
+keymap('n', '<Esc>', ':nohlsearch<CR>', opts)      -- Quit highlighting of search.
 keymap('n', 'n',  'nzzzv',        opts)  -- Center the screen after jumping to the next match.
 keymap('n', 'N',  'Nzzzv',        opts)  -- Center the screen after jumping to the previous match.
 
 
 -------------------------------------------------------------------------------
--- Editing boost
+-- Editing
 
 keymap('n',        'U',          '<C-r>',        opts)  -- Redo last action.
+keymap({ 'n', }, '<', '<<', opts)                        -- Stay in visual mode after indent width <<.
+keymap({ 'n', }, '>', '>>', opts)                        -- Stay in visual mode after indent width <<.
+keymap({ 'v', 'x' }, '<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
+keymap({ 'v', 'x' }, '>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
+keymap({ 'v', 'x' }, '<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
+keymap({ 'v', 'x' }, '>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
+keymap('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
+keymap('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
+keymap('n', '+', '<C-a>', opts)                                          -- Increment number under cursor.
+keymap('n', '-', '<C-x>', opts)                                          -- Decrement number under cursor.
+
+
+
 keymap('n',        ',,',         '<Esc>A,<Esc>', opts)  -- Insert a , at the end of a line.
 keymap('n',        '::',         '<Esc>A:<Esc>', opts)  -- Insert a : at the end of a line.
 keymap('n',        'x',          '"_x',          opts)  -- If delete one char, don't copy it to the clipboard.
 keymap('n',        'q:',         ':q<CR>',       opts)  -- Disable typical command line typo.
 keymap({'n', 'v'}, '<Leader>jl', 'J',            opts)  -- Join line below with white space.
-keymap('v',        '<<',         '<gv',          opts)  -- Stay in visual mode after indent width <<.
-keymap('v',        '>>',         '>gv',          opts)  -- Stay in visual mode after indent width >>.
 keymap('n', 'Y',  '+y$',    opts)        -- Yank to end of line.
 
 keymap({"n", "v"}, "y", '"+y',   opts)  -- Yank line to system clipboard.
@@ -83,6 +95,8 @@ keymap({"n", "v"}, "D", '"+D', opts)  -- Delete to end of line and copy to syste
 -- keymap({"n", "v"}, "<leader>p", '"+p', opts)
 keymap({"n", "v"}, "p", '"+p', opts)
 
+keymap('n', 'dw', 'vb"_d', opts)                                         -- Delete word backwards it.
+keymap('n', '<C-a>', 'gg<S-v>G', opts)                                   -- Select all text.
 
 -------------------------------------------------------------------------------
 -- Visual mode
@@ -91,6 +105,8 @@ keymap('n', 'vv', 'V',     opts)        -- Enter visual line mode like all other
 keymap('n', 'vb', '<C-v>', opts)        -- Enter visual block mode (vb).
 keymap('v', 'y',  'myy`y', opts)        -- Maintain the cursor position when yanking a visual selection.
 keymap('v', 'Y',  'myY`y', opts)        -- Maintain the cursor position when yanking a visual line selection.
+keymap({ 'n', }, '<', '<<', opts)       -- Use only < for indent width <<.
+keymap({ 'n', }, '>', '>>', opts)       -- Use only > for indent width >>.
 keymap('v', '<<', '<gv',   opts)        -- Stay in visual mode after indent width <<.
 keymap('v', '>>', '>gv',   opts)        -- Stay in visual mode after indent width >>.
 keymap('v', 'p',  '"_dP',  opts)        -- Paste preserves primal yanked piece.

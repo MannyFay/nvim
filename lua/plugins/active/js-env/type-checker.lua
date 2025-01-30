@@ -15,7 +15,7 @@ return {
     local tsconfig_path = utils.find_nearest_tsconfig() or false
 
     tsc.setup({
-      auto_open_qflist = true,
+      auto_open_qflist = false,
       auto_close_qflist = false,
       auto_focus_qflist = false,
       auto_start_watch_mode = true,  -- Start watch mode on open.
@@ -24,8 +24,8 @@ return {
       run_as_monorepo = false,
       -- bin_path = utils.find_tsc_bin(),
       bin_path = require('tsc.utils').find_tsc_bin(),
-      enable_progress_notifications = true,
-      enable_error_notifications = true,
+      enable_progress_notifications = false,
+      enable_error_notifications = false,
       flags = {
         noEmit = true,  -- Run type-checker only.
         -- project = function()

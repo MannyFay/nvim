@@ -63,6 +63,11 @@ return {
         color = "hint",
         alt   = { "HELP", "QUESTIONS", "HELPWANTED" }
       },
+      IDEA = {
+        icon  = " ",
+        color = "hint",
+        alt   = { "idea" }
+      },
     },
     gui_style      = {
       fg = "NONE",                               -- The GUI style to use for the "fg" highlight group.

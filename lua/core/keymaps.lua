@@ -53,21 +53,19 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true }) -- When text is wrap
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true }) -- When text is wrapped, move by terminal rows, not lines down, unless a count is provided.
 
 map('n', 'U', '<C-r>', opts)                                -- Redo last action.
-
-map({ 'n', }, '<', '<<', opts)                        -- Stay in visual mode after indent width <<.
-map({ 'n', }, '>', '>>', opts)                        -- Stay in visual mode after indent width <<.
+map({ 'n', }, '<', '<<', opts)                        -- Use only < for indent width <<.
+map({ 'n', }, '>', '>>', opts)                        -- Use only > for indent width >>.
 map({ 'v', 'x' }, '<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
 map({ 'v', 'x' }, '>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
 map({ 'v', 'x' }, '<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
 map({ 'v', 'x' }, '>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
 map('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
-
 map('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
-
-
-
 map('n', '+', '<C-a>', opts)                                          -- Increment number under cursor.
 map('n', '-', '<C-x>', opts)                                          -- Decrement number under cursor.
+
+
+
 map('n', 'dw', 'vb"_d', opts)                                         -- Delete word backwards it.
 map('n', '<C-a>', 'gg<S-v>G', opts)                                   -- Select all text.
 
@@ -127,8 +125,8 @@ vim.keymap.set('n', '<Leader>jl', 'J', opts)          -- Join line below with wh
 -- vim.keymap.set('n', '<Leader>tih', function() lsp.inlay_hint.enable(0, not lsp.inlay_hint.is_enabled()) end)
 
 
--- Start tmux sessionizer
-vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/personal/github/dotfiles/tmux/tmux-sessionizer.sh<CR>')
+-- Start tmux sessionizer:
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/personal/github/dotfiles/cli-tools/tmux/scripts/tmux_sessionizer.sh<CR>')
 
 ------------------------------------------------------------
 -- Scrolling

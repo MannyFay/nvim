@@ -39,8 +39,8 @@ return {
 
     telescope.setup({
       defaults = {
-        -- hidden               = true, -- Show hidden files.
-        -- no_ignore            = true, -- Show ignored files.
+        hidden               = true, -- Show hidden files.
+        no_ignore            = true, -- Show ignored files.
         file_ignore_patterns = {},
         shorten_paths        = false,
         prompt_prefix        = '   ',
