@@ -56,6 +56,7 @@ keymap({'n', 'v'}, '<leader>bc', "<cmd>lua require('vscode').action('editor.acti
 -- Searching
 
 keymap({'n', 'v'}, '<leader>ff',  "<cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>")
+keymap({'n', 'v'}, '<leader>ft', "<cmd>lua require('vscode').action('workbench.action.findInFiles')<CR>")
 keymap('n', '<Esc>', ':nohlsearch<CR>', opts)      -- Quit highlighting of search.
 keymap('n', 'n',  'nzzzv',        opts)  -- Center the screen after jumping to the next match.
 keymap('n', 'N',  'Nzzzv',        opts)  -- Center the screen after jumping to the previous match.

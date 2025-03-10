@@ -31,4 +31,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { import = "plugins.active.surround" },
+  { import = "plugins.active.alternate_toggler" },
 })

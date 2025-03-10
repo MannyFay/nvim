@@ -24,12 +24,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-
 -------------------------------------------------------------------------------
 -- Load plugins
 -- (always load them separately in this list because debugging is way easier)
 
 require("lazy").setup({
+
+  ---------------------------------------------------------------------------
+  -- Alternate Toggler
+  { import = "plugins.active.alternate_toggler" },
 
   ---------------------------------------------------------------------------
   -- Copilot
