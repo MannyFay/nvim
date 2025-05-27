@@ -66,8 +66,10 @@ return {
         svn        = false,
         -- ['*']      = false,
       },
-      copilot_node_command  = 'node', -- Node.js version must be higher than 16.x.
-      server_opts_overrides = {},
+      -- copilot_node_command  = 'node', -- Node.js version must be higher than 16.x.
+      copilot_node_command = vim.fn.exepath("node"),
+      -- server_opts_overrides = {},
+      server_opts_overrides = nil,
     })
   end,
 }

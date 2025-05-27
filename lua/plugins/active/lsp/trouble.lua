@@ -23,12 +23,26 @@ return {
 
   keys = {
     {
-      "<leader>xx", function() -- Run workspace diagnostics, then toggle trouble.
+      "<leader>xx", function()
+        local exclude = {
+          copilot = true,
+          null_ls = true,
+        }
+
         for _, client in ipairs(vim.lsp.get_clients()) do
-          require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+          if not exclude[client.name] then
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+          end
         end
         require("trouble").toggle("diagnostics")
       end, desc = "Populate Workspace Diagnostics and Toggle Trouble",
+
+      -- "<leader>xx", function() -- Run workspace diagnostics, then toggle trouble.
+      --   for _, client in ipairs(vim.lsp.get_clients()) do
+      --     require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+      --   end
+      --   require("trouble").toggle("diagnostics")
+      -- end, desc = "Populate Workspace Diagnostics and Toggle Trouble",
     },
     -- { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)", },
     { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)", },

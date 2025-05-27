@@ -42,14 +42,20 @@ return {
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
         -- Attach diagnostics for all LSP clients:
-        if client then
-          on_attach(client, ev.buf) --  <-- This is the original code.
-          -- workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
-          -- Special handling for Copilot:
-          -- if client.name == "copilot" then
-          --   workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
-          -- end
+        if client and client.name ~= "copilot" then
+          on_attach(client, ev.buf)
         end
+
+
+
+        -- if client then
+        --   on_attach(client, ev.buf) --  <-- This is the original code.
+        --   -- workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
+        --   -- Special handling for Copilot:
+        --   -- if client.name == "copilot" then
+        --   --   workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
+        --   -- end
+        -- end
 
       end,
     })
@@ -62,8 +68,14 @@ return {
       noremap = true,
       callback = function()
         for _, client in ipairs(vim.lsp.get_clients()) do
-          require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+          if client.name ~= "copilot" then
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+          end
         end
+
+        -- for _, client in ipairs(vim.lsp.get_clients()) do
+        --   require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+        -- end
       end,
       desc = "Populate workspace diagnostics"
     })

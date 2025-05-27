@@ -4,6 +4,9 @@
 -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
 -------------------------------------------------------------------------------
 
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+vim.env.PATH = vim.fn.exepath("node"):match("(.+)/[^/]+$") .. ":" .. vim.env.PATH
+
 return {
   "williamboman/mason.nvim",
   dependencies = {
@@ -28,6 +31,11 @@ return {
           package_pending     = "➜",
           package_uninstalled = "✗",
         },
+        check_outdated_packages_on_open = true,
+        border                          = "none",
+        backdrop                        = 0,
+        width                           = 0.8,
+        height                          = 0.9,
       },
     })
 
@@ -36,6 +44,7 @@ return {
     --- Mason LSP Config Settings
 
     mason_lspconfig.setup({
+      automatic_installation = true,
       ensure_installed = {                 -- List of LSP servers for mason to install.
         'angularls',                       -- Angular language server.
         'ansiblels',                       -- Ansible language server.
@@ -128,3 +137,4 @@ return {
     })
   end,
 }
+

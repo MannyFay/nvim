@@ -20,6 +20,9 @@ return {
           function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
+            if client.name ~= "copilot" then
+              require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+            end
         -- for _, client in ipairs(vim.lsp.get_clients()) do
         --   require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
         --     require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) -- Populate Workspace-Diagnostics plugin information.
