@@ -34,10 +34,13 @@ require("lazy").setup({
   -- Alternate Toggler
   { import = "plugins.active.alternate_toggler" },
 
+
   ---------------------------------------------------------------------------
-  -- Copilot
-  { import = "plugins.active.copilot.copilot-chat" },
-  { import = "plugins.active.copilot.copilot" },
+  -- AI
+
+  { import = "plugins.active.ai.claude.claude_code" },
+  { import = "plugins.active.ai.copilot.copilot-chat" },
+  { import = "plugins.active.ai.copilot.copilot" },
 
 
   ---------------------------------------------------------------------------
@@ -61,8 +64,8 @@ require("lazy").setup({
 
   ---------------------------------------------------------------------------
   -- LSP
-  { import = "plugins.active.lsp.lspconfig" },
   { import = "plugins.active.lsp.mason" },
+  { import = "plugins.active.lsp.lspconfig" },
   { import = "plugins.active.lsp.otter" },
   -- { import = "plugins.active.lsp.lspsaga" },
   { import = "plugins.active.lsp.trouble" },

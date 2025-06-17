@@ -93,7 +93,7 @@ return {
         'terraformls',   -- Terraform language server.
         -- 'ts_ls',         -- JavaScript/TypeScript language server.
         -- 'tsserver',                           -- JavaScript/TypeScript language server.
-        'volar',  -- Vue language server.
+        'vue-language-server',  -- Vue language server (volar).
         'yamlls', -- YAML language server.
         --'nginx_language_server',            -- NGINX language server.
         'vimls',  -- Vim language server.
