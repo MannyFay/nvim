@@ -49,11 +49,15 @@ require("lazy").setup({
   { import = "plugins.active.js-env.type-checker" },
 
 
+
   ---------------------------------------------------------------------------
   -- Git
+
   { import = "plugins.active.git.fugitive" },
   { import = "plugins.active.git.gitsigns" },
   { import = "plugins.active.git.neogit" },
+  { import = "plugins.active.git.git_worktree" },
+
 
 
   ---------------------------------------------------------------------------
