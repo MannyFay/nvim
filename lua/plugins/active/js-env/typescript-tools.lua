@@ -13,22 +13,20 @@ return {
   },
   opts = {},
   config = function()
-    local ts = require("typescript-tools")
+    local ts_tools     = require("typescript-tools")
 
-    ts.setup({
-      on_attach =
-          function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
-            if client.name ~= "copilot" then
-              require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-            end
-        -- for _, client in ipairs(vim.lsp.get_clients()) do
-        --   require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
-        --     require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) -- Populate Workspace-Diagnostics plugin information.
-        -- end
-          end,
-      handlers = {},
+    ts_tools.setup({
+      -- The following snippet is for TypeScript-Tools plugin linting function.
+      -- It is turned off here because ESLint is already configured as a linter.
+      on_attach = function(client, bufnr)
+        if client.name == "typescript-tools" then
+          client.handlers["textDocument/publishDiagnostics"] = function(...)
+            local result = select(2, ...)
+            result.diagnostics = {}
+          end
+        end
+      end,
+
       settings = {
         -- spawn additional tsserver instance to calculate diagnostics on it
         separate_diagnostic_server = true,
