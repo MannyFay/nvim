@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Git-Signs Plugin
 -- https://github.com/lewis6991/gitsigns.nvim
--- Git integration for buffers.
+-- Git hunks and line level operations to stage hunks, blame, navigation, etc.
 -------------------------------------------------------------------------------
 
 return {

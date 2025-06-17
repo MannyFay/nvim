@@ -1,0 +1,5 @@
+-------------------------------------------------------------------------------
+-- Diffview Plugin
+-- https://github.com/sindrets/diffview.nvim
+-- Advanced Git diff viewer for file diffs, merge conflicts, history, and more.
+-------------------------------------------------------------------------------

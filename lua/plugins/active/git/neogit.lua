@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- NeoGit Plugin
 -- https://github.com/NeogitOrg/neogit
--- Git interface for Neovim.
+-- Main Git interface for status, commits, push/pull, log, and more.
 -------------------------------------------------------------------------------
 
 return {

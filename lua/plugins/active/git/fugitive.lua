@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Vim Fugitive Plugin
 -- https://github.com/tpope/vim-fugitive
--- Git wrapper for Vim/Neovim.
+-- Advanced Git operations to compare, browse, edit Git objects, and more.
 -------------------------------------------------------------------------------
 
 return {

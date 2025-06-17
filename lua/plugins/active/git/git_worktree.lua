@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Git-Worktree Plugin
 -- https://github.com/ThePrimeagen/git-worktree.nvim
---
+-- Git worktree management to create, switch, and delete worktrees.
 -------------------------------------------------------------------------------
 
 return {

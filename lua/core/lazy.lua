@@ -53,6 +53,7 @@ require("lazy").setup({
   ---------------------------------------------------------------------------
   -- Git
 
+  -- { import = "plugins.active.git" },
   { import = "plugins.active.git.fugitive" },
   { import = "plugins.active.git.gitsigns" },
   { import = "plugins.active.git.neogit" },
