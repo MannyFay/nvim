@@ -1,76 +1,123 @@
--------------------------------------------------------------------------------
--- Git init.lua
--- Centralized Git plugins orchestration file.
--------------------------------------------------------------------------------
-
-return {
-  -- Core git functionality
-  { import = "plugins.git.gitsigns" },
-  { import = "plugins.git.neogit" },
-  { import = "plugins.git.diffview" },
-  { import = "plugins.git.fugitive" },
-  { import = "plugins.git.worktree" },
-
-  -- Optional: GitHub integration
-  -- { import = "plugins.git.octo" },
-  -- { import = "plugins.git.git-conflict" },
-}
-
--- lua/plugins/git/core.lua
--- Shared git configuration and key mappings
+-- lua/plugins/git/init.lua
+-- Professional Git plugin orchestration with proper separation of concerns
 
 local M = {}
 
--- Unified git key mapping namespace
-M.setup_git_keymaps = function()
-  local opts = { noremap = true, silent = true }
-
-  -- Git Status & Navigation
-  vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", opts)                    -- Main git interface
-  vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", opts)      -- Stage hunk
-  vim.keymap.set("v", "<leader>gs", ":Gitsigns stage_hunk<CR>", opts)      -- Stage selection
-  vim.keymap.set("n", "<leader>gu", ":Gitsigns undo_stage_hunk<CR>", opts) -- Unstage hunk
-  vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", opts)      -- Reset hunk
-  vim.keymap.set("v", "<leader>gr", ":Gitsigns reset_hunk<CR>", opts)      -- Reset selection
-
-  -- Git Diff & Preview
-  vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>", opts)             -- Diffview
-  vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", opts)    -- Preview hunk
-  vim.keymap.set("n", "<leader>gH", ":DiffviewFileHistory %<CR>", opts)    -- File history
-
-  -- Git Blame & Log
-  vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", opts) -- Toggle blame
-  vim.keymap.set("n", "<leader>gB", ":Git blame<CR>", opts)                -- Full blame view
-  vim.keymap.set("n", "<leader>gl", ":Neogit log<CR>", opts)               -- Git log
-
-  -- Git Commit & Push
-  vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", opts)            -- Commit
-  vim.keymap.set("n", "<leader>gp", ":Neogit push<CR>", opts)              -- Push
-  vim.keymap.set("n", "<leader>gP", ":Neogit pull<CR>", opts)              -- Pull
-
-  -- Git Branches & Worktree
-  vim.keymap.set("n", "<leader>gw", ":Telescope git_worktree<CR>", opts)   -- Worktree picker
-  vim.keymap.set("n", "<leader>gW", ":Telescope git_worktree create<CR>", opts) -- Create worktree
-  vim.keymap.set("n", "<leader>gco", ":Telescope git_branches<CR>", opts)  -- Checkout branch
-
-  -- Git Navigation
-  vim.keymap.set("n", "]h", ":Gitsigns next_hunk<CR>", opts)               -- Next hunk
-  vim.keymap.set("n", "[h", ":Gitsigns prev_hunk<CR>", opts)               -- Previous hunk
-end
-
--- Plugin integration helpers
-M.close_fugitive_on_neogit = function()
-  -- Auto-close fugitive when opening neogit to avoid conflicts
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "NeogitStatusRefresh",
-    callback = function()
-      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.bo[buf].filetype == "fugitive" then
-          vim.api.nvim_buf_delete(buf, { force = true })
-        end
-      end
+-- Plugin specifications with proper dependencies and loading strategies
+local plugins = {
+  -- Core git functionality (load first)
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = function()
+      return require("plugins.git.config.gitsigns")
     end,
-  })
-end
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
+      require("plugins.git.integrations.gitsigns").setup()
+    end,
+  },
 
-return M
+  -- Advanced diff viewing (load early for neogit integration)
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+    cmd = {
+      "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles",
+      "DiffviewFocusFiles", "DiffviewRefresh", "DiffviewFileHistory"
+    },
+    opts = function()
+      return require("plugins.git.config.diffview")
+    end,
+    config = function(_, opts)
+      require("diffview").setup(opts)
+      require("plugins.git.integrations.diffview").setup()
+    end,
+  },
+
+  -- Main git interface (load after dependencies)
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    cmd = "Neogit",
+    keys = {
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit Status" },
+      { "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Neogit Commit" },
+      { "<leader>gp", "<cmd>Neogit push<cr>", desc = "Neogit Push" },
+      { "<leader>gP", "<cmd>Neogit pull<cr>", desc = "Neogit Pull" },
+    },
+    opts = function()
+      return require("plugins.git.config.neogit")
+    end,
+    config = function(_, opts)
+      require("neogit").setup(opts)
+      require("plugins.git.integrations.neogit").setup()
+    end,
+  },
+
+  -- Advanced git operations (load on demand)
+  {
+    "tpope/vim-fugitive",
+    dependencies = { "tpope/vim-rhubarb" }, -- GitHub integration
+    cmd = {
+      "Git", "GBrowse", "Gwrite", "Gread", "Gdiffsplit",
+      "Gvdiffsplit", "Gedit", "Gsplit", "Gvsplit", "Gtabedit"
+    },
+    keys = {
+      { "<leader>gB", "<cmd>GBlameDetailed<cr>", desc = "Git Blame Detailed" },
+      { "<leader>gC", "<cmd>GCompare<cr>", desc = "Git Compare" },
+      { "<leader>gO", "<cmd>GBrowse<cr>", desc = "Git Browse", mode = { "n", "v" } },
+    },
+    config = function()
+      require("plugins.git.integrations.fugitive").setup()
+    end,
+  },
+
+  -- Worktree management (optional, load on demand)
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>gw", function() require("telescope").extensions.git_worktree.git_worktrees() end, desc = "Git Worktrees" },
+      { "<leader>gW", function() require("telescope").extensions.git_worktree.create_git_worktree() end, desc = "Create Worktree" },
+    },
+    opts = function()
+      return require("plugins.git.config.worktree")
+    end,
+    config = function(_, opts)
+      require("git-worktree").setup(opts)
+      require("telescope").load_extension("git_worktree")
+      require("plugins.git.integrations.worktree").setup()
+    end,
+  },
+}
+
+-- Core orchestration plugin (handles keymaps and cross-plugin integration)
+local orchestration = {
+  "folke/which-key.nvim",
+  optional = true,
+  config = function()
+    require("plugins.git.core.orchestrator").setup()
+  end,
+}
+
+-- Health check and debugging utilities
+local utilities = {
+  "nvim-lua/plenary.nvim",
+  config = function()
+    require("plugins.git.core.health").setup()
+    require("plugins.git.core.commands").setup()
+  end,
+}
+
+-- Combine all plugin specifications
+table.insert(plugins, orchestration)
+table.insert(plugins, utilities)
+
+return plugins
