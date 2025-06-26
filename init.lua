@@ -1,4 +1,11 @@
 -------------------------------------------------------------------------------
+-- Neovim configuration file.
+-- This file is loaded by Neovim when it starts.
+-------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------
 -- VS Code and Neovim loaders
 
 if vim.g.vscode then          -- VSCode Neovim Extension.
@@ -10,6 +17,7 @@ else                          -- Ordinary Neovim
   require("core.keymaps")
   require("core.lazy")
 end
+
 
 
 -------------------------------------------------------------------------------
