@@ -1,0 +1,10 @@
+{
+  "diagnostics.globals": ["vim"],
+  "runtime.version": "LuaJIT",
+  "workspace.library": [
+    "$VIMRUNTIME/lua",
+    "~/.local/share/nvim/lazy/*/lua"
+  ],
+  "workspace.checkThirdParty": false,
+  "telemetry.enable": false
+}

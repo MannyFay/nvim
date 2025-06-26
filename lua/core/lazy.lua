@@ -34,10 +34,15 @@ require("lazy").setup({
   -- Alternate Toggler
   { import = "plugins.active.alternate_toggler" },
 
+
+
   ---------------------------------------------------------------------------
-  -- Copilot
-  { import = "plugins.active.copilot.copilot-chat" },
-  { import = "plugins.active.copilot.copilot" },
+  -- AI
+
+  { import = "plugins.active.ai.claude_code" },
+  { import = "plugins.active.ai.copilot" },
+  { import = "plugins.active.ai.copilot_chat" },
+
 
 
   ---------------------------------------------------------------------------
