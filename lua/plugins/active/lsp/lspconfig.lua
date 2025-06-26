@@ -76,18 +76,19 @@ return {
       end,
     })
 
-    local signs = {
+
+    local diagnostic_signs = {
       Error = " ",
       Warn  = " ",
       Hint  = " ",
       Info  = " ",
     }
 
-    -- for type, icon in pairs(signs) do
-    --   local name = "DiagnosticSign" .. type
-    --   vim.api.nvim_set_hl(0, name, {})  -- Optional: define color group if needed
-    --   vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-    -- end
+    -- Activate the diagnostic signs in the gutter column:
+    for type, icon in pairs(diagnostic_signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
 
 
 

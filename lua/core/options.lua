@@ -54,3 +54,36 @@ vim.o.undofile = true
 vim.opt.swapfile = false  -- Don't create swap files.
 vim.g.editorconfig = true -- Enable Neovims editorconfig functionality.
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+
+vim.diagnostic.config({
+  underline = {
+    [vim.diagnostic.severity.ERROR] = true,
+    [vim.diagnostic.severity.WARN] = true,    -- ← Warnings jetzt auch unterstrichen!
+    [vim.diagnostic.severity.INFO] = true,
+    [vim.diagnostic.severity.HINT] = true,
+  },
+
+  -- Zeige Virtual Text nur für wichtige Sachen
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+    spacing = 4,
+    prefix = "●",
+  },
+
+  -- Zeige Signs für alle Level
+  signs = {
+    severity = { min = vim.diagnostic.severity.HINT },
+  },
+
+  -- Andere nützliche Einstellungen
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
