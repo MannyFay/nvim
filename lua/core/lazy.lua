@@ -46,7 +46,7 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- JavaScript Environment
 
-  { import = "plugins.active.js-env.ts-worksheet" },
+  { import = "plugins.active.js-env.ts_worksheet" },
   { import = "plugins.active.js-env.typescript-tools" },
   { import = "plugins.active.js-env.type-checker" },
 

@@ -5,7 +5,7 @@
 -------------------------------------------------------------------------------
 
 return {
-  "typed-rocks/ts-worksheet-neovim",
+  "typed-rocks/ts-worksheet",
 
   -- Lazy loading configuration
   cmd = { "Tsw" },                    -- Load when :Tsw command is used
