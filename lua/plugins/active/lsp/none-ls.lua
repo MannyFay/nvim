@@ -21,11 +21,7 @@ return {
         null_ls.builtins.code_actions.gitsigns,    -- Code actions for Git operations at cursor position.
         null_ls.builtins.code_actions.refactoring, -- Code actions for refactoring operations at cursor position.
 
-        -- Formatters:
-        null_ls.builtins.formatting.biome, --JavaScript, TypeScript, JSON, HTML, Markdown, CSS and GraphQL.
-
         -- Linters:
-        null_ls.builtins.formatting.stylua,
         null_ls.builtins.completion.spell,
         null_ls.builtins.code_actions.textlint,            -- Linter for text and Markdown.
         null_ls.builtins.diagnostics.actionlint,           -- Linter for GitHub Actions workflow files.
@@ -44,6 +40,7 @@ return {
         null_ls.builtins.diagnostics.markdownlint,         -- Linter for Markdown.
         null_ls.builtins.diagnostics.phpcs,                -- Linter for PHP.
         null_ls.builtins.diagnostics.pylint,               -- Linter for Python.
+        null_ls.builtins.diagnostics.shellcheck,           -- Linter for shell scripts.
         null_ls.builtins.diagnostics.spectral,             -- Linter for JSON, YAML, OpenAPI files.
         null_ls.builtins.diagnostics.sqlfluff.with({       -- Linter for SQL.
           extra_args = { "--dialect", "mssql" },           -- change to your dialect

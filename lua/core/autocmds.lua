@@ -43,3 +43,51 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+
+-------------------------------------------------------------------------------
+-- Color Column for specific file types
+-- Shows vertical lines at 80 and 120 characters for Lua and PHP files
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "lua", "php" },
+  desc = "Set color columns at 80 and 120 characters for Lua and PHP files",
+  callback = function()
+    vim.opt_local.colorcolumn = "80,120"
+    vim.opt_local.textwidth = 120  -- Auto line wrap at 120 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+-- JavaScript
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "javascript",
+  desc = "Set color columns at 80 characters for JavaScript files",
+  callback = function()
+    vim.opt_local.colorcolumn = "80"
+    vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+-- TypeScript and React (TSX/JSX)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript", "typescriptreact", "javascriptreact" },
+  desc = "Set color column at 100 characters for TypeScript and React files",
+  callback = function()
+    vim.opt_local.colorcolumn = "100"
+    vim.opt_local.textwidth = 100  -- Auto line wrap at 100 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+-- Shell Scripts (bash, sh, zsh)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "sh", "bash", "zsh" },
+  desc = "Set color column at 80 characters for shell scripts",
+  callback = function()
+    vim.opt_local.colorcolumn = "80"
+    vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+

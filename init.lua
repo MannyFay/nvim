@@ -41,6 +41,7 @@ else                          -- Ordinary Neovim
   end
 
   require_safely("core.keymaps")
+  require_safely("core.autocmds")
 
     if not require_safely("core.lazy") then
     vim.notify("Plugins in /lua/core/lazy.lua failed to load", vim.log.levels.ERROR)

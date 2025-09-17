@@ -269,21 +269,40 @@ return {
             filetypes = { "sh", "bash", "zsh", "fish", "dash", "ksh" },
           })
         end,
+
+        -- Volar (Vue Language Server):
+        -- DISABLED: Conflicts with typescript-tools.nvim
+        -- Uncomment this handler and comment out typescript-tools if you need Vue support
+        -- ["volar"] = function()
+        --   lspconfig["volar"].setup({
+        --     capabilities = capabilities,
+        --     on_attach = setup_workspace_diagnostics,
+        --     filetypes = { "vue" },
+        --     init_options = {
+        --       typescript = {
+        --         tsdk = vim.fn.expand("~/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"),
+        --       },
+        --       vue = {
+        --         hybridMode = false,
+        --       },
+        --     },
+        --   })
+        -- end,
       })
     end
 
-    -- ESLint has always to be outside of Mason handlers:
-    lspconfig.eslint.setup({
-      capabilities = capabilities,
-      settings = { packageManager = "yarn" },
-      on_attach = function(client, bufnr)
-        setup_workspace_diagnostics(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = bufnr,
-          command = "EslintFixAll",
-        })
-      end,
-    })
+    -- ESLint disabled - using Biome instead
+    -- lspconfig.eslint.setup({
+    --   capabilities = capabilities,
+    --   settings = { packageManager = "yarn" },
+    --   on_attach = function(client, bufnr)
+    --     setup_workspace_diagnostics(client, bufnr)
+    --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --       buffer = bufnr,
+    --       command = "EslintFixAll",
+    --     })
+    --   end,
+    -- })
   end,
 }
 

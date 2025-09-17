@@ -25,7 +25,7 @@ vim.opt.splitright     = true -- Open new vertical split always below the curren
 vim.opt.iskeyword:append('-') -- Consider string-string as whole word.
 vim.opt.showmode      = false -- Don't show Vim modes.
 vim.opt.smartindent   = true -- Keep indentation in new line.
-vim.opt.textwidth     = 0 -- Disable hard wrapping.
+-- vim.opt.textwidth     = 0 -- Disable hard wrapping.
 vim.opt.title         = true -- Show invisible characters like spaces/tabs.
 vim.opt.list          = true -- Show invisible characters like spaces/tabs.
 vim.opt.listchars     = { tab = '▸ ', trail = '·' } -- Character to show for tabs and trailing spaces.
@@ -35,7 +35,7 @@ vim.opt.confirm       = true -- Ask for confirmation instead of error out if fil
 vim.o.compatible      = false -- Disable overwriting from Vi to Vim (needed by vim-polyglot plugin).
 vim.opt.backupdir:remove('.') -- Keep backups out of the current directory and save in ~.
 vim.opt.fileencoding = 'utf-8' -- Encoding written to a file.
-vim.opt.colorcolumn  = '80' -- Show visual guide line.
+-- vim.opt.colorcolumn  = '80' -- Show visual guide line.
 vim.opt.errorbells   = false -- Turn off all error bells.
 vim.opt.numberwidth  = 5 -- Set width of number column.
 --vim.opt.completeopt = { 'menu,menuone','noselect' },       -- Don't select any item in auto complete automatically (set in nvim-cmp.lua too).

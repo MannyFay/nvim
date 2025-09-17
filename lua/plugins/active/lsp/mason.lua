@@ -46,7 +46,7 @@ return {
     mason_lspconfig.setup({
       automatic_installation = true,
       ensure_installed = {                 -- List of LSP servers for mason to install.
-        'angularls',                       -- Angular language server.
+        -- 'angularls',                       -- Angular language server (temporarily disabled - not recognized by mason-lspconfig).
         'ansiblels',                       -- Ansible language server.
         'arduino_language_server',         -- Arduino language server.
         'azure_pipelines_ls',              -- Azure Pipelines language server.
@@ -91,9 +91,9 @@ return {
         'tailwindcss',   -- Tailwind CSS language server.
         'taplo',         -- TOML language server.
         'terraformls',   -- Terraform language server.
-        -- 'ts_ls',         -- JavaScript/TypeScript language server.
-        -- 'tsserver',                           -- JavaScript/TypeScript language server.
-        'volar',  -- Vue language server.
+        -- 'ts_ls',         -- JavaScript/TypeScript language server (disabled - using typescript-tools instead).
+        -- 'tsserver',                           -- JavaScript/TypeScript language server (disabled - using typescript-tools instead).
+        -- 'volar',  -- Vue language server (disabled - conflicts with typescript-tools).
         'yamlls', -- YAML language server.
         --'nginx_language_server',            -- NGINX language server.
         'vimls',  -- Vim language server.
@@ -121,12 +121,14 @@ return {
         -- "eslint-lsp",           -- JavaScript, TypeScript linter.
         "phpstan",              -- PHP linter.
         "pylint",               -- Python linter.
+        "shellcheck",           -- Shell script linter.
         "yamllint",             -- YAML linter.
 
         ----- Formatters:
+        "biome",           -- Fast JS/TS/JSON formatter.
         "black",           -- Python formatter.
         "blade-formatter", -- Laravel Blade formatter.
-        "prettierd",       -- Prettier formatter.
+        -- "prettierd",       -- Prettier formatter (disabled - using biome instead).
         --"stylua",           -- Lua formatter.
         "isort",           -- Python formatter.
         "pint",            -- PHP formatter.

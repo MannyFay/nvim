@@ -14,13 +14,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",                 -- Completion source for built-in LSP.
     "hrsh7th/cmp-nvim-lsp-signature-help",  -- CMP source to display function signatures with parameter explanation.
     "hrsh7th/cmp-nvim-lua",                 -- CMP source for Neovim Lua API.
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
-    },
     "saadparwaiz1/cmp_luasnip",  -- Required for autocompletion
-    -- "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim",      -- VS-Code like pictograms.
   },
   config = function()
@@ -39,9 +33,30 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-Tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<Space>"] = cmp.mapping(function(fallback)
+          if cmp.visible() and cmp.get_selected_entry() then
+            cmp.confirm({ select = false })
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         -- ["<Leader>es"] = cmp.mapping.confirm({ select = true }),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item({ select = false}), -- previous suggestion
-        ["<Tab>"]   = cmp.mapping.select_next_item({ select = false }), -- next suggestion
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          elseif luasnip.locally_jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         ["<C-q>"] = cmp.mapping.abort(), -- close completion window
         ["<C-j>"] = cmp.mapping.scroll_docs(4),
         ["<C-k>"] = cmp.mapping.scroll_docs(-4),
