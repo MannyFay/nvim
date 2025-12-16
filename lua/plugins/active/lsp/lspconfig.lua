@@ -12,7 +12,16 @@ return {
     { "mason.nvim", config = true },
     { "williamboman/mason-lspconfig.nvim", config = true },
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          -- Load luvit types when the `vim.uv` word is found:
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
     "artemave/workspace-diagnostics.nvim",
   },
 
