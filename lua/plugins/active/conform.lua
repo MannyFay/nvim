@@ -43,7 +43,9 @@ return {
       notify_no_formatters = true,  -- Conform will notify you when no formatters are available for the buffer.
       formatters           = {
         biome = {
-          command = "/opt/homebrew/bin/biome",
+          command = require("conform.util").find_executable({
+            "node_modules/.bin/biome",
+          }, "biome"),
           args = { "format", "--config-path", vim.fn.expand("~/.config/biome.json"), "--stdin-file-path", "$FILENAME" },
           stdin = true,
         },
@@ -53,23 +55,6 @@ return {
         -- },
       },
       log_level = vim.log.levels.DEBUG,
-    })
-
-
-    local group = vim.api.nvim_create_augroup("ConformAutoFormat", { clear = true })
-
-    vim.api.nvim_create_autocmd({"BufEnter", "BufLeave"}, {
-      group = group,
-      callback = function(args)
-        if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modifiable and vim.bo[args.buf].buftype == "" then
-          require("conform").format({
-            bufnr = args.buf,
-            lsp_fallback = true,
-            async = true,
-            timeout_ms = 10000,
-          })
-        end
-      end,
     })
 
     ---------------------------------------------------------------------------

@@ -58,20 +58,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- JavaScript
+-- 100 characters:
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "javascript",
-  desc = "Set color columns at 80 characters for JavaScript files",
-  callback = function()
-    vim.opt_local.colorcolumn = "80"
-    vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
-    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
-  end,
-})
-
--- TypeScript and React (TSX/JSX)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "typescriptreact", "javascriptreact" },
+  pattern = { "blade.php", "html", "typescriptreact", "javascriptreact", "twig" },
   desc = "Set color column at 100 characters for TypeScript and React files",
   callback = function()
     vim.opt_local.colorcolumn = "100"
@@ -80,10 +69,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Shell Scripts (bash, sh, zsh)
+-- 80 characters:
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "sh", "bash", "zsh" },
-  desc = "Set color column at 80 characters for shell scripts",
+  pattern = { "css", "sh", "bash", "zsh", "markdown", "javascript", "typescript" },
+  desc = "Set color column at 80 characters.",
   callback = function()
     vim.opt_local.colorcolumn = "80"
     vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters

@@ -77,7 +77,7 @@ local filename = {
 -- File indentation level component setup:
 local fileIndentationLevel = function()
   if vim.fn.winwidth(0) > 80 then
-    return 'SP:' .. vim.api.nvim_buf_get_option(0, 'shiftwidth')
+    return 'SP:' .. vim.bo[0].shiftwidth
   else
     return ''
   end

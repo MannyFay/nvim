@@ -78,9 +78,7 @@ return {
 
 
     ---------------------------------------------------------------------------
-    -- Diagnostic Highlighting
-
-    -- Diagnostic signs in the gutter column:
+    -- Diagnostic Configuration
     local diagnostic_signs = {
       Error = " ",
       Warn  = " ",
@@ -88,14 +86,15 @@ return {
       Info  = " ",
     }
 
-    -- Activate the diagnostic signs in the gutter column:
-    for type, icon in pairs(diagnostic_signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
-    -- Diagnostic virtual text configuration:
     vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
+          [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
+          [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
+          [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
+        },
+      },
       virtual_text = {
         spacing = 4,
       },

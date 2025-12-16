@@ -57,8 +57,6 @@ map({ 'n', }, '<', '<<', opts)                        -- Use only < for indent w
 map({ 'n', }, '>', '>>', opts)                        -- Use only > for indent width >>.
 map({ 'v', 'x' }, '<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
 map({ 'v', 'x' }, '>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
-map({ 'v', 'x' }, '<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
-map({ 'v', 'x' }, '>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
 map('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
 map('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
 map('n', '+', '<C-a>', opts)                                          -- Increment number under cursor.

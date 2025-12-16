@@ -50,7 +50,7 @@
     -- ... rest deiner config
   })
 
-  ---
+  ---------------------------------------------------------------------------------------------------------------------
   3. Deprecated vim.api.nvim_buf_get_option()
 
   Datei: lua/plugins/active/lualine.lua:80
@@ -62,7 +62,7 @@
   Empfehlung:
   return 'SP:' .. vim.bo[0].shiftwidth
 
-  ---
+  -----------------------------------------------------------------------------------------------------------
   4. Typo in Telescope-Keymaps
 
   Datei: lua/plugins/active/telescope/telescope.lua:151-155
@@ -73,7 +73,7 @@
 
   Empfehlung: Korrigiere alle reaquire zu require.
 
-  ---
+  --------------------------------------------------------------------------------------------------------------
   5. Doppelte Formatierungs-Autocmds
 
   Datei: lua/plugins/active/conform.lua:36-39 + 59-73
@@ -82,7 +82,7 @@
 
   Empfehlung: Entferne den manuellen Autocmd oder deaktiviere format_on_save.
 
-  ---
+  --------------------------------------------------------------------------------------------------------------
   6. Hardcoded Biome-Pfad
 
   Datei: lua/plugins/active/conform.lua:46
@@ -96,7 +96,7 @@
     "node_modules/.bin/biome",
   }, "biome"),
 
-  ---
+  -------------------------------------------------------------------------------------------------------------------------------
   7. Viele unnötige LSP-Server in ensure_installed
 
   Datei: lua/plugins/active/lsp/mason.lua:48-102
@@ -105,7 +105,7 @@
 
   Empfehlung: Reduziere auf die Server, die du tatsächlich verwendest. Das spart Speicherplatz und Mason-Update-Zeit.
 
-  ---
+  ------------------------------------------------------------------------------------------------------------------------------------------
   8. Doppelte Keybindings
 
   Datei: lua/core/keymaps.lua:58-61
@@ -119,7 +119,7 @@
 
   Empfehlung: Entferne die doppelten Zeilen.
 
-  ---
+  ------------------------------------------------------------------------------------------------------------------------------------------
   9. Performance: vim.cmd Autocmds
 
   Datei: lua/core/options.lua:44-45
@@ -136,7 +136,7 @@
     end,
   })
 
-  ---
+  ------------------------------------------------------------------------------------------------------------------------------------------
   10. Fehlende moderne Plugins
 
   Verglichen mit LazyVim und anderen modernen Configs fehlen dir einige nützliche Tools:
@@ -149,7 +149,7 @@
   | mini.nvim (optional)      | Sammlung nützlicher Mini-Plugins      |
   | nvim-lint                 | Asynchrones Linting (ergänzt conform) |
 
-  ---
+  ------------------------------------------------------------------------------------------------------------------------------------------
   11. blink.cmp als Alternative zu nvim-cmp
 
   blink.cmp ist eine neuere Alternative mit:

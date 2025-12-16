@@ -40,9 +40,12 @@ vim.opt.errorbells   = false -- Turn off all error bells.
 vim.opt.numberwidth  = 5 -- Set width of number column.
 --vim.opt.completeopt = { 'menu,menuone','noselect' },       -- Don't select any item in auto complete automatically (set in nvim-cmp.lua too).
 vim.opt.completeopt  = { 'menu,menuone' } -- Select first item in auto completion list.
--- vim.opt.formatoptions:remove('r')
-vim.cmd('autocmd BufEnter * set formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
-vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
+-- Don't insert current comment leader in new line.
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.spell       = true -- Enable spell checking.
 vim.opt.equalalways = true -- Enable/Disable automatic resizing of panes (does not work).
