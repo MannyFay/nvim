@@ -71,12 +71,45 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 80 characters:
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "css", "sh", "bash", "zsh", "markdown", "javascript", "typescript" },
+  pattern = { "css", "sh", "bash", "zsh", "markdown", "javascript", "typescript", "editorconfig" },
   desc = "Set color column at 80 characters.",
   callback = function()
     vim.opt_local.colorcolumn = "80"
     vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
     vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+
+-------------------------------------------------------------------------------
+-- JSONC (JSON with Comments) File Type Detection
+-- Many config files use JSON with comments (VS Code, Zed, TypeScript, etc.)
+-- This ensures proper syntax highlighting and LSP support without errors.
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = {
+    "*/.vscode/*.json",
+    "*/.vscode/**/*.json",
+    "*/zed/*.json",
+    "*/zed/**/*.json",
+    "tsconfig.json",
+    "tsconfig.*.json",
+    "jsconfig.json",
+    "jsconfig.*.json",
+    ".babelrc",
+    ".eslintrc",
+    ".eslintrc.json",
+    ".prettierrc",
+    ".prettierrc.json",
+    "launch.json",
+    "tasks.json",
+    "devcontainer.json",
+    "*/devcontainer.json",
+    ".swcrc",
+  },
+  desc = "Set filetype to jsonc for config files that support comments",
+  callback = function()
+    vim.bo.filetype = "jsonc"
   end,
 })
 

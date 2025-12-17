@@ -137,6 +137,14 @@ lazy_plugin_manager.setup({
   change_detection = {
     notify = false, -- Don't notify in command line about changed plugin files.
   },
+  ---------------------------------------
+  -- Uncomment this to enable local colorscheme development:
+  dev = {
+    path = "~/personal/github", -- Local plugin development path.
+    patterns = { "MannyFay" },  -- Load all MannyFay/* plugins from local path.
+    fallback = true,            -- Fallback to git if local plugin doesn't exist.
+  },
+  ---------------------------------------
   install = {
     colorscheme = {
       "mannydark",

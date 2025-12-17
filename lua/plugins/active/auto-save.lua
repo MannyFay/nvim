@@ -30,6 +30,11 @@ return {
 
       -- Function that determines whether to save the current buffer or not (true: if buffer is ok to be saved. false: if it's not ok to be saved.
       condition = function(buf)
+        -- Check if buffer is valid first (may have been closed during debounce delay)
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return false
+        end
+
         if vim.bo[buf].filetype == "harpoon" then  -- Don't save Harpoon buffers (leaves Harpoon window open).
           return false
         end

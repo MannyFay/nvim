@@ -100,18 +100,15 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = {
-            --       "rg",
-            --       "--files",
-            --       "--hidden",
-            --       "--no-ignore-vcs",
-            --       "-g",
-            --       "!**/.git/*",
-            --       "-g",
-            -- "!**/node_modules/*",
-            "**/node_modules/**/*",
-            --       "-g", "!**/.repro/*", -- just to hide .repro rtp
-          },
+          -- find_command = {
+          --   "rg",
+          --   "--files",
+          --   "--hidden",
+          --   "--no-ignore-vcs",
+          --   "-g", "!**/.git/*",
+          --   "-g", "!**/node_modules/*",
+          --   "-g", "!**/.repro/*",
+          -- },
           -- hidden = true,
           -- no_ignore = true,
           -- file_ignore_patterns = { },

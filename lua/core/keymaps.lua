@@ -236,6 +236,21 @@ keymap('n', '<Leader>tl', ':tabp<CR>', opts)               -- Go to previous tab
 
 
 ------------------------------------------------------------
+-- Colorscheme Development
+
+-- Reload mannydark colorscheme (clear cache and re-apply):
+vim.keymap.set('n', '<Leader>cr', function()
+  for name, _ in pairs(package.loaded) do
+    if name:match('^mannydark') then
+      package.loaded[name] = nil
+    end
+  end
+  vim.cmd.colorscheme('mannydark')
+  vim.notify('Colorscheme reloaded!', vim.log.levels.INFO)
+end, { desc = 'Reload mannydark colorscheme' })
+
+
+------------------------------------------------------------
 -- Hop Plugin
 
 -- Hop to character in (multiple) buffer:          <Leader>c
