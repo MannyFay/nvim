@@ -25,7 +25,7 @@ vim.opt.splitright     = true -- Open new vertical split always below the curren
 vim.opt.iskeyword:append('-') -- Consider string-string as whole word.
 vim.opt.showmode      = false -- Don't show Vim modes.
 vim.opt.smartindent   = true -- Keep indentation in new line.
-vim.opt.textwidth     = 0 -- Disable hard wrapping.
+-- vim.opt.textwidth     = 0 -- Disable hard wrapping.
 vim.opt.title         = true -- Show invisible characters like spaces/tabs.
 vim.opt.list          = true -- Show invisible characters like spaces/tabs.
 vim.opt.listchars     = { tab = '▸ ', trail = '·' } -- Character to show for tabs and trailing spaces.
@@ -35,14 +35,17 @@ vim.opt.confirm       = true -- Ask for confirmation instead of error out if fil
 vim.o.compatible      = false -- Disable overwriting from Vi to Vim (needed by vim-polyglot plugin).
 vim.opt.backupdir:remove('.') -- Keep backups out of the current directory and save in ~.
 vim.opt.fileencoding = 'utf-8' -- Encoding written to a file.
-vim.opt.colorcolumn  = '80' -- Show visual guide line.
+-- vim.opt.colorcolumn  = '80' -- Show visual guide line.
 vim.opt.errorbells   = false -- Turn off all error bells.
 vim.opt.numberwidth  = 5 -- Set width of number column.
 --vim.opt.completeopt = { 'menu,menuone','noselect' },       -- Don't select any item in auto complete automatically (set in nvim-cmp.lua too).
 vim.opt.completeopt  = { 'menu,menuone' } -- Select first item in auto completion list.
--- vim.opt.formatoptions:remove('r')
-vim.cmd('autocmd BufEnter * set formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
-vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro') -- Don't insert current comment leader in new line (only works in some files if pressing enter).
+-- Don't insert current comment leader in new line.
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.spell       = true -- Enable spell checking.
 vim.opt.equalalways = true -- Enable/Disable automatic resizing of panes (does not work).
@@ -54,3 +57,4 @@ vim.o.undofile = true
 vim.opt.swapfile = false  -- Don't create swap files.
 vim.g.editorconfig = true -- Enable Neovims editorconfig functionality.
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+

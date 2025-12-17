@@ -5,12 +5,13 @@
 -------------------------------------------------------------------------------
 
 
+
 -------------------------------------------------------------------------------
 -- Automatically install Lazy
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.fn.isdirectory(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -24,53 +25,56 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
+
 -------------------------------------------------------------------------------
 -- Load plugins
 -- (always load them separately in this list because debugging is way easier)
 
-require("lazy").setup({
+local lazy_plugin_manager = require("lazy")  -- Load Lazy plugin manager.
 
-  ---------------------------------------------------------------------------
-  -- Alternate Toggler
-  { import = "plugins.active.alternate_toggler" },
+lazy_plugin_manager.setup({
 
-
-  ---------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   -- AI
 
-  { import = "plugins.active.ai.claude.claude_code" },
-  { import = "plugins.active.ai.copilot.copilot-chat" },
-  { import = "plugins.active.ai.copilot.copilot" },
+  { import = "plugins.active.ai.claude_code" },
+  { import = "plugins.active.ai.copilot" },
+  { import = "plugins.active.ai.copilot_chat" },
+  { import = "plugins.active.ai.mcphub" },
 
 
-  ---------------------------------------------------------------------------
-  -- js-env
+
+  -----------------------------------------------------------------------------
+  -- JavaScript Environment
+
+  { import = "plugins.active.js-env.ts_worksheet" },
   { import = "plugins.active.js-env.typescript-tools" },
   { import = "plugins.active.js-env.type-checker" },
 
 
 
-  ---------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   -- Git
 
-  -- { import = "plugins.active.git" },
   { import = "plugins.active.git.fugitive" },
   { import = "plugins.active.git.gitsigns" },
   { import = "plugins.active.git.neogit" },
-  { import = "plugins.active.git.git_worktree" },
 
 
 
-  ---------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   -- Laravel
+
   { import = "plugins.active.laravel.laravel" },
   { import = "plugins.active.laravel.vim-blade" },
 
 
-  ---------------------------------------------------------------------------
+
+  -----------------------------------------------------------------------------
   -- LSP
-  { import = "plugins.active.lsp.mason" },
+
   { import = "plugins.active.lsp.lspconfig" },
+  { import = "plugins.active.lsp.mason" },
   { import = "plugins.active.lsp.otter" },
   -- { import = "plugins.active.lsp.lspsaga" },
   { import = "plugins.active.lsp.trouble" },
@@ -78,25 +82,35 @@ require("lazy").setup({
   -- { import = "plugins.active.lsp.none-ls" },
 
 
-  ---------------------------------------------------------------------------
+
+  -----------------------------------------------------------------------------
   -- Snippets
+
   { import = "plugins.active.snippets.luasnip" },
 
 
-  ---------------------------------------------------------------------------
+
+  -----------------------------------------------------------------------------
   -- Telescope
+
   { import = "plugins.active.telescope.telescope-undo" },
   { import = "plugins.active.telescope.telescope" },
 
 
-  ---------------------------------------------------------------------------
+
+  -----------------------------------------------------------------------------
   -- Treesitter
+
   { import = "plugins.active.treesitter.treesitter-auto-tag" },
   { import = "plugins.active.treesitter.treesitter-text-objects" },
   { import = "plugins.active.treesitter.treesitter" },
 
-  ---------------------------------------------------------------------------
+
+
+  -----------------------------------------------------------------------------
   -- General
+
+  { import = "plugins.active.alternate_toggler" },
   { import = "plugins.active.align" },
   { import = "plugins.active.auto-save" },
   { import = "plugins.active.autopairs" },
@@ -123,9 +137,18 @@ require("lazy").setup({
   change_detection = {
     notify = false, -- Don't notify in command line about changed plugin files.
   },
+  ---------------------------------------
+  -- Uncomment this to enable local colorscheme development:
+  dev = {
+    path = "~/personal/github", -- Local plugin development path.
+    patterns = { "MannyFay" },  -- Load all MannyFay/* plugins from local path.
+    fallback = true,            -- Fallback to git if local plugin doesn't exist.
+  },
+  ---------------------------------------
   install = {
     colorscheme = {
       "mannydark",
     },
   },
 })
+

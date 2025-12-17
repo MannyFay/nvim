@@ -26,10 +26,18 @@ return {
       },
       graph_style                  = "unicode", -- Possible: "ascii" (regular CLI), "unicode (https://github.com/rbong/vim-flog)" .
       git_services                 = {          -- To generate URL's for branch popup action "pull request".
-        ["azure.com"]     = "https://dev.azure.com/${owner}/_git/${repository}/pullrequestcreate?sourceRef=${branch_name}&targetRef=${target}",
-        ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
-        ["github.com"]    = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
-        ["gitlab.com"]    = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
+        ["azure.com"]     = {
+          pull_request = "https://dev.azure.com/${owner}/_git/${repository}/pullrequestcreate?sourceRef=${branch_name}&targetRef=${target}",
+        },
+        ["bitbucket.org"] = {
+          pull_request = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
+        },
+        ["github.com"]    = {
+          pull_request = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
+        },
+        ["gitlab.com"]    = {
+          pull_request = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
+        },
       },
       telescope_sorter             = function()                        -- Telescope sorter.
         return require("telescope").extensions.fzf.native_fzf_sorter() -- FZF as sorter.

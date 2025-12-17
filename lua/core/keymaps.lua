@@ -57,8 +57,6 @@ map({ 'n', }, '<', '<<', opts)                        -- Use only < for indent w
 map({ 'n', }, '>', '>>', opts)                        -- Use only > for indent width >>.
 map({ 'v', 'x' }, '<', '<gv', opts)                        -- Stay in visual mode after indent width <<.
 map({ 'v', 'x' }, '>', '>gv', opts)                        -- Stay in visual mode after indent width >>.
-map({ 'v', 'x' }, '<', '<gV', opts)                        -- Stay in visual mode after indent width <<.
-map({ 'v', 'x' }, '>', '>gV', opts)                        -- Stay in visual mode after indent width >>.
 map('n', '<Leader><Leader>==', 'ggvvG=', opts)              -- Auto indent the whole file.
 map('n', '~', 'g~l', opts)                                  -- Don't change the cursor position after case change.
 map('n', '+', '<C-a>', opts)                                          -- Increment number under cursor.
@@ -235,6 +233,21 @@ keymap('n', '<Leader>tl', ':tabp<CR>', opts)               -- Go to previous tab
 
 -- No key mappings defined.
 
+
+
+------------------------------------------------------------
+-- Colorscheme Development
+
+-- Reload mannydark colorscheme (clear cache and re-apply):
+vim.keymap.set('n', '<Leader>cr', function()
+  for name, _ in pairs(package.loaded) do
+    if name:match('^mannydark') then
+      package.loaded[name] = nil
+    end
+  end
+  vim.cmd.colorscheme('mannydark')
+  vim.notify('Colorscheme reloaded!', vim.log.levels.INFO)
+end, { desc = 'Reload mannydark colorscheme' })
 
 
 ------------------------------------------------------------

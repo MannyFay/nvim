@@ -14,7 +14,7 @@ return {
     },
     build = "make tiktoken",
     opts  = {
-      debug                    = true,                                              -- Enable debugging
+      debug                    = false,                                             -- Enable debugging
       proxy                    = nil,                                               -- [protocol://]host[:port] Use this proxy
       allow_insecure           = false,                                             -- Allow insecure server connections
       -- system_prompt            = prompts.COPILOT_INSTRUCTIONS,                      -- System prompt to use
@@ -35,11 +35,14 @@ return {
       history_path             = vim.fn.stdpath('data') .. '/copilotchat_history',  -- Default path to stored history
       callback                 = nil,                                               -- Callback to use when ask response is received
     },
+    config = function(_, opts)
+      local chat = require("CopilotChat")
+      chat.setup(opts)
 
+      ---------------------------------------------------------------------------
+      -- Key Mappings
 
-    ---------------------------------------------------------------------------
-    ----- Key Mappings
-
-    vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>'),  -- Open Copilot Chat.
+      vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>')  -- Open Copilot Chat
+    end,
   },
 }

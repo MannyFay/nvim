@@ -97,35 +97,32 @@ return {
             ['<C-p-d>'] = actions.preview_scrolling_down,
           },
         },
-        pickers              = {
-          find_files = {
-            find_command = {
-              --       "rg",
-              --       "--files",
-              --       "--hidden",
-              --       "--no-ignore-vcs",
-              --       "-g",
-              --       "!**/.git/*",
-              --       "-g",
-              -- "!**/node_modules/*",
-              "**/node_modules/**/*",
-              --       "-g", "!**/.repro/*", -- just to hide .repro rtp
-            },
-            -- hidden = true,
-            -- no_ignore = true,
-            -- file_ignore_patterns = { },
-          },
+      },
+      pickers = {
+        find_files = {
+          -- find_command = {
+          --   "rg",
+          --   "--files",
+          --   "--hidden",
+          --   "--no-ignore-vcs",
+          --   "-g", "!**/.git/*",
+          --   "-g", "!**/node_modules/*",
+          --   "-g", "!**/.repro/*",
+          -- },
+          -- hidden = true,
+          -- no_ignore = true,
+          -- file_ignore_patterns = { },
         },
-        extensions           = {
-          file_browser = {
-            theme = "dropdown",
-            hijack_netrw = true,
-            mappings = {
-              ['i'] = {},
-              ['n'] = {
-                ['ni'] = fb_actions.create,
-                ['P'] = fb_actions.goto_parent_dir,
-              },
+      },
+      extensions = {
+        file_browser = {
+          theme = "dropdown",
+          hijack_netrw = true,
+          mappings = {
+            ['i'] = {},
+            ['n'] = {
+              ['ni'] = fb_actions.create,
+              ['P'] = fb_actions.goto_parent_dir,
             },
           },
         },
@@ -148,10 +145,10 @@ return {
     map("n", "<leader>fr", "<cmd>Telescope oldfiles hidden=true<cr>", { desc = "Fuzzy find recent files" })
     map("n", "<leader>ft", "<cmd>Telescope live_grep hidden=true<cr>", { desc = "Find string in cwd" })
     map("n", "<leader>fs", "<cmd>Telescope grep_string hidden=true<cr>", { desc = "Find string under cursor" })
-    map("n", "<leader>fb", '<cmd>lua reaquire("telescope.builtin").buffers()<cr>', { desc = "Show buffers" })
-    map("n", "<leader>fh", '<cmd>lua reaquire("telescope.builtin").help_tags()<cr>', { desc = "Show help tags" })
-    map("n", "<leader>fc", '<cmd>lua reaquire("telescope.builtin").resume()<cr>', { desc = "Show resume" })
-    map("n", "<leader>fd", '<cmd>lua reaquire("telescope.builtin").diagnostics()<cr>', { desc = "Show diagnostic results" })
-    map("n", "<leader>fe", '<cmd>lua reaquire("telescope").extensions.file_browser({ path = "%:p:h", cwd = telescope_buffer_dir(), respect_git_ignore = false, hidden = true, grouped = true, previewer = false, initial_mode = "normal" })<cr>', { desc = "Show diagnostic results" })
+    map("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>', { desc = "Show buffers" })
+    map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Show help tags" })
+    map("n", "<leader>fc", '<cmd>lua require("telescope.builtin").resume()<cr>', { desc = "Show resume" })
+    map("n", "<leader>fd", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', { desc = "Show diagnostic results" })
+    map("n", "<leader>fe", '<cmd>lua require("telescope").extensions.file_browser({ path = "%:p:h", cwd = telescope_buffer_dir(), respect_git_ignore = false, hidden = true, grouped = true, previewer = false, initial_mode = "normal" })<cr>', { desc = "Show diagnostic results" })
   end,
 }

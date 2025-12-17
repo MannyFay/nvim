@@ -33,6 +33,7 @@ return {
         "graphql",
         "html",
         "json",
+        "jsonc",
         "javascript",
         "lua",
         "markdown",

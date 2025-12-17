@@ -6,11 +6,11 @@
 
 return {
   "tpope/vim-fugitive",
-
-
-  ---------------------------------------------------------------------------
-  --- Key Mappings
-
-  vim.api.nvim_buf_set_keymap( 0, "n", "<leader>gb", ":Git blame<CR>", { noremap = true, silent = true, nowait = true }),  -- Open Git blame window.
+  config = function()
+    ---------------------------------------------------------------------------
+    --- Key Mappings
+    
+    vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { noremap = true, silent = true, desc = "Git blame" })
+  end,
 }
 

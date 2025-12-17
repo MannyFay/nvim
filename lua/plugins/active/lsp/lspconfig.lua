@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
--- File: lspconfig.lua
--- Description: LSP configuration with mason-lspconfig integration
+-- LSP Config Plugin
 -- https://github.com/neovim/nvim-lspconfig
+-- Language Server Protocol client configurations for various LSP servers.
 -------------------------------------------------------------------------------
 
 return {
@@ -9,36 +9,34 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    { "mason.nvim", config = true },
+    { "williamboman/mason-lspconfig.nvim", config = true },
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
-    "artemave/workspace-diagnostics.nvim",
-  },
-  config = function()
-    local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    local keymap = vim.keymap
-
-    -- Diagnostic configuration
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = " ",
-          [vim.diagnostic.severity.WARN] = " ",
-          [vim.diagnostic.severity.HINT] = " ",
-          [vim.diagnostic.severity.INFO] = " ",
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          -- Load luvit types when the `vim.uv` word is found:
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
       },
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    })
+    },
+    "artemave/workspace-diagnostics.nvim",
+  },
 
+  config = function()
+    local lspconfig = require("lspconfig")
+    local mason_lspconfig = require("mason-lspconfig")
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- LSP Attach
+    ---------------------------------------------------------------------------
+    -- LSP Attach Keymaps
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
       callback = function(ev)
+        local keymap = vim.keymap
         local opts = { buffer = ev.buf, silent = true }
 
         -- Navigation
@@ -53,7 +51,7 @@ return {
         opts.desc = "Show LSP type definitions"
         keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
-        -- Actions
+        -- Code actions
         opts.desc = "See available code actions"
         keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
         opts.desc = "Smart rename"
@@ -64,14 +62,12 @@ return {
         keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-
-        -- Fixed deprecated warnings
         opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+        keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
         opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+        keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
 
-        -- Help
+        -- Help and documentation
         opts.desc = "Show documentation for what is under cursor"
         keymap.set("n", "K", vim.lsp.buf.hover, opts)
         opts.desc = "Restart LSP"
@@ -79,133 +75,242 @@ return {
       end,
     })
 
-    -- Capabilities
-    local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- Configure individual servers
-    local function default_on_attach(client, bufnr)
-      require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+
+    ---------------------------------------------------------------------------
+    -- Diagnostic Configuration
+    local diagnostic_signs = {
+      Error = " ",
+      Warn  = " ",
+      Hint  = " ",
+      Info  = " ",
+    }
+
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
+          [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
+          [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
+          [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
+        },
+      },
+      virtual_text = {
+        spacing = 4,
+      },
+      underline = {
+        [vim.diagnostic.severity.ERROR] = true,
+        [vim.diagnostic.severity.WARN] = true,
+        [vim.diagnostic.severity.INFO] = true,
+        [vim.diagnostic.severity.HINT] = true,
+      },
+      update_in_insert = false,
+      severity_sort = true,
+      float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = true,
+        header = "",
+        prefix = "",
+      },
+    })
+
+
+
+    ---------------------------------------------------------------------------
+    -- Helper function for workspace diagnostics
+
+    local function setup_workspace_diagnostics(client, bufnr)
+      if client.name ~= "copilot" then
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+      end
     end
 
-    -- Tailwind CSS
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" },
-      settings = {
-        tailwindCSS = {
-          experimental = {
-            classRegex = {
-              { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*)" }
+
+
+    ---------------------------------------------------------------------------
+    -- Mason LSP Setup Handlers
+
+    if mason_lspconfig.setup_handlers then
+      mason_lspconfig.setup_handlers({
+
+        -- Default handler for all LSP servers:
+        function(server_name)
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+          })
+        end,
+
+        -- Tailwind CSS:
+        ["tailwindcss"] = function()
+          lspconfig["tailwindcss"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = {
+              "html", "css", "scss", "javascript", "javascriptreact",
+              "typescript", "typescriptreact", "svelte"
             },
-          },
-        },
-      },
-    })
+            settings = {
+              tailwindCSS = {
+                experimental = {
+                  classRegex = {
+                    { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*)" }
+                  },
+                },
+              },
+            },
+          })
+        end,
 
-    -- Svelte
-    lspconfig["svelte"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        default_on_attach(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePost", {
-          pattern = { "*.js", "*.ts" },
-          callback = function(ctx)
-            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-          end,
-        })
-      end,
-    })
+        -- Svelte:
+        ["svelte"] = function()
+          lspconfig["svelte"].setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              setup_workspace_diagnostics(client, bufnr)
+              vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = { "*.js", "*.ts" },
+                callback = function(ctx)
+                  client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+                end,
+              })
+            end,
+          })
+        end,
 
-    -- GraphQL
-    lspconfig["graphql"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    })
+        -- GraphQL:
+        ["graphql"] = function()
+          lspconfig["graphql"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+          })
+        end,
 
-    -- Emmet
-    lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    })
+        -- Emmet:
+        ["emmet_ls"] = function()
+          lspconfig["emmet_ls"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+          })
+        end,
 
-    -- Lua
-    lspconfig["lua_ls"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      settings = {
-        Lua = {
-          diagnostics = { globals = { "vim" } },
-          completion = { callSnippet = "Replace" },
-        },
-      },
-    })
+        -- Lua:
+        ["lua_ls"] = function()
+          lspconfig["lua_ls"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { "vim" },
+                  unusedLocalExclude = { "_*" },
+                },
+                completion = { callSnippet = "Replace" },
+                workspace = {
+                  checkThirdParty = false,
+                },
+                telemetry = { enable = false },
+              },
+            },
+          })
+        end,
 
-    -- PHP
-    lspconfig["intelephense"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "php", "blade" },
-      settings = {
-        intelephense = {
-          filetypes = { "php", "blade" },
-          files = {
-            associations = { "*.php", "*.blade.php" },
-            maxSize = 5000000,
-          },
-        },
-      },
-    })
+        -- PHP:
+        ["intelephense"] = function()
+          lspconfig["intelephense"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "php", "blade" },
+            settings = {
+              intelephense = {
+                filetypes = { "php", "blade" },
+                files = {
+                  associations = { "*.php", "*.blade.php" },
+                  maxSize = 5000000,
+                },
+              },
+            },
+          })
+        end,
 
-    -- CSS
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "css", "scss", "less", "sass" },
-      settings = {
-        css = { validate = true, lint = { unknownAtRules = "ignore" } },
-        scss = { validate = true, lint = { unknownAtRules = "ignore" } },
-        less = { validate = true, lint = { unknownAtRules = "ignore" } },
-      },
-    })
+        -- CSS:
+        ["cssls"] = function()
+          lspconfig["cssls"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "css", "scss", "less", "sass" },
+            settings = {
+              css = { validate = true, lint = { unknownAtRules = "ignore" } },
+              scss = { validate = true, lint = { unknownAtRules = "ignore" } },
+              less = { validate = true, lint = { unknownAtRules = "ignore" } },
+            },
+          })
+        end,
 
-    -- Ansible
-    lspconfig["ansiblels"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "yaml", "yml", "ansible" },
-    })
+        -- Ansible:
+        ["ansiblels"] = function()
+          lspconfig["ansiblels"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "yaml", "yml", "ansible" },
+          })
+        end,
 
-    -- YAML
-    lspconfig["yamlls"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "yaml", "yml" },
-    })
+        -- YAML:
+        ["yamlls"] = function()
+          lspconfig["yamlls"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "yaml", "yml" },
+          })
+        end,
 
-    -- Bash
-    lspconfig["bashls"].setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { "sh", "bash", "zsh", "fish", "dash", "ksh" },
-    })
+        -- Bash:
+        ["bashls"] = function()
+          lspconfig["bashls"].setup({
+            capabilities = capabilities,
+            on_attach = setup_workspace_diagnostics,
+            filetypes = { "sh", "bash", "zsh", "fish", "dash", "ksh" },
+          })
+        end,
 
-    -- Copilot (without workspace diagnostics)
-    lspconfig["copilot"].setup({
-      capabilities = capabilities,
-    })
+        -- Volar (Vue Language Server):
+        -- DISABLED: Conflicts with typescript-tools.nvim
+        -- Uncomment this handler and comment out typescript-tools if you need Vue support
+        -- ["volar"] = function()
+        --   lspconfig["volar"].setup({
+        --     capabilities = capabilities,
+        --     on_attach = setup_workspace_diagnostics,
+        --     filetypes = { "vue" },
+        --     init_options = {
+        --       typescript = {
+        --         tsdk = vim.fn.expand("~/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"),
+        --       },
+        --       vue = {
+        --         hybridMode = false,
+        --       },
+        --     },
+        --   })
+        -- end,
+      })
+    end
 
-    -- ESLint
-    lspconfig.eslint.setup({
-      settings = { packageManager = "yarn" },
-      on_attach = function(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = bufnr,
-          command = "EslintFixAll",
-        })
-      end,
-    })
+    -- ESLint disabled - using Biome instead
+    -- lspconfig.eslint.setup({
+    --   capabilities = capabilities,
+    --   settings = { packageManager = "yarn" },
+    --   on_attach = function(client, bufnr)
+    --     setup_workspace_diagnostics(client, bufnr)
+    --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --       buffer = bufnr,
+    --       command = "EslintFixAll",
+    --     })
+    --   end,
+    -- })
   end,
 }
+

@@ -1,30 +1,41 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
--- Add any additional autocmds here
+-------------------------------------------------------------------------------
+-- Auto Commands Configuration
+-- Custom auto commands for improved development experience.
+-- Auto commands are automatically loaded on the VeryLazy event.
+-------------------------------------------------------------------------------
 
--- Define an autocmd group for the blade workaround
-local augroup = vim.api.nvim_create_augroup("lsp_blade_workaround", { clear = true })
 
--- Autocommand to temporarily change 'blade' filetype to 'php' when opening for LSP server activation
+
+-------------------------------------------------------------------------------
+-- Laravel Blade LSP Workaround
+-- Problem: LSP servers don't recognize .blade.php files properly
+-- Solution: Temporarily set file type to 'php' for LSP, then back to 'blade'
+
+local blade_group = vim.api.nvim_create_augroup("LaravelBladeWorkaround", { clear = true })
+
+-- Step 1: Initially treat .blade.php files as PHP for LSP attachment:
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup,
+  group = blade_group,
   pattern = "*.blade.php",
+  desc = "Set blade files to PHP filetype for LSP attachment",
   callback = function()
     vim.bo.filetype = "php"
   end,
 })
 
--- Additional autocommand to switch back to 'blade' after LSP has attached
+-- Step 2: After LSP attaches, switch back to blade file type for proper syntax highlighting:
 vim.api.nvim_create_autocmd("LspAttach", {
+  group = blade_group,
   pattern = "*.blade.php",
+  desc = "Switch back to blade filetype after LSP attachment",
   callback = function(args)
     vim.schedule(function()
-      -- Check if the attached client is 'phpactor'
-      for _, client in ipairs(vim.lsp.get_active_clients()) do
-        if client.name == "intelephense" and client.attached_buffers[args.buf] then
-          vim.api.nvim_buf_set_option(args.buf, "filetype", "blade")
-          -- update treesitter parser to blade
-          vim.api.nvim_buf_set_option(args.buf, "syntax", "blade")
+      -- Check if Intelephense (PHP LSP) has attached to this buffer:
+      for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf })) do
+        if client.name == "intelephense" then
+          -- Switch back to blade for proper syntax highlighting:
+          vim.bo[args.buf].filetype = "blade"
+          vim.bo[args.buf].syntax   = "blade"
           break
         end
       end
@@ -32,10 +43,73 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- make $ part of the keyword for php.
-vim.api.nvim_exec(
-  [[
-autocmd FileType php set iskeyword+=$
-]],
-  false
-)
+
+-------------------------------------------------------------------------------
+-- Color Column for specific file types
+-- Shows vertical lines at 80 and 120 characters for Lua and PHP files
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "lua", "php" },
+  desc = "Set color columns at 80 and 120 characters for Lua and PHP files",
+  callback = function()
+    vim.opt_local.colorcolumn = "80,120"
+    vim.opt_local.textwidth = 120  -- Auto line wrap at 120 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+-- 100 characters:
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "blade.php", "html", "typescriptreact", "javascriptreact", "twig" },
+  desc = "Set color column at 100 characters for TypeScript and React files",
+  callback = function()
+    vim.opt_local.colorcolumn = "100"
+    vim.opt_local.textwidth = 100  -- Auto line wrap at 100 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+-- 80 characters:
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "css", "sh", "bash", "zsh", "markdown", "javascript", "typescript", "editorconfig" },
+  desc = "Set color column at 80 characters.",
+  callback = function()
+    vim.opt_local.colorcolumn = "80"
+    vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
+    vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+
+-------------------------------------------------------------------------------
+-- JSONC (JSON with Comments) File Type Detection
+-- Many config files use JSON with comments (VS Code, Zed, TypeScript, etc.)
+-- This ensures proper syntax highlighting and LSP support without errors.
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = {
+    "*/.vscode/*.json",
+    "*/.vscode/**/*.json",
+    "*/zed/*.json",
+    "*/zed/**/*.json",
+    "tsconfig.json",
+    "tsconfig.*.json",
+    "jsconfig.json",
+    "jsconfig.*.json",
+    ".babelrc",
+    ".eslintrc",
+    ".eslintrc.json",
+    ".prettierrc",
+    ".prettierrc.json",
+    "launch.json",
+    "tasks.json",
+    "devcontainer.json",
+    "*/devcontainer.json",
+    ".swcrc",
+  },
+  desc = "Set filetype to jsonc for config files that support comments",
+  callback = function()
+    vim.bo.filetype = "jsonc"
+  end,
+})
+
