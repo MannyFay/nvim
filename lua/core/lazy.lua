@@ -45,6 +45,12 @@ lazy_plugin_manager.setup({
 
 
   -----------------------------------------------------------------------------
+  -- Collaboration
+
+  { import = "plugins.active.teamtype" },
+
+
+  -----------------------------------------------------------------------------
   -- JavaScript Environment
 
   { import = "plugins.active.js-env.ts_worksheet" },
