@@ -47,7 +47,15 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- Collaboration
 
-  { import = "plugins.active.teamtype" },
+  { import = "plugins.active.collaboration.teamtype" },
+
+
+
+  -----------------------------------------------------------------------------
+  -- Formatting
+
+  { import = "plugins.active.formatting.conform" },
+
 
 
   -----------------------------------------------------------------------------
@@ -55,6 +63,7 @@ lazy_plugin_manager.setup({
 
   { import = "plugins.active.js-env.ts_worksheet" },
   { import = "plugins.active.js-env.typescript-tools" },
+
   { import = "plugins.active.js-env.type-checker" },
 
 
@@ -123,7 +132,6 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.colorizer" },
   { import = "plugins.active.colorscheme" },
   { import = "plugins.active.comment" },
-  { import = "plugins.active.conform" },
   { import = "plugins.active.harpoon" },
   { import = "plugins.active.indent-blankline" },
   { import = "plugins.active.lastplace" },
