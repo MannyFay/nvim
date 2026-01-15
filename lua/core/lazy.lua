@@ -99,6 +99,15 @@ lazy_plugin_manager.setup({
 
 
   -----------------------------------------------------------------------------
+  -- Markdown
+
+  { import = "plugins.active.markdown.obsidian" },
+  { import = "plugins.active.markdown.peek" },
+  { import = "plugins.active.markdown.render_markdown" },
+
+
+
+  -----------------------------------------------------------------------------
   -- Snippets
 
   { import = "plugins.active.snippets.luasnip" },
@@ -141,8 +150,6 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.maximizer" },
   { import = "plugins.active.nvim-cmp" },
   { import = "plugins.active.nvim-tree" },
-  { import = "plugins.active.obsidian" },
-  { import = "plugins.active.peek" },
   { import = "plugins.active.surround" },
   { import = "plugins.active.todo-comments" },
   { import = "plugins.active.vim-illuminate" },
