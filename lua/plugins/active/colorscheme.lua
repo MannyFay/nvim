@@ -15,7 +15,29 @@ return {
   ---------------------------------------
   priority = 1000, -- Load color scheme before loading anything else.
   config = function()
-    vim.cmd("colorscheme mannydark")
+    require("mannydark").setup({
+      -- Style: "dark" | "bright" | "red-green-dark" | "red-green-bright"
+      style = "dark",
+      -- Transparent background
+      transparent = false,
+      -- Dim inactive windows
+      dim_inactive = false,
+      -- Apply colors to :terminal
+      terminal_colors = true,
+      -- Per-element styling
+      styles = {
+        comments  = { italic = false, bold = false },
+        keywords  = {},
+        functions = {},
+        variables = {},
+        strings   = {},
+        types     = {},
+      },
+      -- Override colors: function(colors) colors.blue = "#0000FF" end
+      on_colors = nil,
+      -- Override highlights: function(hl, colors) hl.Normal = { fg = colors.white } end
+      on_highlights = nil,
+    })
   end,
 }
 
