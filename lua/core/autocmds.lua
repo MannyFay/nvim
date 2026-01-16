@@ -107,8 +107,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
       -- formatoptions: t=auto-wrap, q=allow gq, n=recognize lists
       vim.bo[buf].formatoptions = "tqn"
 
-      -- Simpler pattern for markdown lists
-      vim.bo[buf].formatlistpat = [[^\s*[-*+]\s\+\|^\s*\d\+\.\s\+]]
+      -- Pattern for markdown lists: checkboxes, bullets, numbered
+      -- Order matters: checkbox pattern first (more specific), then bullets, then numbers
+      vim.bo[buf].formatlistpat = [[^\s*[-*+] \[[ xX]\]\|^\s*[-*+]\s\+\|^\s*\d\+\.\s\+]]
 
       -- Clear comments to avoid interference
       vim.bo[buf].comments = ""
