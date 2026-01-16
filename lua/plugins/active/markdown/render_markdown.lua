@@ -327,7 +327,7 @@ return {
       -- ordered_icons = function(ctx) return ctx.index .. '.' end,
       ordered_icons = 'empty', -- 'empty' to disable
       -- Left padding
-      left_pad = 2,
+      left_pad = 0,
       -- Right padding
       right_pad = 0,
       -- Highlight group
@@ -349,9 +349,9 @@ return {
       -- Replace bullet with checkbox (true = no bullet shown)
       bullet = false,
       -- Left padding
-      left_pad = 2,
+      left_pad = 0,
       -- Right padding
-      right_pad = 1,
+      right_pad = 0,
       -- Unchecked checkbox [ ]
       unchecked = {
         icon = '󰄱 ',
