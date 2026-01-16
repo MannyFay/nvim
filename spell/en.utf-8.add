@@ -1297,3 +1297,6 @@ filetype
 buftype
 buflisted
 jsoncstyleguide
+hsplit
+tostring
+func

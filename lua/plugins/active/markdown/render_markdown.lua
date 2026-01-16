@@ -41,7 +41,7 @@ return {
     nested = true,
     -- Additional change events to trigger re-render: 'InsertLeave', 'TextChanged', etc.
     change_events = {},
-    -- Restart treesitter highlighter on attach (fixes some rendering issues)
+  -- Restart treesitter highlighter on attach (fixes some rendering issues)
     restart_highlighter = false,
 
     -----------------------------------------------------------------------
