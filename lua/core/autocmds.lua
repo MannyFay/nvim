@@ -100,14 +100,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
       -- No hard-wrap
       vim.bo[buf].textwidth = 0
 
-      -- Visual guide
-      vim.wo.colorcolumn = "100"
+      -- No visual guide for markdown
+      vim.wo.colorcolumn = ""
 
       -- Soft-wrap: visual wrapping without inserting newlines
       vim.wo.wrap = true
       vim.wo.linebreak = true  -- Wrap at word boundaries
       vim.wo.breakindent = true  -- Preserve indentation on wrapped lines
-      vim.wo.breakindentopt = "shift:2"  -- Extra indent for wrapped lines
+      vim.wo.breakindentopt = "shift:2"  -- Indent wrapped lines
+      vim.bo[buf].formatlistpat = [[^\s*[-*+]\s\[[ xX]\]\s\|^\s*[-*+]\s\|^\s*\d\+[.)]\s\+]]  -- Recognize checkboxes and lists
     end)
   end,
 })
