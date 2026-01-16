@@ -104,6 +104,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.markdown.obsidian" },
   { import = "plugins.active.markdown.peek" },
   { import = "plugins.active.markdown.render_markdown" },
+  { import = "plugins.active.markdown.wrapwidth" },
 
 
 

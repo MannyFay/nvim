@@ -82,37 +82,32 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -------------------------------------------------------------------------------
--- Markdown: Hard-wrap at 100 with proper list indentation
--- Uses BufEnter + vim.schedule to run AFTER all plugins
+-- Markdown: Soft-wrap only (no hard line breaks)
+-- Long lines in file, but displayed nicely in both Neovim and Obsidian
 
 local markdown_group = vim.api.nvim_create_augroup("MarkdownSettings", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   group = markdown_group,
   pattern = "*.md",
-  desc = "Markdown hard-wrap at 100 characters",
+  desc = "Markdown soft-wrap settings",
   callback = function()
     vim.schedule(function()
       local buf = vim.api.nvim_get_current_buf()
       local ft = vim.bo[buf].filetype
       if ft ~= "markdown" then return end
 
-      vim.bo[buf].textwidth = 100
+      -- No hard-wrap
+      vim.bo[buf].textwidth = 0
+
+      -- Visual guide
       vim.wo.colorcolumn = "100"
+
+      -- Soft-wrap: visual wrapping without inserting newlines
       vim.wo.wrap = true
-      vim.wo.linebreak = true
-      vim.wo.breakindent = true
-      vim.wo.breakindentopt = "shift:2"
-
-      -- formatoptions: t=auto-wrap, q=allow gq, n=recognize lists
-      vim.bo[buf].formatoptions = "tqn"
-
-      -- Pattern for markdown lists: checkboxes, bullets, numbered
-      -- Order matters: checkbox pattern first (more specific), then bullets, then numbers
-      vim.bo[buf].formatlistpat = [[^\s*[-*+] \[[ xX]\]\|^\s*[-*+]\s\+\|^\s*\d\+\.\s\+]]
-
-      -- Clear comments to avoid interference
-      vim.bo[buf].comments = ""
+      vim.wo.linebreak = true  -- Wrap at word boundaries
+      vim.wo.breakindent = true  -- Preserve indentation on wrapped lines
+      vim.wo.breakindentopt = "shift:2"  -- Extra indent for wrapped lines
     end)
   end,
 })
