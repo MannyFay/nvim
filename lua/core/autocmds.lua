@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
       vim.wo.wrap = true
       vim.wo.linebreak = true  -- Wrap at word boundaries
       vim.wo.breakindent = true  -- Preserve indentation on wrapped lines
-      vim.wo.breakindentopt = "shift:2"  -- Indent wrapped lines
+      vim.wo.breakindentopt = "shift:4"  -- Compromise between bullets (2) and checkboxes (6)
       vim.bo[buf].formatlistpat = [[^\s*[-*+]\s\[[ xX]\]\s\|^\s*[-*+]\s\|^\s*\d\+[.)]\s\+]]  -- Recognize checkboxes and lists
     end)
   end,
