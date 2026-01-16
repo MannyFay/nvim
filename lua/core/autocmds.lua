@@ -71,12 +71,48 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 80 characters:
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "css", "sh", "bash", "zsh", "markdown", "javascript", "typescript", "editorconfig" },
+  pattern = { "css", "sh", "bash", "zsh", "javascript", "typescript", "editorconfig" },
   desc = "Set color column at 80 characters.",
   callback = function()
     vim.opt_local.colorcolumn = "80"
     vim.opt_local.textwidth = 80  -- Auto line wrap at 80 characters
     vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+  end,
+})
+
+
+-------------------------------------------------------------------------------
+-- Markdown: Hard-wrap at 100 with proper list indentation
+-- Uses BufEnter + vim.schedule to run AFTER all plugins
+
+local markdown_group = vim.api.nvim_create_augroup("MarkdownSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = markdown_group,
+  pattern = "*.md",
+  desc = "Markdown hard-wrap at 100 characters",
+  callback = function()
+    vim.schedule(function()
+      local buf = vim.api.nvim_get_current_buf()
+      local ft = vim.bo[buf].filetype
+      if ft ~= "markdown" then return end
+
+      vim.bo[buf].textwidth = 100
+      vim.wo.colorcolumn = "100"
+      vim.wo.wrap = true
+      vim.wo.linebreak = true
+      vim.wo.breakindent = true
+      vim.wo.breakindentopt = "shift:2"
+
+      -- formatoptions: t=auto-wrap, q=allow gq, n=recognize lists
+      vim.bo[buf].formatoptions = "tqn"
+
+      -- Simpler pattern for markdown lists
+      vim.bo[buf].formatlistpat = [[^\s*[-*+]\s\+\|^\s*\d\+\.\s\+]]
+
+      -- Clear comments to avoid interference
+      vim.bo[buf].comments = ""
+    end)
   end,
 })
 

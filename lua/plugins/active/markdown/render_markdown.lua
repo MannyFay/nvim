@@ -229,15 +229,15 @@ return {
       -- Languages to disable background for
       disable_background = { 'diff' },
       -- Width of code block: 'full' | 'block'
-      width = 'full',
+      width = 'block',
       -- Left margin (columns)
-      left_margin = 0,
+      left_margin = 2,
       -- Left padding inside code block
-      left_pad = 0,
+      left_pad = 2,
       -- Right padding inside code block
-      right_pad = 0,
+      right_pad = 2,
       -- Minimum width of code block
-      min_width = 0,
+      min_width = 100,
       -- Border style: 'hide' | 'thin' | 'thick' | 'none'
       border = 'hide',
       -- Character for language border
@@ -287,7 +287,7 @@ return {
       -- Character to repeat for dash line
       icon = '─',
       -- Width: 'full' | number (columns)
-      width = 'full',
+      width = 100,
       -- Left margin (columns)
       left_margin = 0,
       -- Render priority (nil = auto)
