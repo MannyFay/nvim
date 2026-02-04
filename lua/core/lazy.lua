@@ -104,7 +104,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.markdown.obsidian" },
   { import = "plugins.active.markdown.peek" },
   { import = "plugins.active.markdown.render_markdown" },
-  { import = "plugins.active.markdown.wrapwidth" },
+  -- { import = "plugins.active.markdown.wrapwidth" },
 
 
 
@@ -152,7 +152,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.nvim-cmp" },
   { import = "plugins.active.nvim-tree" },
   { import = "plugins.active.surround" },
-  { import = "plugins.active.todo-comments" },
+  { import = "plugins.active.todo_comments" },
   { import = "plugins.active.vim-illuminate" },
   { import = "plugins.active.plantuml_preview" },
 }, {

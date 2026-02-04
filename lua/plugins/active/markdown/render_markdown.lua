@@ -11,6 +11,38 @@ return {
     pcall(function()
       require('mannydark.highlighting.plugins.render_markdown').setupHighlighting()
     end)
+
+    -- Force remove bold from headings (override any defaults)
+    local colors = require('mannydark.palette')
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH1', { fg = colors.purple, bold = false })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH2', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH3', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH4', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH5', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH6', { fg = colors.blue, bold = false })
+
+    -- Also override the standard markdown heading highlights (treesitter/syntax)
+    vim.api.nvim_set_hl(0, '@markup.heading.1.markdown', { fg = colors.purple, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.heading.2.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.heading.3.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.heading.4.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.heading.5.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.heading.6.markdown', { fg = colors.blue, bold = false })
+
+    -- Remove bold from list markers (bullets and ordered numbers)
+    vim.api.nvim_set_hl(0, 'RenderMarkdownBullet', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.list.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.list.numbered.markdown', { fg = colors.blue, bold = false })
+    vim.api.nvim_set_hl(0, '@markup.list.unnumbered.markdown', { fg = colors.blue, bold = false })
+
+    -- Bold text (**content**) - blue and bold
+    vim.api.nvim_set_hl(0, '@markup.strong', { fg = colors.blue, bold = true })
+    vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline', { fg = colors.blue, bold = true })
+
+    -- Inline code (`content`) - green text, keep background
+    local code_hl = vim.api.nvim_get_hl(0, { name = 'RenderMarkdownCodeInline' })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownCodeInline', { fg = colors.green, bg = code_hl.bg })
+    vim.api.nvim_set_hl(0, '@markup.raw.markdown_inline', { fg = colors.green, bg = code_hl.bg })
   end,
   opts = {
     -----------------------------------------------------------------------
@@ -231,7 +263,7 @@ return {
       -- Width of code block: 'full' | 'block'
       width = 'block',
       -- Left margin (columns)
-      left_margin = 2,
+      left_margin = 0,
       -- Left padding inside code block
       left_pad = 2,
       -- Right padding inside code block
@@ -319,23 +351,23 @@ return {
     bullet = {
       -- Enable bullet point rendering
       enabled = true,
-      -- Render modes (false = inherit from top-level)
-      render_modes = false,
-      -- Icons for unordered list levels
-      icons = { '●', '○', '◆', '◇' },
-      -- Function or table for ordered list icons
-      -- ordered_icons = function(ctx) return ctx.index .. '.' end,
-      ordered_icons = 'empty', -- 'empty' to disable
-      -- Left padding
-      left_pad = 0,
-      -- Right padding
-      right_pad = 0,
-      -- Highlight group
-      highlight = 'RenderMarkdownBullet',
-      -- Scope highlight groups per level
-      scope_highlight = {},
-      -- Scope render priority (nil = auto)
-      scope_priority = nil,
+      -- -- Render modes (false = inherit from top-level)
+      -- render_modes = false,
+      -- -- Icons for unordered list levels
+      -- icons = { '●', '○', '◆', '◇' },
+      -- -- Function or table for ordered list icons
+      -- -- ordered_icons = function(ctx) return ctx.index .. '.' end,
+      -- ordered_icons = 'empty', -- 'empty' to disable
+      -- -- Left padding
+      -- left_pad = 0,
+      -- -- Right padding
+      -- right_pad = 0,
+      -- -- Highlight group
+      -- highlight = 'RenderMarkdownBullet',
+      -- -- Scope highlight groups per level
+      -- scope_highlight = {},
+      -- -- Scope render priority (nil = auto)
+      -- scope_priority = nil,
     },
 
     -----------------------------------------------------------------------

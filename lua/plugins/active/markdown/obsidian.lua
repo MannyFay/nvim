@@ -262,7 +262,7 @@ return {
     -- UI (Markdown rendering in Neovim)
 
     ui = {
-      enable = true, -- Colors defined in mannydark colorscheme
+      enable = false, -- Disabled: render-markdown.nvim handles rendering (both UIs cause freezes)
       update_debounce = 200,
       max_file_length = 5000,
       checkboxes = {

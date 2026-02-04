@@ -19,7 +19,6 @@ return {
             "typescript",
             "html",
             "css",
-            "markdown",
             "yaml",
             "sh",
             "bash",

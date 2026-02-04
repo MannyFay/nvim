@@ -36,7 +36,7 @@ return {
         auto_trigger = true,
         debounce     = 75,     -- (Milliseconds) Delay before suggestions are shown.
         keymap       = {       -- Key mappings in insert mode (be careful which keys you choose - insert mode ;) ).
-          accept  = '<right>', -- Right arrow key to accept suggestion.
+          accept  = false,     -- Handled manually below with fallback to cursor movement.
           -- accept_word = '<leader>cw',  -- Leader + cw to accept word.
           -- accept_line = '<leader>cl',  -- Leader + cl to accept line.
           next    = '<down>', -- Down arrow key to show next suggestion.
@@ -70,5 +70,16 @@ return {
       copilot_node_command  = vim.fn.exepath("node"), -- Node.js version must be higher than 16.x.
       server_opts_overrides = nil,
     })
+
+    ---------------------------------------------------------------------------
+    -- Custom keymap: Accept suggestion if visible, otherwise move cursor right
+    local suggestion = require('copilot.suggestion')
+    vim.keymap.set('i', '<Right>', function()
+      if suggestion.is_visible() then
+        suggestion.accept()
+      else
+        return '<Right>'
+      end
+    end, { expr = true, noremap = true })
   end,
 }
