@@ -63,9 +63,9 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- JavaScript Environment
 
-  { import = "plugins.active.js-env.ts_worksheet" },
-  { import = "plugins.active.js-env.typescript-tools" },
-  { import = "plugins.active.js-env.type-checker" },
+  { import = "plugins.active.js_env.ts_worksheet" },
+  { import = "plugins.active.js_env.typescript_tools" },
+  { import = "plugins.active.js_env.type_checker" },
 
 
 
@@ -84,7 +84,7 @@ lazy_plugin_manager.setup({
   -- Laravel
 
   { import = "plugins.active.laravel.laravel" },
-  { import = "plugins.active.laravel.vim-blade" },
+  { import = "plugins.active.laravel.vim_blade" },
 
 
 
@@ -97,9 +97,9 @@ lazy_plugin_manager.setup({
   -- /inactive:
   -- { import = "plugins.active.lsp.lspsaga" },
   { import = "plugins.active.lsp.trouble" },
-  { import = "plugins.active.lsp.workspace-diagnostics" },
+  { import = "plugins.active.lsp.workspace_diagnostics" },
   -- /inactive:
-  -- { import = "plugins.active.lsp.none-ls" },
+  -- { import = "plugins.active.lsp.none_ls" },
 
 
 
@@ -122,7 +122,7 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- Telescope
 
-  { import = "plugins.active.telescope.telescope-undo" },
+  { import = "plugins.active.telescope.telescope_undo" },
   { import = "plugins.active.telescope.telescope" },
 
 
@@ -130,8 +130,8 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- Treesitter
 
-  { import = "plugins.active.treesitter.treesitter-auto-tag" },
-  { import = "plugins.active.treesitter.treesitter-text-objects" },
+  { import = "plugins.active.treesitter.treesitter_auto_tag" },
+  { import = "plugins.active.treesitter.treesitter_text_objects" },
   { import = "plugins.active.treesitter.treesitter" },
 
 
@@ -141,24 +141,25 @@ lazy_plugin_manager.setup({
 
   { import = "plugins.active.alternate_toggler" },
   { import = "plugins.active.align" },
-  { import = "plugins.active.auto-save" },
+  { import = "plugins.active.auto_save" },
   { import = "plugins.active.autopairs" },
   { import = "plugins.active.colorizer" },
   { import = "plugins.active.colorscheme" },
   { import = "plugins.active.comment" },
   { import = "plugins.active.harpoon" },
-  { import = "plugins.active.indent-blankline" },
+  { import = "plugins.active.indent_blankline" },
   { import = "plugins.active.lastplace" },
-  { import = "plugins.active.live-share" },
-  -- { import = "plugins.active.local-highlight" },
+  -- /inactive:
+  -- { import = "plugins.active.collaboration.live_share" },
+  -- { import = "plugins.active.local_highlight" },
   { import = "plugins.active.lualine" },
   { import = "plugins.active.maximizer" },
-  { import = "plugins.active.nvim-cmp" },
-  { import = "plugins.active.nvim-tree" },
+  { import = "plugins.active.nvim_cmp" },
+  { import = "plugins.active.nvim_tree" },
   { import = "plugins.active.surround" },
   { import = "plugins.active.todo_comments" },
-  { import = "plugins.active.vim-illuminate" },
-  { import = "plugins.active.which-key" },
+  { import = "plugins.active.vim_illuminate" },
+  { import = "plugins.active.which_key" },
   { import = "plugins.active.plantuml_preview" },
 }, {
   change_detection = {
