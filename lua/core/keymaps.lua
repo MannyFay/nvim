@@ -124,7 +124,7 @@ vim.keymap.set('n', '<Leader>jl', 'J', opts)          -- Join line below with wh
 
 
 -- Start tmux sessionizer:
-vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/personal/github/dotfiles/cli-tools/tmux/scripts/tmux_sessionizer.sh<CR>')
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/.config/tmux/scripts/tmux_sessionizer.sh<CR>')
 
 ------------------------------------------------------------
 -- Scrolling

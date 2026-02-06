@@ -19,6 +19,7 @@ return {
             "typescript",
             "html",
             "css",
+            "markdown",
             "yaml",
             "sh",
             "bash",
@@ -29,35 +30,8 @@ return {
       },
     })
 
-    -- Automatically populate diagnostics when the LSP client attaches:
-    local function on_attach(client, bufnr)
-      workspace_diagnostics.populate_workspace_diagnostics(client, bufnr)
-    end
-
-    -- Auto-command for Lsp-Attach to call on_attach:
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("WorkspaceDiagnosticsGroup", {}),
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-        -- Attach diagnostics for all LSP clients:
-        if client and client.name ~= "copilot" then
-          on_attach(client, ev.buf)
-        end
-
-
-
-        -- if client then
-        --   on_attach(client, ev.buf) --  <-- This is the original code.
-        --   -- workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
-        --   -- Special handling for Copilot:
-        --   -- if client.name == "copilot" then
-        --   --   workspace_diagnostics.populate_workspace_diagnostics(client, ev.buf)
-        --   -- end
-        -- end
-
-      end,
-    })
+    -- NOTE: Auto-loading on LspAttach is disabled because it blocks file opening
+    -- in large projects (~10k files). Use <space>x to manually populate instead.
 
 
     ---------------------------------------------------------------------------
@@ -71,10 +45,6 @@ return {
             require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
           end
         end
-
-        -- for _, client in ipairs(vim.lsp.get_clients()) do
-        --   require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
-        -- end
       end,
       desc = "Populate workspace diagnostics"
     })

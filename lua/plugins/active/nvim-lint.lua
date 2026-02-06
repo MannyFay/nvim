@@ -11,14 +11,22 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
-      sh                 = { "shellcheck" },
-      bash               = { "shellcheck" },
-      zsh                = { "shellcheck" },
-      yaml               = { "yamllint" },
-      python             = { "pylint" },
-      php                = { "phpstan" },
-      ["yaml.github"]    = { "actionlint" },
-      ["yaml.githubaction"] = { "actionlint" },
+      sh                     = { "shellcheck" },
+      bash                   = { "shellcheck" },
+      zsh                    = { "shellcheck" },
+      yaml                   = { "yamllint" },
+      python                 = { "pylint" },
+      php                    = { "phpstan" },
+      java                   = { "checkstyle" },
+      cmake                  = { "cmakelint" },
+      dockerfile             = { "hadolint" },
+      markdown               = { "markdownlint" },
+      css                    = { "stylelint" },
+      scss                   = { "stylelint" },
+      less                   = { "stylelint" },
+      ansible                = { "ansible_lint" },
+      ["yaml.ansible"]       = { "ansible_lint" },
+      ["yaml.githubaction"]  = { "actionlint" },
     }
 
     -- Actionlint for GitHub workflow files.
@@ -34,6 +42,7 @@ return {
       group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
       callback = function()
         lint.try_lint()
+        lint.try_lint("codespell") -- Run codespell on all filetypes.
       end,
     })
 

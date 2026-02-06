@@ -45,6 +45,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 -------------------------------------------------------------------------------
+-- PHP: Make $ part of the keyword (useful for variable selection)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "php",
+  desc = "Include $ in keyword characters for PHP",
+  callback = function()
+    vim.opt_local.iskeyword:append("$")
+  end,
+})
+
+
+-------------------------------------------------------------------------------
 -- Color Column for specific file types
 -- Shows vertical lines at 80 and 120 characters for Lua and PHP files
 
@@ -144,5 +156,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   callback = function()
     vim.bo.filetype = "jsonc"
   end,
+})
+
+
+-------------------------------------------------------------------------------
+-- Prevent ansible-lint from running on GitHub workflow YAML files
+
+vim.filetype.add({
+  pattern = {
+    [".*/%.github/workflows/.*%.yml"] = "yaml",
+    [".*/%.github/workflows/.*%.yaml"] = "yaml",
+  },
 })
 

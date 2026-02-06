@@ -128,7 +128,7 @@ return {
         "biome",           -- Fast JS/TS/JSON formatter.
         "black",           -- Python formatter.
         "blade-formatter", -- Laravel Blade formatter.
-        -- "prettierd",       -- Prettier formatter (disabled - using biome instead).
+        "prettierd",          -- Prettier formatter (fallback for non-Biome projects).
         --"stylua",           -- Lua formatter.
         "isort",           -- Python formatter.
         "pint",            -- PHP formatter.

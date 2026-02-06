@@ -20,6 +20,22 @@ vim.opt.background     = 'dark' -- Apply the color set to dark screens.
 vim.opt.signcolumn     = 'yes' -- Always show the sign column, otherwise it would shift the text each time.
 vim.opt.backspace      = 'indent,eol,start' -- Allow backspace on indent, end of line or insert mode start position.
 vim.opt.clipboard      = 'unnamedplus' -- Use clipboard of OS.
+
+-- WSL2 clipboard integration via win32yank:
+if vim.fn.has('wsl') == 1 then
+  vim.g.clipboard = {
+    name = 'win32yank-wsl',
+    copy = {
+      ['+'] = 'win32yank.exe -i --crlf',
+      ['*'] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+      ['+'] = 'win32yank.exe -o --lf',
+      ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 0,
+  }
+end
 vim.opt.splitbelow     = true -- Open new horizontal split always below the current.
 vim.opt.splitright     = true -- Open new vertical split always below the current.
 vim.opt.iskeyword:append('-') -- Consider string-string as whole word.
@@ -55,6 +71,12 @@ vim.opt.mouse = 'a' -- Enable mouse support.
 vim.o.undofile = true
 -- nvim_list_uis()[0]
 vim.opt.swapfile = false  -- Don't create swap files.
+vim.opt.autoread = true   -- Automatically reload files changed outside of Neovim.
+
+-- Auto-reload files when focus returns or buffer is entered:
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "silent! checktime",
+})
 vim.g.editorconfig = true -- Enable Neovims editorconfig functionality.
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 
