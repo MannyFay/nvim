@@ -274,7 +274,7 @@ return {
     filesystem_watchers = {   -- File system watcher to watch for changes.
       enable         = true,  -- true: Enable file system watcher.
       debounce_delay = 50,    -- (milliseconds) Debounce time for file system watcher.
-      ignore_dirs    = {},    -- List of Vim regex for absolute directory paths to ignore.
+      ignore_dirs    = { "node_modules", ".react-router", "build", "dist" },
     },
     actions = {                                             -- Actions behavior.
       use_system_clipboard = true,                          -- true: Use system clipboard for copy and paste.

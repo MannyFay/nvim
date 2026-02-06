@@ -4,13 +4,22 @@
 -- Plugin for writing and navigating Obsidian vaults.
 -------------------------------------------------------------------------------
 
+-- Vault path per platform:
+local vault_path
+if vim.fn.has("macunix") == 1 then
+  vault_path = vim.fn.expand("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/notebook")
+else
+  vault_path = vim.fn.expand("~/Documents/notebook")
+end
+
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
   lazy = true,
+  cond = vim.env.MACHINE_TYPE ~= "work-vds", -- Disable on work machine.
   event = {
-    "BufReadPre /Volumes/Users/manny/Library/Mobile Documents/iCloud~md~obsidian/Documents/notebook/**.md",
-    "BufNewFile /Volumes/Users/manny/Library/Mobile Documents/iCloud~md~obsidian/Documents/notebook/**.md",
+    "BufReadPre " .. vault_path .. "/**.md",
+    "BufNewFile " .. vault_path .. "/**.md",
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -25,7 +34,7 @@ return {
     workspaces = {
       {
         name = "notebook",
-        path = "/Volumes/Users/manny/Library/Mobile Documents/iCloud~md~obsidian/Documents/notebook",
+        path = vault_path,
       },
     },
 

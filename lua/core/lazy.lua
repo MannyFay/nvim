@@ -41,6 +41,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.ai.copilot" },
   { import = "plugins.active.ai.copilot_chat" },
   { import = "plugins.active.ai.mcphub" },
+  -- /inactive:
   -- { import = "plugins.active.ai.aider" },
 
 
@@ -64,7 +65,6 @@ lazy_plugin_manager.setup({
 
   { import = "plugins.active.js-env.ts_worksheet" },
   { import = "plugins.active.js-env.typescript-tools" },
-
   { import = "plugins.active.js-env.type-checker" },
 
 
@@ -72,8 +72,10 @@ lazy_plugin_manager.setup({
   -----------------------------------------------------------------------------
   -- Git
 
+  { import = "plugins.active.git.diffview" },
   { import = "plugins.active.git.fugitive" },
   { import = "plugins.active.git.gitsigns" },
+  { import = "plugins.active.git.git_worktree" },
   { import = "plugins.active.git.neogit" },
 
 
@@ -92,9 +94,11 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.lsp.lspconfig" },
   { import = "plugins.active.lsp.mason" },
   { import = "plugins.active.lsp.otter" },
+  -- /inactive:
   -- { import = "plugins.active.lsp.lspsaga" },
   { import = "plugins.active.lsp.trouble" },
   { import = "plugins.active.lsp.workspace-diagnostics" },
+  -- /inactive:
   -- { import = "plugins.active.lsp.none-ls" },
 
 
@@ -105,7 +109,6 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.markdown.obsidian" },
   { import = "plugins.active.markdown.peek" },
   { import = "plugins.active.markdown.render_markdown" },
-  -- { import = "plugins.active.markdown.wrapwidth" },
 
 
 
@@ -155,6 +158,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.surround" },
   { import = "plugins.active.todo_comments" },
   { import = "plugins.active.vim-illuminate" },
+  { import = "plugins.active.which-key" },
   { import = "plugins.active.plantuml_preview" },
 }, {
   change_detection = {
