@@ -41,6 +41,7 @@ lazy_plugin_manager.setup({
   { import = "plugins.active.ai.copilot" },
   { import = "plugins.active.ai.copilot_chat" },
   { import = "plugins.active.ai.mcphub" },
+  -- { import = "plugins.active.ai.aider" },
 
 
 
