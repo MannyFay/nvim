@@ -12,7 +12,6 @@ return {
   config = function()
     local tsc = require('tsc')
     local utils = require('tsc.utils')
-    local tsconfig_path = utils.find_nearest_tsconfig() or false
 
     tsc.setup({
       auto_open_qflist = false,
@@ -22,23 +21,15 @@ return {
       use_trouble_qflist = true,  -- Use Trouble plugin as quickfix list.
       use_diagnostics = true,  -- Show errors also in Nvim-Tree.
       run_as_monorepo = false,
-      -- bin_path = utils.find_tsc_bin(),
       bin_path = require('tsc.utils').find_tsc_bin(),
       enable_progress_notifications = false,
       enable_error_notifications = false,
       flags = {
         noEmit = true,  -- Run type-checker only.
-        -- project = function()
-        --   return utils.find_nearest_tsconfig()
-        -- end,
-       project = tsconfig_path,
---           project = function()
---     local config = utils.find_nearest_tsconfig()
---     return config or false  -- Set to `false` if config is not found
---   end,
---         project = utils.find_nearest_tsconfig and function()
---   return utils.find_nearest_tsconfig()
--- end or false,
+        project = function()
+          local configs = utils.find_nearest_tsconfig()
+          return configs[1] or false
+        end,
         watch = true,
       },
       hide_progress_notifications_from_history = true,

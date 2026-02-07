@@ -15,6 +15,15 @@ return {
   config = function()
     local ts_tools     = require("typescript-tools")
 
+    -- Auto-organize imports on save for TypeScript/JavaScript files
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("TSToolsOrganizeImports", { clear = true }),
+      pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+      callback = function()
+        vim.cmd("TSToolsOrganizeImports sync")
+      end,
+    })
+
     ts_tools.setup({
       -- The following snippet is for TypeScript-Tools plugin linting function.
       -- It is turned off here because ESLint is already configured as a linter.
