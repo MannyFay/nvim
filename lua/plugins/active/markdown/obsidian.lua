@@ -78,8 +78,8 @@ return {
     ---------------------------------------------------------------------------
     -- Frontmatter (YAML header)
 
-    disable_frontmatter = true,  -- Don't use the frontmatter note header feature.
     frontmatter = {
+      enabled = false,  -- Don't use the frontmatter note header feature.
       sort = { "id", "aliases", "tags" },
     },
 
@@ -272,21 +272,20 @@ return {
 
     ui = {
       enable = false, -- Disabled: render-markdown.nvim handles rendering (both UIs cause freezes)
-      update_debounce = 200,
-      max_file_length = 5000,
-      checkboxes = {
+    },
+
+    ---------------------------------------------------------------------------
+    -- Checkboxes
+
+    checkbox = {
+      order = { " ", "x", ">", "~", "!" },
+      markers = {
         [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
         ["x"] = { char = "", hl_group = "ObsidianDone" },
         [">"] = { char = "", hl_group = "ObsidianRightArrow" },
         ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
         ["!"] = { char = "", hl_group = "ObsidianImportant" },
       },
-      bullets = { char = "•", hl_group = "ObsidianBullet" },
-      external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
-      reference_text = { hl_group = "ObsidianRefText" },
-      highlight_text = { hl_group = "ObsidianHighlightText" },
-      tags = { hl_group = "ObsidianTag" },
-      block_ids = { hl_group = "ObsidianBlockID" },
       -- hl_groups defined in mannydark.nvim/lua/mannydark/highlighting/plugins/obsidian.lua
     },
 
@@ -303,22 +302,13 @@ return {
     },
 
     ---------------------------------------------------------------------------
-    -- Callbacks
-
-    -- Follow URLs (external links)
-    follow_url_func = function(url)
-      vim.ui.open(url)
-    end,
-
-    -- Follow images
-    follow_img_func = function(img)
-      vim.ui.open(img)
-    end,
-
-    ---------------------------------------------------------------------------
     -- Obsidian App Integration
 
-    open_app_foreground = false,
+    open = {
+      func = function(uri)
+        vim.ui.open(uri)
+      end,
+    },
   },
 
   config = function(_, opts)
