@@ -230,6 +230,56 @@ return {
         next_year_link = function()
           return "[[" .. (tonumber(os.date("%Y")) + 1) .. "]]"
         end,
+        -- {{current_week}} - Current week (YYYY-WNN)
+        current_week = function()
+          return os.date("%Y-W%V")
+        end,
+        -- {{prev_worklog_link}} - [[YYYY-WNN-vds-workday-log]] link to previous week
+        prev_worklog_link = function()
+          local prev = os.time() - (7 * 86400)
+          return "[[" .. os.date("%Y-W%V", prev) .. "-vds-workday-log]]"
+        end,
+        -- {{next_worklog_link}} - [[YYYY-WNN-vds-workday-log]] link to next week
+        next_worklog_link = function()
+          local next = os.time() + (7 * 86400)
+          return "[[" .. os.date("%Y-W%V", next) .. "-vds-workday-log]]"
+        end,
+        -- {{week_mon}} through {{week_sun}} - Dates for each day of the current week
+        week_mon = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - wday_offset * 86400)
+        end,
+        week_tue = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 1) * 86400)
+        end,
+        week_wed = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 2) * 86400)
+        end,
+        week_thu = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 3) * 86400)
+        end,
+        week_fri = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 4) * 86400)
+        end,
+        week_sat = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 5) * 86400)
+        end,
+        week_sun = function()
+          local t = os.date("*t")
+          local wday_offset = (t.wday - 2) % 7
+          return os.date("%Y-%m-%d", os.time() - (wday_offset - 6) * 86400)
+        end,
       },
     },
 
@@ -272,6 +322,13 @@ return {
 
     ui = {
       enable = false, -- Disabled: render-markdown.nvim handles rendering (both UIs cause freezes)
+    },
+
+    ---------------------------------------------------------------------------
+    -- Footer (virtual text at bottom of notes)
+
+    footer = {
+      enabled = false,
     },
 
     ---------------------------------------------------------------------------
@@ -367,6 +424,17 @@ return {
       open_periodic_note("yearly", filename, "yearly-nvim.md")
     end, { desc = "Open yearly note" })
 
+    -- :ObsidianWorklog - Open/create workday log (2026-W06-vds-workday-log.md)
+    vim.api.nvim_create_user_command("ObsidianWorklog", function()
+      local filename = os.date("%Y-W%V") .. "-vds-workday-log"
+      local path = vault_path .. "/2-areas/work/vds/work-logs/" .. filename .. ".md"
+      local is_new = is_new_file(path)
+      vim.cmd("edit " .. path)
+      if is_new then
+        vim.cmd("Obsidian template workday-log-nvim.md")
+      end
+    end, { desc = "Open workday log" })
+
     -- :ObsidianNewNote - Create new note with template
     vim.api.nvim_create_user_command("ObsidianNewNote", function()
       vim.ui.input({ prompt = "Note title: " }, function(title)
@@ -385,11 +453,13 @@ return {
     -- Keymaps
 
     local keymap = vim.keymap.set
+    keymap("n", "gf", "<cmd>Obsidian follow_link<cr>", { desc = "Obsidian Follow Link" })
     keymap("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Obsidian Daily" })
     keymap("n", "<leader>ow", "<cmd>ObsidianWeekly<cr>", { desc = "Obsidian Weekly" })
     keymap("n", "<leader>om", "<cmd>ObsidianMonthly<cr>", { desc = "Obsidian Monthly" })
     keymap("n", "<leader>oq", "<cmd>ObsidianQuarterly<cr>", { desc = "Obsidian Quarterly" })
     keymap("n", "<leader>oy", "<cmd>ObsidianYearly<cr>", { desc = "Obsidian Yearly" })
+    keymap("n", "<leader>ol", "<cmd>ObsidianWorklog<cr>", { desc = "Obsidian Worklog" })
     keymap("n", "<leader>on", "<cmd>ObsidianNewNote<cr>", { desc = "Obsidian New Note" })
     keymap("n", "<leader>oo", "<cmd>ObsidianOpen<cr>", { desc = "Obsidian Open in App" })
     keymap("n", "<leader>os", "<cmd>ObsidianSearch<cr>", { desc = "Obsidian Search" })

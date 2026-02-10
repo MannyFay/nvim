@@ -651,7 +651,7 @@ return {
 
     yaml = {
       -- Enable YAML frontmatter rendering
-      enabled = true,
+      enabled = false,
       -- Render modes (false = inherit from top-level)
       render_modes = false,
     },
