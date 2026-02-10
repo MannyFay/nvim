@@ -16,7 +16,7 @@ return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
   lazy = true,
-  cond = vim.env.MACHINE_TYPE ~= "work-vds", -- Disable on work machine.
+  -- cond = vim.env.MACHINE_TYPE ~= "work-vds", -- Disable on work machine.
   event = {
     "BufReadPre " .. vault_path .. "/**.md",
     "BufNewFile " .. vault_path .. "/**.md",
