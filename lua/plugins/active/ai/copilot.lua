@@ -78,8 +78,9 @@ return {
       if suggestion.is_visible() then
         suggestion.accept()
       else
-        return '<Right>'
+        local key = vim.api.nvim_replace_termcodes('<Right>', true, false, true)
+        vim.api.nvim_feedkeys(key, 'n', false)
       end
-    end, { expr = true, noremap = true })
+    end, { noremap = true })
   end,
 }

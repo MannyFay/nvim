@@ -23,7 +23,7 @@ return {
         javascriptreact = { "biome", "prettierd", stop_after_first = true },
         liquid          = { "prettierd" },
         lua             = { "stylua" },
-        markdown        = { "prettierd" },
+        -- markdown        = { "prettierd" },  -- Disabled: no auto-formatting for markdown
         python          = { "isort", "black", stop_after_first = true },
         sh              = { "shfmt" },
         bash            = { "shfmt" },
