@@ -154,7 +154,7 @@ lazy_plugin_manager.setup({
   -- { import = "plugins.active.local_highlight" },
   { import = "plugins.active.lualine" },
   { import = "plugins.active.maximizer" },
-  { import = "plugins.active.no_neck_pain" },
+  -- { import = "plugins.active.no_neck_pain" },
   { import = "plugins.active.nvim_cmp" },
   { import = "plugins.active.nvim_tree" },
   { import = "plugins.active.surround" },

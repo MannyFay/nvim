@@ -11,7 +11,13 @@ return {
   event = "VimEnter",
   opts = {
     autocmds = {
-      enableOnVimEnter = true,
+      enableOnVimEnter = "safe",
+    },
+    integrations = {
+      NvimTree = {
+        position = "left",
+        reopen = true,
+      },
     },
   },
 
